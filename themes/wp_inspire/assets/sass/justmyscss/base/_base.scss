@@ -1,0 +1,26 @@
+// Base
+// ------------------------
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+::selection {
+    color: $secondary;
+    background-color: $primary;
+}
+
+html {
+    @if $debug {
+        @include debug-breakpoints;
+    }
+}
+
+body {
+    overflow-x: hidden;
+    min-width: $min-width;
+    font: 100%/1.5 $font;
+    -webkit-text-size-adjust: 100%;
+    color: $black;
+}
