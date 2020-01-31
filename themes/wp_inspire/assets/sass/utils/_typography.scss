@@ -1,6 +1,4 @@
-/**
- *  TYPOGRAPHY
- */
+// TYPOGRAPHY
 
 body {
 	color: $c-body;
@@ -20,10 +18,47 @@ a {
 
 	&:focus {
 		color: $c-primary;
+		outline: thin dotted;
+	}
+
+	&:hover,
+	&:active {
+		outline: 0;
 	}
 }
 
 // Sizes
+h1,
+h2,
+h3,
+h4 {
+	font-weight: $fw-headings;
+}
+
+h1,
+%h1 {
+	font-size: $fz-title;
+	line-height: $lh-title;
+}
+
+h2,
+%h2 {
+	font-size: $fz-huge;
+	line-height: $lh-huge;
+}
+
+h3,
+%h3 {
+	font-size: $fz-big;
+	line-height: $lh-big;
+}
+
+h4,
+%h4 {
+	font-size: $fz-base;
+	line-height: $lh-base;
+}
+
 .text {
 	&-huge,
 	&-big,
@@ -32,18 +67,15 @@ a {
 	}
 
 	&-huge {
-		font-size: $fz-huge;
-		line-height: $lh-huge;
+		@extend %h2;
 	}
 
 	&-big {
-		font-size: $fz-big;
-		line-height: $lh-big;
+		@extend %h3;
 	}
 
 	&-medium {
-		font-size: $fz-medium;
-		line-height: $lh-medium;
+		@extend %h4;
 	}
 
 	&-small {
@@ -76,7 +108,7 @@ a {
 	font-weight: $fw-normal;
 }
 
-.text-lineThrough {
+.text-linethrough {
 	text-decoration: line-through;
 }
 
@@ -93,7 +125,7 @@ a {
 }
 
 // titles after titles
-.text-withSubtitle {
+.text-withsubtitle {
 	margin-bottom: 0 !important;
 
 	+ .text-huge,
@@ -102,13 +134,6 @@ a {
 	+ .text-small {
 		margin-top: 0.5em;
 	}
-}
-
-h1,
-h2,
-h3,
-h4 {
-	font-weight: $fw-headings;
 }
 
 // Aligners

@@ -120,7 +120,9 @@ add_action( 'widgets_init', 'wp_inspire_widgets_init' );
  * Enqueue scripts and styles.
  */
 function wp_inspire_scripts() {
-	wp_enqueue_style( 'wp_inspire-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'add_google-fonts ', 'https://fonts.googleapis.com/css?family=Quicksand:300,400,500&display=swap', false );
+
+	wp_enqueue_style( 'wp_inspire-style', get_stylesheet_directory_uri() . '/assets/css/index.min.css' );
 
 	wp_enqueue_script( 'wp_inspire-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), '20151215', true );
 

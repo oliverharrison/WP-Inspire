@@ -70,7 +70,7 @@ button {
 		padding: $p-button-small;
 	}
 
-	&--mobileFull {
+	&--mobilefull {
 		@include media-breakpoint-down(md) {
 			margin-left: 0;
 			margin-right: 0;
