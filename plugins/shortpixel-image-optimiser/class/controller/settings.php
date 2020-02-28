@@ -90,16 +90,9 @@ class SettingsController extends shortPixelController
               $this->keyModel->resetTried();
               $this->keyModel->checkKey($this->postData['apiKey']);
             }
-            /*if (isset($this->postData['verifiedKey']) && $this->postData['verifiedKey'])
-            {
-              $this->model->apiKey = $this->postData['apiKey'];
-              $this->model->verifiedKey = $this->postData['verifiedKey'];
-            } */
         }
 
         $this->doRedirect();
-        //exit();
-
       }
 
       public function action_debug_medialibrary()
@@ -171,6 +164,8 @@ class SettingsController extends shortPixelController
          if (is_wp_error($this->view->resources))
             $this->view->resources = null;
 
+         $this->view->cloudflare_constant = defined('SHORTPIXEL_CFTOKEN') ? true : false;
+
          $settings = $this->shortPixel->getSettings();
          $this->view->dismissedNotices = $settings->dismissedNotices;
 
@@ -193,71 +188,7 @@ class SettingsController extends shortPixelController
           $this->has_nextgen = $env->has_nextgen;
 
           $this->display_part = isset($_GET['part']) ? sanitize_text_field($_GET['part']) : 'settings';
-
       }
-
-
-      /** Check if everything is OK with the Key **/
-      /*public function checkKey()
-      {
-          //$this->is_constant_key = (defined("SHORTPIXEL_API_KEY")) ? true : false;
-        //  $this->hide_api_key = (defined("SHORTPIXEL_HIDE_API_KEY")) ? SHORTPIXEL_HIDE_API_KEY : false;
-
-          $verified_key = $this->model->verifiedKey;
-          $this->is_verifiedkey = ($verified_key) ? true : false;
-
-          $key_in_db = $this->model->apiKey;
-
-          // if form submit, but no validation already pushed, check if api key was changed.
-          if ($this->is_form_submit && ! $this->postkey_needs_validation)
-          {
-             // api key was changed on the form.
-             if ($this->postData['apiKey'] != $key_in_db)
-             {
-                $this->postkey_needs_validation = true;
-             }
-          }
-
-          if($this->is_constant_key)
-          {
-              if ($key_in_db != SHORTPIXEL_API_KEY)
-              {
-                $this->validateKey(SHORTPIXEL_API_KEY);
-              }
-          }
-          elseif ($this->postkey_needs_validation)
-          {
-              $key = isset($this->postData['apiKey']) ? $this->postData['apiKey'] : $this->model->apiKey;
-              $this->validateKey($key);
-
-          } // postkey_needs_validation
-      } */
-
-      /** Check remotely if key is alright **/
-      /*public function validateKey($key)
-      {
-        Log::addDebug('Validating Key ' . $key);
-        // first, save Auth to satisfy getquotainformation
-        if ($this->is_form_submit)
-        {
-          if (strlen($this->postData['siteAuthUser']) > 0 || strlen($this->postData['siteAuthPass']) > 0)
-          {
-            $this->model->siteAuthUser = $this->postData['siteAuthUser'];
-            $this->model->siteAuthPass = $this->postData['siteAuthPass'];
-          }
-        }
-
-         /*if (! $this->is_verifiedkey)
-         {
-            Notice::addError(sprintf(__('Error during verifying API key: %s','shortpixel-image-optimiser'), $this->quotaData['Message'] ));
-         }
-         elseif ($this->is_form_submit) {
-           $this->processNewKey();
-         }
-
-      } */
-
-
 
       /* Temporary function to check if HTaccess is writable.
       * HTaccess is writable if it exists *and* is_writable, or can be written if directory is writable.
@@ -336,12 +267,21 @@ class SettingsController extends shortPixelController
 
         if ($this->has_nextgen)
         {
-          $ngg = array_map(array('ShortPixelNextGenAdapter','pathToAbsolute'), \ShortPixelNextGenAdapter::getGalleries());
-          for($i = 0; $i < count($customFolders); $i++) {
-              if(in_array($customFolders[$i]->getPath(), $ngg )) {
-                  $customFolders[$i]->setType("NextGen");
-                }
+    //      $ngg = array_map(array('ShortPixelNextGenAdapter','pathToAbsolute'), \ShortPixelNextGenAdapter::getGalleries());
+          $ng = NextGen::getInstance();
+          $folders = $ng->getGalleries();
+          $foldersArray = array();
+          foreach($folders as $dirObj)
+          {
+             $foldersArray[] = $dirObj->getPath();
+          }
+
+          foreach($customFolders as $id => $folder)
+          {
+            if(in_array($folder->getPath(), $foldersArray )) {
+                $folder->setType("nextgen");
               }
+          }
         }
         return $customFolders;
       }
@@ -426,6 +366,7 @@ class SettingsController extends shortPixelController
 
           $post = $this->processWebp($post);
           $post = $this->processExcludeFolders($post);
+          $post = $this->processCloudFlare($post);
 
           parent::processPostData($post);
 
@@ -483,15 +424,48 @@ class SettingsController extends shortPixelController
             $items = explode(',', $post['excludePatterns']);
             foreach($items as $pat) {
                 $parts = explode(':', $pat);
-                if(count($parts) == 1) {
+                if (count($parts) == 1)
+                {
+                  $type = 'name';
+                  $value = str_replace('\\\\','\\', trim($parts[0]));
+                }
+                else
+                {
+                  $type = trim($parts[0]);
+                  $value = str_replace('\\\\','\\',trim($parts[1]));
+                }
+
+                if (strlen($value) > 0)  // omit faulty empty statements.
+                  $patterns[] = array('type' => $type, 'value' => $value);
+/*                if(count($parts) == 1) {
                     $patterns[] = array("type" =>"name", "value" => str_replace('\\\\','\\',trim($pat)));
                 } else {
                     $patterns[] = array("type" =>trim($parts[0]), "value" => str_replace('\\\\','\\',trim($parts[1])));
-                }
+                } */
             }
 
         }
         $post['excludePatterns'] = $patterns;
+        return $post;
+      }
+
+      protected function processCloudFlare($post)
+      {
+        if (isset($post['cf_auth_switch']) && $post['cf_auth_switch'] == 'token')
+        {
+            if (isset($post['cloudflareAuthKey']))
+              unset($post['cloudflareAuthKey']);
+
+            if (isset($post['cloudflareEmail']))
+              unset($post['cloudflareEmail']);
+
+        }
+        elseif (isset($post['cloudflareAuthKey']) && $post['cf_auth_switch'] == 'global')
+        {
+            if (isset($post['cloudflareToken']))
+               unset($post['cloudflareToken']);
+        }
+
         return $post;
       }
 
@@ -513,19 +487,5 @@ class SettingsController extends shortPixelController
         exit();
       }
 
-      /*
-      protected function NoticeApiKeyLength($key)
-      {
-        $KeyLength = strlen($key);
 
-        $notice =  sprintf(__("The key you provided has %s characters. The API key should have 20 characters, letters and numbers only.",'shortpixel-image-optimiser'), $KeyLength)
-                   . "<BR> <b>"
-                   . __('Please check that the API key is the same as the one you received in your confirmation email.','shortpixel-image-optimiser')
-                   . "</b><BR> "
-                   . __('If this problem persists, please contact us at ','shortpixel-image-optimiser')
-                   . "<a href='mailto:help@shortpixel.com?Subject=API Key issues' target='_top'>help@shortpixel.com</a>"
-                   . __(' or ','shortpixel-image-optimiser')
-                   . "<a href='https://shortpixel.com/contact' target='_blank'>" . __('here','shortpixel-image-optimiser') . "</a>.";
-        Notice::addError($notice);
-      } */
 }

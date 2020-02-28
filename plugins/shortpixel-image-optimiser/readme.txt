@@ -4,7 +4,7 @@ Tags: compressor, image, compression, optimize, image optimizer, image optimiser
 Requires at least: 3.2.0
 Tested up to: 5.3
 Requires PHP: 5.3
-Stable tag: 4.15.4
+Stable tag: 4.16.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -238,6 +238,9 @@ define("SHORTPIXEL_NOFLOCK", true); // don't use flock queue, only activate this
 .
 define("SHORTPIXEL_EXPERIMENTAL_SECURICACHE", true);  // adds timestamps to URLS, to prevent hitting the cache. Useful for persistent caches.
 
+//Hide the Cloudflare settings by defining these constants in wp-config.php
+define('SHORTPIXEL_CFTOKEN', 'the Cloudflare API token that has Purge Cache right');
+define('SHORTPIXEL_CFZONE', 'The Zone ID from the domain settings in Cloudflare');
 
 == Screenshots ==
 
@@ -260,6 +263,40 @@ define("SHORTPIXEL_EXPERIMENTAL_SECURICACHE", true);  // adds timestamps to URLS
 9. Check other optimized images status - themes or other plugins' images. (Media>Other Media)
 
 == Changelog ==
+
+= 4.16.2 =
+
+Release date: 27th February 2020
+* Fix notices javascript.
+* Language – 0 new strings added, 0 updated, 0 fuzzied, and 0 obsoleted
+
+= 4.16.1 =
+
+Release date: 14th February 2020
+* Fix non-dismissable alerts.
+* Reference to the Website Speed Optimization service.
+* Fixed: deleteItemCache in wrong place ( before save ) thus resetting data
+* Fixed: NextGen integration
+* Language – 3 new strings added, 0 updated, 0 fuzzied, and 0 obsoleted
+
+= 4.16.0 =
+
+Release date: 4th February 2020
+* New - Token support for Cloudflare via config constant or settings.
+* Backup setting - add orange warning when backups are off.
+* Button to dismiss the top bar notification of missing files.
+* Shortpixel now loads scripts with 'defer' on front site, if it's configured to be loaded there.
+* Hiding Cloudflare details via wp-config.php.
+* Hide the option "Process in front-end" when "Optimize media on upload" is not checked.
+* Fixes for multibyte filenames with mixed locales.
+* Fixes for combination of S3-offload, webp pictures and cnames.
+* Reworked Notifications.
+* Fixed - PNG2JPG Retry button didn't work, now properly resets retry counter.
+* Fixed - Realpath in directory model throws off installations with symlinks.
+* Fixed - Thrown Exception in API with corrupted images now caught.
+* Fixed - Debug window link was visible when it should not.
+* Fixed - ExcludePattern without value would result in notices.
+* Language – 7 new strings added, 0 updated, 0 fuzzied, and 0 obsoleted
 
 = 4.15.4 =
 

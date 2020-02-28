@@ -16,8 +16,11 @@ class ShortPixelView {
         $this->__construct($controller);
     }
 
+/** @todo REMOVE this from this view. Moved to adminnotices controller */
     public function displayQuotaExceededAlert($quotaData, $averageCompression = false, $recheck = false)
-    { ?>
+    {
+      return; // no longer active.
+      ?>
         <br/>
         <div class="wrap sp-quota-exceeded-alert"  id="short-pixel-notice-exceed">
             <?php if($averageCompression) { ?>
@@ -68,6 +71,7 @@ class ShortPixelView {
         </div> <?php self::includeProposeUpgradePopup();
     }
 
+/*
     public static function displayApiKeyAlert()
     { ?>
         <p><?php _e('In order to start the optimization process, you need to validate your API Key in the '
@@ -129,7 +133,7 @@ class ShortPixelView {
             ?></h3> <?php
             switch($when) {
                 case '2h' :
-                    _e("Action needed. Please <a href='https://shortpixel.com/wp-apikey' target='_blank'>get your API key</a> to activate your ShortPixel plugin.",'shortpixel-image-optimiser') . "<BR><BR>";
+                    _e("Action needed. Please <a href='https://shortpixel.com/wp-apikey' target='_blank'>get your API key</a> to activate your ShortPixel plugin.",'shortpixel-image-optimiser');
                     break;
                 case '3d':
                     _e("Your image gallery is not optimized. It takes 2 minutes to <a href='https://shortpixel.com/wp-apikey' target='_blank'>get your API key</a> and activate your ShortPixel plugin.",'shortpixel-image-optimiser') . "<BR><BR>";
@@ -190,6 +194,9 @@ class ShortPixelView {
         </div>
     <?php
     }
+    */
+
+    /*
     protected static function includeProposeUpgradePopup() {
         wp_enqueue_style('short-pixel-modal.min.css', plugins_url('/res/css/short-pixel-modal.min.css',SHORTPIXEL_PLUGIN_FILE), array(), SHORTPIXEL_IMAGE_OPTIMISER_VERSION);
         ?>
@@ -205,6 +212,7 @@ class ShortPixelView {
             </div>
         </div>
     <?php }
+    */
 
     public function displayBulkProcessingForm($quotaData,  $thumbsProcessedCount, $under5PercentCount, $bulkRan,
                                               $averageCompression, $filesOptimized, $savedSpace, $percent, $customCount) {
@@ -599,15 +607,33 @@ class ShortPixelView {
             <h1><?php _e('Bulk Image Optimization by ShortPixel','shortpixel-image-optimiser');?></h1>
             <?php $this->displayBulkProgressBar(true, $percent, $message, $remainingQuota, $averageCompression, $type);?>
 
-            <!-- Partners: SQUIRLY -->
-            <?php if(!isset($dismissed['squirrly']) && $quotaData['APICallsQuotaOneTimeNumeric']<10000 && $quotaData['APICallsQuotaNumeric']<5000) { ?>
+            <!-- Partners: WSO Website Speed Optimization -->
+            <?php
+              if(!isset($dismissed['squirrly'])) // keep the same dismiss option
+              {
+            ?>
             <div id="short-pixel-notice-squirrly" class="sp-notice sp-notice-info bulk-progress bulk-progress-partners sp-floating-block sp-full-width">
-                <div style="float:right"><a href="javascript:dismissShortPixelNotice('squirrly')"><?php _e('Dismiss','shortpixel-image-optimiser');?></a></div>
-                <a href="https://my.squirrly.co/go120073/squirrly.co/short-pixel-seo" target="_blank">
-                    <img src="<?php echo(wpSPIO()->plugin_url('res/img/squirrly.png' ));?>" height="50">
-                    <div><?php _e('While you wait for your images to optimize, check out Squirrly, a great plugin for further boosting your SEO.','shortpixel-image-optimiser');?></div>
-                </a>
+                <div style="float:right"><a href="javascript:dismissShortPixelNotice('squirrly')"><?php _e('Dismiss','shortpixel-image-optimiser'); ?></a></div>
+                    <div style="display: flex; align-items: center;">
+                      <span class='icon' style="margin-right: 25px;"><img src="<?php echo(wpSPIO()->plugin_url('res/img/robo-winky.png' ));?>" ></span>
+                      <span class='content'>
+                       <p><?php _e('After you optimized all your images your site speed might still be improved. Allow ShortPixel Specialists to tell you how.', 'shortpixel-image-optimiser');  ?><p>
+                        <p style='font-size: 16px;'><a href="https://shortpixel.com/lp/wso/" target="_blank" style='font-weight: 700;'><?php _e('Get Your Site Assessment','shortpixel-image-optimiser'); ?></a></p>
+                      </span>
+                  </div>
             </div>
+            <?php } ?>
+            <?php
+            // deactivated for the moment, because of the WSO notice above
+            if(false && !isset($dismissed['squirrly']) && $quotaData['APICallsQuotaOneTimeNumeric']<10000 && $quotaData['APICallsQuotaNumeric']<5000) { ?>
+                <!-- Partners: SQUIRLY -->
+                <div id="short-pixel-notice-squirrly" class="sp-notice sp-notice-info bulk-progress bulk-progress-partners sp-floating-block sp-full-width">
+                    <div style="float:right"><a href="javascript:dismissShortPixelNotice('squirrly')"><?php _e('Dismiss','shortpixel-image-optimiser');?></a></div>
+                    <a href="https://my.squirrly.co/go120073/squirrly.co/short-pixel-seo" target="_blank">
+                        <img src="<?php echo(wpSPIO()->plugin_url('res/img/squirrly.png' ));?>" height="50">
+                        <div><?php _e('While you wait for your images to optimize, check out Squirrly, a great plugin for further boosting your SEO.','shortpixel-image-optimiser');?></div>
+                    </a>
+                </div>
             <?php } ?>
 
             <div class="sp-floating-block sp-notice bulk-notices-parent">
@@ -1691,7 +1717,7 @@ class ShortPixelView {
             }
             return;
         }
-        
+
         ?>
         <div id='sp-msg-<?php echo($id);?>' class='column-wp-shortPixel'>
 
