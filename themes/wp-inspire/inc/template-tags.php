@@ -123,3 +123,37 @@ if ( ! function_exists( 'wp_inspire_post_thumbnail' ) ) :
 		endif; // End is_singular().
 	}
 endif;
+
+
+
+/**
+ * Create Alternate Logo Setting and Upload Control; add description for Primary Logo.
+ *
+ * @author Oliver Harrison
+ * @param object $wp_customize Instance of WP_Customize_Class.
+ */
+function wp_inspire_customize_logos( $wp_customize ) {
+	// Add a setting for an alternate logo that displays in the sticky nav.
+	$wp_customize->add_setting(
+		'wp_inspire_alternate_logo',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_url',
+		)
+	);
+
+	// Add a control to upload the Alternate Logo.
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'wp_inspire_alternate_logo',
+			array(
+				'description' => esc_html__( 'Upload an alternate logo which will display in the footer. The dimensions should be 418x106 pixels if using a PNG image or 209x53 pixels if using an SVG image.', 'dell-foundation' ),
+				'label'       => esc_html__( 'Alternate Logo', 'dell-foundation' ),
+				'section'     => 'title_tagline',
+				'settings'    => 'wp_inspire_alternate_logo',
+			)
+		)
+	);
+}
+add_action( 'customize_register', 'wp_inspire_customize_logos' );

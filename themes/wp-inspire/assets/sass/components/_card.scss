@@ -15,7 +15,6 @@
 
 	.card-shadow {
 		border-radius: $bdr-rounded-corners;
-		// box-shadow: 0 rem(6) rem(24) rgba($c-niagara, 0.2);
 		box-shadow: 0 rem(4) rem(12) rgba($c-niagara, 0.3);
 		height: calc(100% + #{$m-medium});
 		position: absolute;
@@ -41,7 +40,7 @@
 	}
 
 	.post-thumbnail {
-		height: auto;
+		height: 100%;
 		line-height: 0;
 	}
 
@@ -70,6 +69,10 @@
 		top: 100%;
 		transition: top 0.2s ease-in;
 		z-index: 99;
+
+		a {
+			font-size: rem(16);
+		}
 	}
 
 	a:not(.tax-link),
