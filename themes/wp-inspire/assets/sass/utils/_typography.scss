@@ -33,30 +33,28 @@ h2,
 h3,
 h4 {
 	font-weight: $fw-headings;
+	line-height: 1.1;
 }
 
 h1,
 %h1 {
 	font-size: $fz-title;
-	line-height: $lh-title;
 }
 
 h2,
 %h2 {
 	font-size: $fz-huge;
-	line-height: $lh-huge;
+
 }
 
 h3,
 %h3 {
 	font-size: $fz-big;
-	line-height: $lh-big;
 }
 
 h4,
 %h4 {
 	font-size: $fz-base;
-	line-height: $lh-base;
 }
 
 .text {
@@ -126,7 +124,7 @@ h4,
 
 // titles after titles
 .text-withsubtitle {
-	margin-bottom: 0 !important;
+	margin-bottom: 0;
 
 	+ .text-huge,
 	+ .text-big,

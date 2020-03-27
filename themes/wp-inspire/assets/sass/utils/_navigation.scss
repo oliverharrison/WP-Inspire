@@ -1,0 +1,14 @@
+.main-navigation {
+	display: inline-flex;
+	justify-content: flex-end;
+	width: 100%;
+
+	.menu {
+		justify-self: flex-end;
+		margin: 0;
+	}
+
+	.menu-item {
+		margin: 0 0 0 $w-gutter;
+	}
+}
