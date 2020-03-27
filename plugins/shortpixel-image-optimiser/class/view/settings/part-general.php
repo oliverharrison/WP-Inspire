@@ -6,7 +6,7 @@
 
     <div class="wp-shortpixel-options wp-shortpixel-tab-content" style="visibility: hidden">
 
-    <p><?php printf(__('New images uploaded to the Media Library will be optimized automatically.<br/>If you have existing images you would like to optimize, you can use the <a href="%supload.php?page=wp-short-pixel-bulk">Bulk Optimization Tool</a>.','shortpixel-image-optimiser'),get_admin_url());?></p>
+
     <table class="form-table">
         <tbody>
             <tr>
@@ -119,6 +119,10 @@
                     <label for="backupImages"><?php _e('Save and keep a backup of your original images in a separate folder.','shortpixel-image-optimiser');?></label>
                     <p class="settings-info"><?php _e('You <strong>need to have backup active</strong> in order to be able to restore images to originals or to convert from Lossy to Lossless and back.','shortpixel-image-optimiser');?></p>
                 </td>
+            </tr>
+            <tr class='view-notice-row backup_warning'>
+              <th scope='row'>&nbsp;</th>
+              <td><div class='view-notice warning'><p><?php _e('Make sure you have a backup in place. When optimizing Shortpixel will overwrite your images without recovery. This may result in lost images.', 'shortpixel-image-optimiser') ?></p></div></td>
             </tr>
             <tr>
                 <th scope="row"><?php _e('Remove EXIF','shortpixel-image-optimiser');?></th>

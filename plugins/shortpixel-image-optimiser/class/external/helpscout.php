@@ -103,9 +103,7 @@ class HelpScout
                //    HS.beacon.init();
                //}
                if(window.shortpixelHSOpen == 1) {
-                   //HS.beacon.close();
                    window.Beacon('close');
-                   //jQuery("#shortpixel-hs-button-blind").css('display', 'none');
                    jQuery('#botbutton').addClass('show');
                    jQuery('div.shortpixel-hs-tools').css('bottom', '116px');
                    jQuery('div.shortpixel-hs-blind').css('height', '188px');
@@ -113,9 +111,7 @@ class HelpScout
                    jQuery('div.shortpixel-hs-blind a').css('display', 'inline');
                    window.shortpixelHSOpen = 0;
                } else {
-                   //HS.beacon.open();
                    window.Beacon('open');
-                   //jQuery("#shortpixel-hs-button-blind").css('display', 'block');
                    jQuery('#botbutton').removeClass('show');
                    jQuery('div.shortpixel-hs-tools').css('bottom', '40px');
                    jQuery('div.shortpixel-hs-blind').css('height', '93px');
@@ -160,34 +156,6 @@ class HelpScout
         }(window,document,window.Beacon||function(){});
         window.Beacon('init', 'e41d21e0-f3c4-4399-bcfe-358e59a860de');
 
-        /*
-        !function(e,o,n){ window.HSCW=o,window.HS=n,n.beacon=n.beacon||{};var t=n.beacon;t.userConfig={
-            color: "#1CBECB",
-            icon: "question",
-            instructions: "Send ShortPixel a message",
-            topArticles: true,
-            poweredBy: false,
-            showContactFields: true,
-            showName: false,
-            showSubject: true,
-            translation: {
-                searchLabel: "What can ShortPixel help you with?",
-                contactSuccessDescription: "Thanks for reaching out! Someone from our team will get back to you in 24h max."
-            }
-
-        },t.readyQueue=[],t.config=function(e){this.userConfig=e},t.ready=function(e){this.readyQueue.push(e)},o.config={docs:{enabled:!0,baseUrl:"//shortpixel.helpscoutdocs.com/"},contact:{enabled:!0,formId:"278a7825-fce0-11e7-b466-0ec85169275a"}};var r=e.getElementsByTagName("script")[0],c=e.createElement("script");
-            c.type="text/javascript",c.async=!0,c.src="https://djtflbt20bdde.cloudfront.net/",r.parentNode.insertBefore(c,r);
-        }(document,window.HSCW||{},window.HS||{});
-        */
-        /*
-        window.HS.beacon.ready(function(){
-            HS.beacon.identify({
-                email: "<?php $u = wp_get_current_user(); echo($u->user_email); ?>",
-                apiKey: "<?php echo($apiKey);?>"
-            });
-            HS.beacon.suggest( <?php echo( $suggestions ) ?> );
-        });
-        */
         window.Beacon('identify', {
             email: "<?php $u = wp_get_current_user(); echo($u->user_email); ?>",
                 apiKey: "<?php echo($apiKey);?>"

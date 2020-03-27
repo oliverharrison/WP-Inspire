@@ -109,15 +109,14 @@ class ShortPixelMetaFacade {
     //  Update MetaData of Image.
     public function updateMeta($newMeta = null, $replaceThumbs = false) {
 
-        $this->deleteItemCache();
-
         if($newMeta) {
             $this->meta = $newMeta;
         }
         if($this->type == self::CUSTOM_TYPE) {
             $this->spMetaDao->update($this->meta);
             if($this->meta->getExtMetaId()) {
-                ShortPixelNextGenAdapter::updateImageSize($this->meta->getExtMetaId(), $this->meta->getPath());
+                $ng = \ShortPixel\NextGen::getInstance();
+                $ng->updateImageSize($this->meta->getExtMetaId(), $this->meta->getPath());
             }
         }
         elseif($this->type == ShortPixelMetaFacade::MEDIA_LIBRARY_TYPE) {
@@ -223,6 +222,8 @@ class ShortPixelMetaFacade {
                 }
             } // duplicates loop
         }
+
+        $this->deleteItemCache();
     }
 
 
@@ -528,7 +529,7 @@ class ShortPixelMetaFacade {
       $cacheController = new Cache();
       Log::adDDebug('Removing Item Cache -> ' . $this->getCacheName() );
       $cacheController->deleteItem( $this->getCacheName());
-      $this->getMeta(true);  // reload the meta. 
+      $this->getMeta(true);  // reload the meta.
 
     }
 
@@ -584,7 +585,7 @@ class ShortPixelMetaFacade {
               return array("URLs" => array(), "PATHs" => array(), "sizesMissing" => array());
             }
             $urlList = array(); $filePaths = array();
-            Log::addDebug('attached file path: ' . (string) $fsFile, array( (string) $fsFile->getFileDir() )  );
+            Log::addDebug('attached file path: ' . (string) $fsFile);
             if ($no_exist_check)
               $mainExists = true;
 
@@ -896,6 +897,7 @@ class ShortPixelMetaFacade {
         return array_unique($duplicates);
     }
 
+/*  @todo . Was only in use by now defunct shortpixel-list-table */
     public static function pathToWebPath($path) {
         //$upl = wp_upload_dir();
         //return str_replace($upl["basedir"], $upl["baseurl"], $path);
@@ -909,6 +911,7 @@ class ShortPixelMetaFacade {
         $path = implode('/', $pathParts);
         return self::filenameToRootRelative($path);
     }
+
 
     public static function filenameToRootRelative($path) {
         return self::replaceHomePath($path, "");

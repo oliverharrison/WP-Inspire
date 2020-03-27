@@ -97,6 +97,17 @@ var ShortPixel = function() {
       }
     }
 
+    function checkBackUpWarning()
+    {
+      if (! jQuery('input[name="backupImages"]').is(':checked') )
+      {
+        jQuery('.backup_warning').fadeIn();
+      }
+      else {
+        jQuery('.backup_warning').fadeOut();
+      }
+    }
+
     function setupGeneralTab() {
         var rad = 0;
         if (typeof document.wp_shortpixel_options !== 'undefined')
@@ -162,6 +173,12 @@ var ShortPixel = function() {
             ShortPixel.checkExifWarning();
         });
         ShortPixel.checkExifWarning();
+
+        jQuery('input[name="backupImages"]').on('change', function()
+        {
+           ShortPixel.checkBackUpWarning();
+        });
+        ShortPixel.checkBackUpWarning();
 
     }
 
@@ -309,7 +326,7 @@ var ShortPixel = function() {
     }
 
     function checkQuota() {
-        var data = { action  : 'shortpixel_check_quota'};
+        var data = {action:'shortpixel_check_quota'};
         jQuery.get(ShortPixel.AJAX_URL, data, function() {
             console.log("quota refreshed");
         });
@@ -507,7 +524,7 @@ var ShortPixel = function() {
         }
     }
 
-    function includeUnlisted() {
+/*    function includeUnlisted() {
     jQuery("#short-pixel-notice-unlisted").hide();
     jQuery("#optimizeUnlisted").prop('checked', true);
     var data = { action  : 'shortpixel_dismiss_notice',
@@ -519,7 +536,7 @@ var ShortPixel = function() {
             console.log("dismissed");
         }
     });
-}
+} */
 
 
     function initFolderSelector() {
@@ -663,6 +680,7 @@ var ShortPixel = function() {
 
     function recheckQuota() {
         var parts = window.location.href.split('#');
+
         window.location.href=parts[0]+(parts[0].indexOf('?')>0?'&':'?')+'checkquota=1' + (typeof parts[1] === 'undefined' ? '' : '#' + parts[1]);
     }
 
@@ -819,7 +837,7 @@ var ShortPixel = function() {
         newApiKey           : newApiKey,
         proposeUpgrade      : proposeUpgrade,
         closeProposeUpgrade : closeProposeUpgrade,
-        includeUnlisted     : includeUnlisted,
+  //      includeUnlisted     : includeUnlisted,
         bulkShowLengthyMsg  : bulkShowLengthyMsg,
         bulkHideLengthyMsg  : bulkHideLengthyMsg,
         bulkShowMaintenanceMsg  : bulkShowMaintenanceMsg,
@@ -837,6 +855,7 @@ var ShortPixel = function() {
         closeComparerPopup  : closeComparerPopup,
         convertPunycode     : convertPunycode,
         checkExifWarning    : checkExifWarning,
+        checkBackUpWarning  : checkBackUpWarning,
         comparerData        : {
             cssLoaded   : false,
             jsLoaded    : false,
@@ -858,7 +877,7 @@ function showToolBarAlert($status, $message, id) {
         case ShortPixel.STATUS_QUOTA_EXCEEDED:
             if(  window.location.href.search("wp-short-pixel-bulk") > 0
               && jQuery(".sp-quota-exceeded-alert").length == 0) { //if we're in bulk and the alert is not displayed reload to see all options
-                location.reload();
+              //  location.reload();
                 return;
             }
             robo.addClass("shortpixel-alert");
@@ -1056,6 +1075,7 @@ function checkBulkProcessingCallApi(){
                             jQuery("a.bulk-cancel").attr("disabled", "disabled");
                             hideSlider();
                             //showStats();
+
                             setTimeout(function(){
                                 window.location.reload();
                             }, 3000);
@@ -1265,6 +1285,7 @@ function optimizeThumbs(id) {
     });
 }
 
+/*
 function dismissShortPixelNoticeExceed(e) {
     jQuery("#wp-admin-bar-shortpixel_processing").hide();
     var data = { action  : 'shortpixel_dismiss_notice',
@@ -1276,12 +1297,25 @@ function dismissShortPixelNoticeExceed(e) {
         }
     });
     e.preventDefault();
-}
+} */
 
+/* @todo Must go, still in use in some parts */
 function dismissShortPixelNotice(id) {
     jQuery("#short-pixel-notice-" + id).hide();
     var data = { action  : 'shortpixel_dismiss_notice',
                  notice_id: id};
+    jQuery.get(ShortPixel.AJAX_URL, data, function(response) {
+        data = JSON.parse(response);
+        if(data["Status"] == ShortPixel.STATUS_SUCCESS) {
+            console.log("dismissed");
+        }
+    });
+}
+
+function dismissFileError() {
+    jQuery('.shortpixel-alert').hide();
+    var data = { action  : 'shortpixel_dismissFileError'
+                 };
     jQuery.get(ShortPixel.AJAX_URL, data, function(response) {
         data = JSON.parse(response);
         if(data["Status"] == ShortPixel.STATUS_SUCCESS) {

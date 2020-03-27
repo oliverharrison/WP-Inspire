@@ -245,8 +245,13 @@ class ShortPixelAPI {
         //#$compressionType = isset($meta['ShortPixel']['type']) ? ($meta['ShortPixel']['type'] == 'lossy' ? 1 : 0) : $this->_settings->compressionType;
         $meta = $itemHandler->getMeta();
         $compressionType = $meta->getCompressionType() !== null ? $meta->getCompressionType() : $this->_settings->compressionType;
-        $response = $this->doRequests($URLs, true, $itemHandler, $compressionType);//send requests to API
 
+        try {
+          $response = $this->doRequests($URLs, true, $itemHandler, $compressionType);//send requests to API
+        }
+        catch(Exception $e) {
+          Log::addError('Api DoRequest Thrown ' . $e->getMessage());
+        }
 
         //die($response['body']);
 
@@ -804,6 +809,7 @@ class ShortPixelAPI {
         $meta->setCompressionType($compressionType);
         $meta->setCompressedSize(@filesize($meta->getPath()));
         $meta->setKeepExif($this->_settings->keepExif);
+        $meta->setCmyk2rgb($this->_settings->CMYKtoRGBconversion);
         $meta->setTsOptimized(date("Y-m-d H:i:s"));
         $meta->setThumbsOptList(is_array($meta->getThumbsOptList()) ? array_unique(array_merge($meta->getThumbsOptList(), $thumbsOptList)) : $thumbsOptList);
         $meta->setThumbsOpt(($meta->getThumbsTodo() ||  $this->_settings->processThumbnails) ? count($meta->getThumbsOptList()) : 0);

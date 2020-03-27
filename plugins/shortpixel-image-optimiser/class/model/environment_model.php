@@ -29,6 +29,7 @@ class EnvironmentModel extends ShortPixelModel
     private $screen_is_set = false;
     public $is_screen_to_use = false; // where shortpixel optimizer loads
     public $is_our_screen = false; // where shortpixel hooks in more complicated functions.
+    public $is_bulk_page = false; // Shortpixel bulk screen.
 
     // Debug flag
     public $is_debug = false;
@@ -40,8 +41,8 @@ class EnvironmentModel extends ShortPixelModel
   {
      $this->setServer();
      $this->setWordPress();
-     $this->setIntegrations();
-     $this->setScreen();  // This might not be set on construct time!
+     add_action('plugins_loaded', array($this, 'setIntegrations') ); // not set on construct.
+     add_action('current_screen', array($this, 'setScreen') );  // Not set on construct
   }
 
   public static function getInstance()
@@ -49,8 +50,8 @@ class EnvironmentModel extends ShortPixelModel
     if (is_null(self::$instance))
         self::$instance = new EnvironmentModel();
 
-    if (! self::$instance->screen_is_set)
-      self::$instance->setScreen();
+    /*if (! self::$instance->screen_is_set)
+      self::$instance->setScreen(); */
 
     return self::$instance;
   }
@@ -91,15 +92,16 @@ class EnvironmentModel extends ShortPixelModel
 
   }
 
-  public function setScreen()
+  public function setScreen($screen)
   {
-    if (! function_exists('get_current_screen')) // way too early.
+    /*if (! function_exists('get_current_screen')) // way too early.
       return false;
 
     $screen = get_current_screen();
+    */
 
-    if (is_null($screen)) // too early
-      return false;
+    /*if (is_null($screen)) //
+      return false; */
 
     // WordPress pages where we'll be active on.
     // https://codex.wordpress.org/Plugin_API/Admin_Screen_Reference
@@ -136,14 +138,18 @@ class EnvironmentModel extends ShortPixelModel
     {
        $this->is_screen_to_use = true;
        $this->is_our_screen = true;
+
+       if ($screen->id == 'media_page_wp-short-pixel-bulk')
+        $this->is_bulk_page = true;
     }
 
     $this->screen_is_set = true;
   }
 
-  private function setIntegrations()
+  public function setIntegrations()
   {
-    $this->has_nextgen = \ShortPixelNextGenAdapter::hasNextGen();
+    $ng = NextGen::getInstance();
+    $this->has_nextgen = $ng->has_nextgen();
 
   }
 }
