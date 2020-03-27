@@ -1001,7 +1001,7 @@ button {
   width: 100%;
 }
 .card .post-thumbnail {
-  height: auto;
+  height: 100%;
   line-height: 0;
 }
 .card .inspire-thumb {
@@ -1027,6 +1027,9 @@ button {
   top: 100%;
   transition: top 0.2s ease-in;
   z-index: 99;
+}
+.card .card-content a {
+  font-size: 1rem;
 }
 .card a:not(.tax-link),
 .card .inspiration-title {
@@ -1876,6 +1879,14 @@ input:-webkit-autofill {
 .site-main {
   padding-bottom: 2.5rem;
   position: relative;
+}
+
+.site-footer {
+  background-color: #069fa6;
+  padding: 3.75rem;
+}
+.site-footer .alternate-logo {
+  max-width: 9rem;
 }
 
 .header-wrap {

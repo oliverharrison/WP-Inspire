@@ -16,12 +16,17 @@
 	<footer id="colophon" class="site-footer">
 		<div class="container">
 			<div class="site-branding">
-				<?php the_custom_logo(); ?>
+				<?php
+					// Grab alternate logo from options.
+					$alternate_logo = get_theme_mod( 'wp_inspire_alternate_logo' );
+
+					if ( $alternate_logo ) :
+				?>
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+					<img src="<?php echo esc_url( $alternate_logo ); ?>" alt="<?php echo esc_html_e( 'WP Inspire white logo', 'wp_inspire' ); ?>" class="alternate-logo" />
+				</a>
+				<?php endif; ?>
 			</div><!-- .site-branding -->
-			<?php get_sidebar(); ?>
-			<div class="site-info">
-				<p>Open source and available on Github</p>
-			</div><!-- .site-info -->
 		</div><!-- .container -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->
