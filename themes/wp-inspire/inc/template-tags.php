@@ -59,23 +59,16 @@ if ( ! function_exists( 'wp_inspire_entry_body' ) ) :
 		?>
 		<div class="card-content">
 		<?php
-		$tags = get_terms( array(
-			'taxonomy' => 'post_tag',
-		) );
-		$industries = get_terms( array(
-			'taxonomy' => 'industry',
-		) );
-		$styles = get_terms( array(
-			'taxonomy' => 'style',
-		) );
-		$colors = get_terms( array(
-			'taxonomy' => 'color',
-		) );
+		$tags = get_the_terms( $post_id, 'post_tag' );
+		$industries = get_the_terms( $post_id, 'industry' );
+		$styles = get_the_terms( $post_id, 'style' );
+		$colors = get_the_terms( $post_id, 'color' );
 
 		$taxonomies = ['Tags' => $tags, 'Industries' => $industries, 'Styles' => $styles, 'Colors' => $colors];
 		?>
 
 		<?php foreach ( $taxonomies as $name => $taxonomy ) : ?>
+			<?php if ( $taxonomy ) : ?>
 			<div class="<?php echo strtolower($name); ?>-list">
 				<h3 class="taxonomy-title"><?php echo $name; ?></h3>
 				<?php  ?>
@@ -85,6 +78,7 @@ if ( ! function_exists( 'wp_inspire_entry_body' ) ) :
 					<?php endforeach; ?>
 				</ul>
 			</div>
+			<?php endif; ?>
 		<?php endforeach; ?>
 		</div><!-- .card-content -->
 		<?php
@@ -109,7 +103,7 @@ if ( ! function_exists( 'wp_inspire_post_thumbnail' ) ) :
 			?>
 
 			<div class="post-thumbnail">
-				<?php the_post_thumbnail( 'large', array( 'class' => $classname ) ); ?>
+				<?php the_post_thumbnail( 'medium_large', array( 'class' => $classname ) ); ?>
 			</div><!-- .post-thumbnail -->
 
 		<?php else : ?>

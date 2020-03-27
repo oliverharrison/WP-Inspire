@@ -9,7 +9,7 @@ $c-atoll: #0b6469;
 $c-niagara: #069fa6;
 $c-jagged-ice: #bee4e6;
 $c-white-smoke: #e9f6f6;
-$gr-pale: linear-gradient(180deg, #f6f9fa 0%, #a8dbdd 100%);
+$gr-pale: linear-gradient(180deg, #fff 0%, #a8dbdd 100%);
 
 // colors
 $c-white: #fff !default;
@@ -69,9 +69,6 @@ $fz-big: 24px !default;
 $fz-medium: $fz-base !default;
 $fz-small: 12px !default;
 
-$lh-title: 1.3em !default;
-$lh-huge: 1.3em !default;
-$lh-big: 1.3em !default;
 $lh-medium: $lh-base !default;
 $lh-small: 1.3em !default;
 
@@ -99,6 +96,7 @@ $mb-li: 0.5em !default;
 $m-xsmall: 4px !default;
 $m-small: 8px !default;
 $m-medium: 16px !default;
+$m-large: 24px !default;
 $m-big: 32px !default;
 $m-huge: 48px !default;
 
@@ -118,34 +116,21 @@ $w-gutter: 40px !default;
 // Grid
 $grid-breakpoints: (
 	xs: 0,
-	sm: 600px,
-	md: 900px,
-	lg: 1200px
+	sm: 90%,
+	md: 768px,
+	lg: 1024px,
+	xl: 1200px
 ) !default;
 
 $grid-columns: 12 !default;
 $grid-gutter-width: $w-gutter !default;
 
 $container-max-widths: (
-	sm: 560px,
-	md: 860px,
-	lg: 1160px
+	sm: 640px,
+	md: 720px,
+	lg: 960px,
+	xl: 1160px
 ) !default;
-
-// DEFAULTS
-// $grid-breakpoints: (
-// 	xs: 0,
-// 	sm: 576px,
-// 	md: 768px,
-// 	lg: 992px,
-// 	xl: 1200px
-// ) !default;
-// $container-max-widths: (
-// 	sm: 540px,
-// 	md: 720px,
-// 	lg: 960px,
-// 	xl: 1140px
-// ) !default;
 
 //  COMPONENTS
 

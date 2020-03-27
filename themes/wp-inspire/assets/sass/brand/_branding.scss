@@ -1,3 +1,7 @@
-.custom-logo {
-	max-width: rem(250);
+.site-branding {
+	display: inline-flex;
+
+	.custom-logo {
+		max-width: rem(250);
+	}
 }

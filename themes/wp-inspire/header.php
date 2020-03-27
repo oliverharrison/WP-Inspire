@@ -25,7 +25,7 @@
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'wp_inspire' ); ?></a>
 
 	<header id="masthead" class="site-header">
-		<div class="container">
+		<div class="container header-wrap">
 			<div class="site-branding">
 				<?php the_custom_logo(); ?>
 			</div><!-- .site-branding -->
@@ -35,6 +35,7 @@
 				wp_nav_menu( array(
 					'theme_location' => 'main-menu',
 					'menu_id'        => 'primary-menu',
+					'container'      => '',
 				) );
 				?>
 			</nav><!-- #site-navigation -->

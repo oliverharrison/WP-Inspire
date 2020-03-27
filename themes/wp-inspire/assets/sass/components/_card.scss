@@ -1,8 +1,8 @@
 .card {
 	display: flex;
 	flex-flow: column wrap;
-	margin-bottom: $m-huge;
-	margin-top: $m-big;
+	margin-bottom: $m-large;
+	margin-top: $m-huge;
 	perspective: 1000px;
 	position: relative;
 	transition: 0.25s margin ease-out;
@@ -15,38 +15,37 @@
 
 	.card-shadow {
 		border-radius: $bdr-rounded-corners;
-		box-shadow: 0 rem(6) rem(24) rgba($c-niagara, 0.2);
+		// box-shadow: 0 rem(6) rem(24) rgba($c-niagara, 0.2);
+		box-shadow: 0 rem(4) rem(12) rgba($c-niagara, 0.3);
 		height: calc(100% + #{$m-medium});
 		position: absolute;
-		transition: 1s box-shadow ease-out;
+		transition: 0.6s box-shadow ease-out;
 		width: 100%;
 	}
 
 	.post-body {
-		min-height: rem(480);
+		height: 100%;
+		min-height: rem(600);
 		overflow: hidden;
 		position: relative;
-		transition: 0.4s transform ease;
 		width: 100%;
-
-		&:hover {
-		}
 	}
 
 	.post-thumbnail,
 	.card-content {
 		background-color: rgba($c-white, 0.96);
+		display: inline-flex;
 		height: 100%;
 		position: absolute;
 		width: 100%;
 	}
 
 	.post-thumbnail {
+		height: auto;
 		line-height: 0;
 	}
 
 	.inspire-thumb {
-		height: rem(480);
 		object-fit: cover;
 		object-position: center top;
 		width: 100%;
@@ -69,7 +68,7 @@
 		flex-flow: column;
 		padding: rem(32);
 		top: 100%;
-		transition: top 0.3s ease-in;
+		transition: top 0.2s ease-in;
 		z-index: 99;
 	}
 
@@ -79,15 +78,16 @@
 	}
 
 	&:hover {
-		margin-bottom: calc(#{$m-big} * 2);
-		margin-top: $m-medium;
+		margin-bottom: $m-huge;
+		margin-top: $m-large;
+
 
 		.card-content {
-			top: 0;
+			top: rem(-1);
 		}
 
 		.card-shadow {
-			box-shadow: 0 rem(12) rem(32) rgba($c-niagara, 0.4);
+			box-shadow: 0 rem(12) rem(32) rgba($c-niagara, 0.5);
 		}
 	}
 }
