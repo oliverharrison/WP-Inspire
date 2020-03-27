@@ -3,9 +3,9 @@ Contributors: ShortPixel
 Donate link: https://www.paypal.me/resizeImage
 Tags: replace, attachment, media, files, replace image, replace jpg, change media, replace media, image, file
 Requires at least: 4.9.7
-Tested up to: 5.3
+Tested up to: 5.3.2
 Requires PHP: 5.6
-Stable tag: trunk
+Stable tag: 3.3.11
 
 Easily replace any attached image/file by simply uploading a new file in the Media Library edit view - a real time saver!
 
@@ -47,15 +47,25 @@ If you want more control over the format used to display the time, you can use t
 
 == Changelog ==
 
+= 3.3.11 =
+
+Release date: 10th March 2020
+* Fix the crashing of certain frontend builders when the plugin is active.
+
+= 3.3.10 =
+
+Release date: 23rd February 2020
+* Fix issue with JSON encoding which was interfering with Advanced Custom Fields and other plugins
+
 = 3.3.9 =
 
 Release date: 23rd February 2020
 * Fix issue with JSON encoded strings
-* Language – 0 new strings added, 0 updated, 0 fuzzied, and 0 obsoleted
+* Language – 0 new strings added, 2 updated, 0 fuzzied, and 0 obsoleted
 
 Release date: 19th February 2020
 * Fix issue with search/replacing non-image attachments and query
-* Language – 0 new strings added, 0 updated, 0 fuzzied, and 0 obsoleted
+* Language – 0 new strings added, 2 updated, 0 fuzzied, and 0 obsoleted
 
 = 3.3.8 =
 

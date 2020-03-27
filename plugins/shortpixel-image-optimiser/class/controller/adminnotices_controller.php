@@ -26,6 +26,8 @@ class adminNoticesController extends ShortPixelController
     const MSG_NO_APIKEY_REPEAT = 'ApiNotice301';  // First Repeat.
     const MSG_NO_APIKEY_REPEAT_LONG = 'ApiNotice302'; // Last Repeat.
 
+    const MSG_INTEGRATION_NGGALLERY = 'IntNotice400';
+
     public function __construct()
     {
         add_action('admin_notices', array($this, 'check_admin_notices'), 5); // run before the plugin admin notices
@@ -59,6 +61,11 @@ class adminNoticesController extends ShortPixelController
       Notices::removeNoticeBYID(self::MSG_QUOTA_REACHED);
     }
 
+    public static function resetIntegrationNotices()
+    {
+      Notices::removeNoticeByID(self::MSG_INTEGRATION_NGGALLERY);
+    }
+
     /** ReInstates A Persistent Notice manually */
     public static function reInstateQuotaExceeded()
     {
@@ -77,6 +84,23 @@ class adminNoticesController extends ShortPixelController
        $this->doCompatNotices();
        $this->doUnlistedNotices();
        $this->doQuotaNotices();
+
+       //$this->doIntegrationNotices();
+    }
+
+
+    protected function doIntegrationNotices()
+    {
+        $settings= \wpSPIO()->settings();
+
+        if (\wpSPIO()->env()->has_nextgen && ! $settings->includeNextGen  )
+        {
+            $url = admin_url('options-general.php?page=wp-shortpixel-settings&part=adv-settings');
+            $message = sprintf(__('It seems you are using NextGen Gallery. You can optimize your galleries with ShortPixel, but this is currently not enabled. To enable, %sgo to settings and enable%s it!', 'shortpixel_image_optimiser'), '<a href="' . $url . '">', '</a>');
+            $notice = Notices::addNormal($message);
+            Notices::makePersistent($notice, self::MSG_INTEGRATION_NGGALLERY, YEAR_IN_SECONDS);
+        }
+
     }
 
     /** Load the various messages about the lack of API-keys in the plugin */
@@ -300,6 +324,7 @@ class adminNoticesController extends ShortPixelController
     {
       $message = '<p>' . sprintf(__("You currently have <strong>%d images and thumbnails to optimize</strong> but you only have <strong>%d images</strong> available in your current plan."
             . " You might need to upgrade your plan in order to have all your images optimized.", 'shortpixel-image-optimiser'), $extra['filesTodo'], $extra['quotaAvailable']) . '</p>';
+      $message .= '  <button class="button button-primary" id="shortpixel-upgrade-advice" onclick="ShortPixel.proposeUpgrade()" style="margin-right:10px;"><strong>' .  __('Show me the best available options', 'shortpixel-image-optimiser') . '</strong></button>';
       $message .= $this->proposeUpgradePopup();
       //self::includeProposeUpgradePopup();
       return $message;
@@ -309,6 +334,7 @@ class adminNoticesController extends ShortPixelController
     {
       $message = '<p>' . sprintf(__("You are adding an average of <strong>%d images and thumbnails every month</strong> to your Media Library and you have <strong>a plan of %d images/month</strong>."
             . " You might need to upgrade your plan in order to have all your images optimized.", 'shortpixel-image-optimiser'), $extra['monthAvg'], $extra['monthlyQuota']) . '</p>';
+      $message .= '  <button class="button button-primary" id="shortpixel-upgrade-advice" onclick="ShortPixel.proposeUpgrade()" style="margin-right:10px;"><strong>' .  __('Show me the best available options', 'shortpixel-image-optimiser') . '</strong></button>';
       $message .= $this->proposeUpgradePopup();
       return $message;
     }
