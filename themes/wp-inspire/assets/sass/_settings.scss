@@ -9,7 +9,7 @@ $c-atoll: #0b6469;
 $c-niagara: #069fa6;
 $c-jagged-ice: #bee4e6;
 $c-white-smoke: #e9f6f6;
-$gr-pale: linear-gradient(180deg, #fff 0%, #a8dbdd 100%);
+$gr-pale: linear-gradient(180deg, #fff 0%, #a8dbdd 480px);
 
 // colors
 $c-white: #fff !default;
@@ -29,6 +29,28 @@ $c-secondary: #fd5200 !default;
 $c-dark: #18232f !default;
 $c-light: $c-gray-light !default;
 
+// Color tags
+$c-tax-beige: beige !default;
+$c-tax-black: black !default;
+$c-tax-blue: dodgerblue !default;
+$c-tax-brown: saddlebrown !default;
+$c-tax-burgundy: firebrick !default;
+$c-tax-darkblue: navy !default;
+$c-tax-green: green !default;
+$c-tax-grey: grey !default;
+$c-tax-khaki: khaki !default;
+$c-tax-lime: limegreen !default;
+$c-tax-maroon: maroon !default;
+$c-tax-mediumblue: mediumblue !default;
+$c-tax-orange: darkorange !default;
+$c-tax-pink: hotpink !default;
+$c-tax-purple: purple !default;
+$c-tax-red: red !default;
+$c-tax-teal: teal !default;
+$c-tax-turquoise: turquoise !default;
+$c-tax-white: white !default;
+$c-tax-yellow: gold !default;
+
 $c-text: #444 !default;
 $c-link: $c-secondary !default;
 $c-link-hover: lighten($c-secondary, 20%) !default;
@@ -46,6 +68,29 @@ $c-map: (
 	'error': $c-error,
 	'gray': $c-gray,
 	'gray-light': $c-gray-light
+) !default;
+
+$c-tax-map: (
+	'tax-beige': $c-tax-beige,
+	'tax-black': $c-tax-black,
+	'tax-blue': $c-tax-blue,
+	'tax-brown': $c-tax-brown,
+	'tax-burgundy': $c-tax-burgundy,
+	'tax-darkblue': $c-tax-darkblue,
+	'tax-green': $c-tax-green,
+	'tax-grey': $c-tax-grey,
+	'tax-khaki': $c-tax-khaki,
+	'tax-lime': $c-tax-lime,
+	'tax-maroon': $c-tax-maroon,
+	'tax-mediumblue': $c-tax-mediumblue,
+	'tax-orange': $c-tax-orange,
+	'tax-pink': $c-tax-pink,
+	'tax-purple': $c-tax-purple,
+	'tax-red': $c-tax-red,
+	'tax-teal': $c-tax-teal,
+	'tax-turquoise': $c-tax-turquoise,
+	'tax-white': $c-tax-white,
+	'tax-yellow': $c-tax-yellow
 ) !default;
 
 // Shadows
@@ -82,8 +127,8 @@ $lh-body: $lh-base !default;
 // Border
 $bdc-base: #d5d9db !default;
 $bd-medium: 1px solid $bdc-base !default;
-$bdr-base: 3px !default;
-$bdr-medium: $bdr-base !default;
+$bdr-base: 4px !default;
+$bdr-medium: 8px !default;
 $bdr-rounded-corners: 16px !default;
 
 // Defaults (HTML elements)

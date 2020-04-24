@@ -8,4 +8,9 @@
 			background-color: $color;
 		}
 	}
+	@each $type, $color in $c-tax-map {
+		&-#{$type} {
+			background-color: $color;
+		}
+	}
 }

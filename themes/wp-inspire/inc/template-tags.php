@@ -58,23 +58,30 @@ if ( ! function_exists( 'wp_inspire_entry_body' ) ) :
 	function wp_inspire_entry_body() {
 		?>
 		<div class="card-content">
-		<?php
-		$tags = get_the_terms( $post_id, 'post_tag' );
-		$industries = get_the_terms( $post_id, 'industry' );
-		$styles = get_the_terms( $post_id, 'style' );
-		$colors = get_the_terms( $post_id, 'color' );
 
-		$taxonomies = ['Tags' => $tags, 'Industries' => $industries, 'Styles' => $styles, 'Colors' => $colors];
+
+
+		<?php
+		$tags       = get_the_terms( $post_id, 'post_tag' );
+		$industries = get_the_terms( $post_id, 'industry' );
+		$styles     = get_the_terms( $post_id, 'style' );
+		$colors     = get_the_terms( $post_id, 'color' );
+		$taxonomies = [ 'Colors' => $colors, 'Styles' => $styles, 'Tags' => $tags, 'Industries' => $industries ];
 		?>
 
 		<?php foreach ( $taxonomies as $name => $taxonomy ) : ?>
 			<?php if ( $taxonomy ) : ?>
-			<div class="<?php echo strtolower($name); ?>-list">
-				<h3 class="taxonomy-title"><?php echo $name; ?></h3>
+			<div class="taxonomy-<?php echo esc_attr( strtolower($name) ); ?>">
+				<!-- <h3 class="taxonomy-title"><?php echo $name; ?></h3> -->
 				<?php  ?>
-				<ul class="taxonomy-list">
+				<?php $list_class = ' list-' . strtolower( $name ); ?>
+				<ul class="taxonomy-list<?php echo esc_attr( $list_class ); ?>">
 					<?php foreach ( $taxonomy as $taxonomy_item ) : ?>
-						<li><a class="tax-link" href="<?php echo get_term_link( $taxonomy_item ); ?>"><?php echo $taxonomy_item->name; ?></a></li>
+						<?php
+							$color_bg   = 'Colors' === $name ? ' bg-tax-' . $taxonomy_item->slug : '';
+							$color_text	= 'Colors' === $name ? ' color-tax-' . $taxonomy_item->slug : '';
+						?>
+						<li class="taxonomy-item<?php echo esc_attr( $color_bg ); ?>"><a class="taxonomy-link<?php echo esc_attr( $color_text ); ?>" href="<?php echo get_term_link( $taxonomy_item ); ?>"><?php echo $taxonomy_item->name; ?></a></li>
 					<?php endforeach; ?>
 				</ul>
 			</div>
