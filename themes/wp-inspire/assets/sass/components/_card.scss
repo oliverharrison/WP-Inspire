@@ -142,7 +142,7 @@
 			width: 100%;
 
 			.taxonomy-item {
-				margin: 0 $p-small;
+				margin: 0 $m-small 0 0;
 			}
 
 			.taxonomy-link {
@@ -165,8 +165,7 @@
 			.taxonomy-link {
 				border-radius: $bdr-medium;
 				height: rem(40);
-				margin-bottom: 0;
-				margin-right: rem(12);
+				margin: 0 rem(12) 0 0;
 				width: rem(40);
 			}
 
