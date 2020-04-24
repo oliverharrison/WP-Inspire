@@ -136,6 +136,15 @@
 		}
 
 		.taxonomy-list {
+			display: inline-flex;
+			margin: $m-medium 0 0 0;
+			padding-top: $p-medium;
+			width: 100%;
+
+			.taxonomy-item {
+				margin: 0 $p-small;
+			}
+
 			.taxonomy-link {
 				color: $c-gray;
 				font-size: rem(16);
@@ -149,6 +158,8 @@
 
 		.list-colors {
 			display: inline-flex;
+			margin: 0;
+			padding: 0;
 
 			.taxonomy-item,
 			.taxonomy-link {
@@ -182,7 +193,7 @@
 		margin-top: $m-large;
 
 		.post-footer {
-			background-color: $c-tertiary;
+			// background-color: $c-tertiary;
 		}
 
 		.card-content {

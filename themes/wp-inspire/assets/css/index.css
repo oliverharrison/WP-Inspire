@@ -168,63 +168,143 @@ li {
 }
 .bg-tax-beige {
   background-color: beige;
+  transition: 0.3s background-color ease;
+}
+.bg-tax-beige:hover {
+  background-color: #fefefc;
 }
 .bg-tax-black {
   background-color: black;
+  transition: 0.3s background-color ease;
+}
+.bg-tax-black:hover {
+  background-color: #141414;
 }
 .bg-tax-blue {
   background-color: dodgerblue;
+  transition: 0.3s background-color ease;
+}
+.bg-tax-blue:hover {
+  background-color: #47a4ff;
 }
 .bg-tax-brown {
   background-color: saddlebrown;
+  transition: 0.3s background-color ease;
+}
+.bg-tax-brown:hover {
+  background-color: #af5718;
 }
 .bg-tax-burgundy {
   background-color: firebrick;
+  transition: 0.3s background-color ease;
+}
+.bg-tax-burgundy:hover {
+  background-color: #d42929;
 }
 .bg-tax-darkblue {
   background-color: navy;
+  transition: 0.3s background-color ease;
+}
+.bg-tax-darkblue:hover {
+  background-color: #0000a9;
 }
 .bg-tax-green {
   background-color: green;
+  transition: 0.3s background-color ease;
+}
+.bg-tax-green:hover {
+  background-color: #00a900;
 }
 .bg-tax-grey {
   background-color: grey;
+  transition: 0.3s background-color ease;
+}
+.bg-tax-grey:hover {
+  background-color: #949494;
 }
 .bg-tax-khaki {
   background-color: khaki;
+  transition: 0.3s background-color ease;
+}
+.bg-tax-khaki:hover {
+  background-color: #f5eeb0;
 }
 .bg-tax-lime {
   background-color: limegreen;
+  transition: 0.3s background-color ease;
+}
+.bg-tax-lime:hover {
+  background-color: #53d553;
 }
 .bg-tax-maroon {
   background-color: maroon;
+  transition: 0.3s background-color ease;
+}
+.bg-tax-maroon:hover {
+  background-color: #a90000;
 }
 .bg-tax-mediumblue {
   background-color: mediumblue;
+  transition: 0.3s background-color ease;
+}
+.bg-tax-mediumblue:hover {
+  background-color: #0000f6;
 }
 .bg-tax-orange {
   background-color: darkorange;
+  transition: 0.3s background-color ease;
+}
+.bg-tax-orange:hover {
+  background-color: #ff9e29;
 }
 .bg-tax-pink {
   background-color: hotpink;
+  transition: 0.3s background-color ease;
+}
+.bg-tax-pink:hover {
+  background-color: #ff92c8;
 }
 .bg-tax-purple {
   background-color: purple;
+  transition: 0.3s background-color ease;
+}
+.bg-tax-purple:hover {
+  background-color: #a900a9;
 }
 .bg-tax-red {
   background-color: red;
+  transition: 0.3s background-color ease;
+}
+.bg-tax-red:hover {
+  background-color: #ff2929;
 }
 .bg-tax-teal {
   background-color: teal;
+  transition: 0.3s background-color ease;
+}
+.bg-tax-teal:hover {
+  background-color: #00a9a9;
 }
 .bg-tax-turquoise {
   background-color: turquoise;
+  transition: 0.3s background-color ease;
+}
+.bg-tax-turquoise:hover {
+  background-color: #63e6d9;
 }
 .bg-tax-white {
+  background-color: white;
+  transition: 0.3s background-color ease;
+}
+.bg-tax-white:hover {
   background-color: white;
 }
 .bg-tax-yellow {
   background-color: gold;
+  transition: 0.3s background-color ease;
+}
+.bg-tax-yellow:hover {
+  background-color: #ffdd29;
 }
 
 /**
@@ -232,63 +312,143 @@ li {
  */
 .color-tax-beige {
   color: beige !important;
+  transition: 0.3s color ease;
+}
+.color-tax-beige:hover {
+  color: #fefefc;
 }
 .color-tax-black {
   color: black !important;
+  transition: 0.3s color ease;
+}
+.color-tax-black:hover {
+  color: #141414;
 }
 .color-tax-blue {
   color: dodgerblue !important;
+  transition: 0.3s color ease;
+}
+.color-tax-blue:hover {
+  color: #47a4ff;
 }
 .color-tax-brown {
   color: saddlebrown !important;
+  transition: 0.3s color ease;
+}
+.color-tax-brown:hover {
+  color: #af5718;
 }
 .color-tax-burgundy {
   color: firebrick !important;
+  transition: 0.3s color ease;
+}
+.color-tax-burgundy:hover {
+  color: #d42929;
 }
 .color-tax-darkblue {
   color: navy !important;
+  transition: 0.3s color ease;
+}
+.color-tax-darkblue:hover {
+  color: #0000a9;
 }
 .color-tax-green {
   color: green !important;
+  transition: 0.3s color ease;
+}
+.color-tax-green:hover {
+  color: #00a900;
 }
 .color-tax-grey {
   color: grey !important;
+  transition: 0.3s color ease;
+}
+.color-tax-grey:hover {
+  color: #949494;
 }
 .color-tax-khaki {
   color: khaki !important;
+  transition: 0.3s color ease;
+}
+.color-tax-khaki:hover {
+  color: #f5eeb0;
 }
 .color-tax-lime {
   color: limegreen !important;
+  transition: 0.3s color ease;
+}
+.color-tax-lime:hover {
+  color: #53d553;
 }
 .color-tax-maroon {
   color: maroon !important;
+  transition: 0.3s color ease;
+}
+.color-tax-maroon:hover {
+  color: #a90000;
 }
 .color-tax-mediumblue {
   color: mediumblue !important;
+  transition: 0.3s color ease;
+}
+.color-tax-mediumblue:hover {
+  color: #0000f6;
 }
 .color-tax-orange {
   color: darkorange !important;
+  transition: 0.3s color ease;
+}
+.color-tax-orange:hover {
+  color: #ff9e29;
 }
 .color-tax-pink {
   color: hotpink !important;
+  transition: 0.3s color ease;
+}
+.color-tax-pink:hover {
+  color: #ff92c8;
 }
 .color-tax-purple {
   color: purple !important;
+  transition: 0.3s color ease;
+}
+.color-tax-purple:hover {
+  color: #a900a9;
 }
 .color-tax-red {
   color: red !important;
+  transition: 0.3s color ease;
+}
+.color-tax-red:hover {
+  color: #ff2929;
 }
 .color-tax-teal {
   color: teal !important;
+  transition: 0.3s color ease;
+}
+.color-tax-teal:hover {
+  color: #00a9a9;
 }
 .color-tax-turquoise {
   color: turquoise !important;
+  transition: 0.3s color ease;
+}
+.color-tax-turquoise:hover {
+  color: #63e6d9;
 }
 .color-tax-white {
   color: white !important;
+  transition: 0.3s color ease;
+}
+.color-tax-white:hover {
+  color: white;
 }
 .color-tax-yellow {
   color: gold !important;
+  transition: 0.3s color ease;
+}
+.color-tax-yellow:hover {
+  color: #ffdd29;
 }
 
 /**
@@ -534,17 +694,34 @@ li {
   }
 }
 
-.main-navigation {
+.main-navigation,
+.footer-navigation {
   display: inline-flex;
   justify-content: flex-end;
   width: 100%;
 }
-.main-navigation .menu {
+.main-navigation .menu-item,
+.footer-navigation .menu-item {
+  margin: 0 0 0 40px;
+}
+
+.menu {
+  align-items: center;
+  display: inline-flex;
   justify-self: flex-end;
   margin: 0;
 }
-.main-navigation .menu-item {
-  margin: 0 0 0 40px;
+
+.footer-navigation a,
+.footer-navigation a:visited {
+  color: #fff;
+  padding: 8px;
+  transition: 0.3s opacity ease;
+}
+.footer-navigation a:hover,
+.footer-navigation a:active {
+  color: #fff;
+  opacity: 0.7;
 }
 
 body {
@@ -1210,6 +1387,15 @@ button {
   font-size: 1rem;
   word-break: break-word;
 }
+.card .card-content .taxonomy-list {
+  display: inline-flex;
+  margin: 16px 0 0 0;
+  padding-top: 8px;
+  width: 100%;
+}
+.card .card-content .taxonomy-list .taxonomy-item {
+  margin: 0 4px;
+}
 .card .card-content .taxonomy-list .taxonomy-link {
   color: #aaa;
   font-size: 1rem;
@@ -1220,6 +1406,8 @@ button {
 }
 .card .card-content .list-colors {
   display: inline-flex;
+  margin: 0;
+  padding: 0;
 }
 .card .card-content .list-colors .taxonomy-item,
 .card .card-content .list-colors .taxonomy-link {
@@ -1245,9 +1433,6 @@ button {
 .card:hover {
   margin-bottom: 48px;
   margin-top: 24px;
-}
-.card:hover .post-footer {
-  background-color: #ffb400;
 }
 .card:hover .card-content {
   top: -0.0625rem;
@@ -2100,6 +2285,11 @@ input:-webkit-autofill {
   max-width: 9rem;
 }
 
+.footer-wrap {
+  display: inline-flex;
+  width: 100%;
+}
+
 .header-wrap {
   align-items: center;
   display: flex;
@@ -2121,7 +2311,8 @@ input:-webkit-autofill {
 
 .inspirations-bg {
   background: linear-gradient(180deg, #fff 0%, #a8dbdd 480px);
-  min-height: calc(100vh - rem(200));
+  min-height: calc(100vh - 12.5rem);
+  padding-bottom: 32px;
   width: 100%;
 }
 

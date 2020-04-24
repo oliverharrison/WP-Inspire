@@ -83,35 +83,41 @@ if ( ! function_exists( 'wp_inspire_entry_body' ) ) :
 			</div>
 
 			<?php
-			$tags       = get_the_terms( $post_id, 'post_tag' );
-			$industries = get_the_terms( $post_id, 'industry' );
-			$styles     = get_the_terms( $post_id, 'style' );
-			$colors     = get_the_terms( $post_id, 'color' );
-			$taxonomies = [ 'Colors' => $colors, 'Styles' => $styles, 'Industries' => $industries, 'Tags' => $tags ];
+			get_the_terms( $post_id, 'color' ) ? $taxonomies['Colors'] = get_the_terms( $post_id, 'color' ) : null;
+			get_the_terms( $post_id, 'style' ) ? $taxonomies['Styles'] = get_the_terms( $post_id, 'style' ) : null;
+			get_the_terms( $post_id, 'industry' ) ? $taxonomies['Industries'] = get_the_terms( $post_id, 'industry' ) : null;
+			get_the_terms( $post_id, 'post_tag' ) ? $taxonomies['Tags'] = get_the_terms( $post_id, 'post_tag' ) : null;
 			?>
 
-			<div class="taxonomies-wrap">
+			<?php if ( $taxonomies ) : ?>
 
-				<?php foreach ( $taxonomies as $name => $taxonomy ) : ?>
-					<?php if ( $taxonomy ) : ?>
-					<div class="taxonomy-<?php echo esc_attr( strtolower($name) ); ?>">
-						<!-- <h3 class="taxonomy-title"><?php echo $name; ?></h3> -->
-						<?php  ?>
-						<?php $list_class = ' list-' . strtolower( $name ); ?>
-						<ul class="taxonomy-list<?php echo esc_attr( $list_class ); ?>">
-							<?php foreach ( $taxonomy as $taxonomy_item ) : ?>
-								<?php
-									$color_bg   = 'Colors' === $name ? ' bg-tax-' . $taxonomy_item->slug : '';
-									$color_text	= 'Colors' === $name ? ' color-tax-' . $taxonomy_item->slug : '';
-								?>
-								<li class="taxonomy-item<?php echo esc_attr( $color_bg ); ?>"><a class="taxonomy-link<?php echo esc_attr( $color_text ); ?>" href="<?php echo get_term_link( $taxonomy_item ); ?>"><?php echo $taxonomy_item->name; ?></a></li>
-							<?php endforeach; ?>
-						</ul>
-					</div>
-					<?php endif; ?>
-				<?php endforeach; ?>
+				<div class="taxonomies-wrap">
 
-			</div><!-- .taxonomies-wrap -->
+					<?php foreach ( $taxonomies as $name => $taxonomy ) : ?>
+
+						<?php if ( $taxonomy ) : ?>
+
+						<div class="taxonomy-<?php echo esc_attr( strtolower($name) ); ?>">
+
+							<ul class="taxonomy-list list-<?php echo esc_attr( strtolower( $name ) ); ?>">
+								<?php foreach ( $taxonomy as $taxonomy_item ) : ?>
+									<?php
+										$color_bg   = 'Colors' === $name ? ' bg-tax-' . $taxonomy_item->slug : '';
+										$color_text	= 'Colors' === $name ? ' color-tax-' . $taxonomy_item->slug : '';
+									?>
+									<li class="taxonomy-item<?php echo esc_attr( $color_bg ); ?>"><a class="taxonomy-link<?php echo esc_attr( $color_text ); ?>" href="<?php echo get_term_link( $taxonomy_item ); ?>"><?php echo $taxonomy_item->name; ?></a></li>
+								<?php endforeach; ?>
+							</ul>
+
+						</div>
+
+						<?php endif; ?>
+
+					<?php endforeach; ?>
+
+				</div><!-- .taxonomies-wrap -->
+
+			<?php endif; ?>
 
 		</div><!-- .card-content -->
 		<?php
