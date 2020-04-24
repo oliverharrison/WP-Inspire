@@ -15,50 +15,53 @@ $inspirations = new WP_Query(
 );
 ?>
 
-<div class="inspirations-bg"></div>
-<div class="container">
+<div class="inspirations-bg">
 
-<?php if ( $inspirations->have_posts() ) : ?>
+	<div class="container">
 
-	<section class="inspirations-block row">
-		<?php while ( $inspirations->have_posts() ) : $inspirations->the_post(); ?>
+		<?php if ( $inspirations->have_posts() ) : ?>
 
-			<?php $insp_link = get_field( 'link' ); ?>
-			<article id="post-<?php the_ID(); ?>" <?php post_class( 'inspiration col-md-6 col-lg-4' ); ?>><!--  -->
+			<section class="inspirations-block row">
+				<?php while ( $inspirations->have_posts() ) : $inspirations->the_post(); ?>
 
-				<div class="card">
-					<div class="card-shadow"></div>
-					<main class="post-body">
+					<?php $insp_link = get_field( 'link' ); ?>
+					<article id="post-<?php the_ID(); ?>" <?php post_class( 'inspiration col-md-6 col-lg-4' ); ?>><!--  -->
 
-						<?php wp_inspire_post_thumbnail(); ?>
-						<?php wp_inspire_entry_body(); ?>
+						<div class="card">
+							<div class="card-shadow"></div>
+							<main class="post-body">
 
-					</main><!-- .entry-body -->
+								<?php wp_inspire_post_thumbnail(); ?>
+								<?php wp_inspire_entry_body(); ?>
 
-					<footer class="post-footer">
-						<?php the_title( '<h2 class="inspiration-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); ?>
-						<?php if ( $insp_link ) : ?>
-							<a href="<?php echo esc_url( $insp_link['url'] ); ?>" class="link-out" target="_blank"><span class="icon icon-link"><?php echo esc_html( preg_replace( '#^https?://#', '', rtrim( $insp_link['url'], '/' ) ) ); ?></span></a>
-						<?php endif; ?>
+							</main><!-- .entry-body -->
 
-					</footer><!-- .entry-footer -->
+							<footer class="post-footer">
+								<?php the_title( '<h2 class="inspiration-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); ?>
+								<?php if ( $insp_link ) : ?>
+									<a href="<?php echo esc_url( $insp_link['url'] ); ?>" class="link-out" target="_blank"><span class="icon icon-link"><?php echo esc_html( preg_replace( '#^https?://#', '', rtrim( $insp_link['url'], '/' ) ) ); ?></span></a>
+								<?php endif; ?>
 
-				</div><!-- .card -->
+							</footer><!-- .entry-footer -->
 
-			</article><!-- #post-<?php the_ID(); ?> .inspiration.col-sm-4 -->
+						</div><!-- .card -->
 
-		<?php endwhile; ?>
+					</article><!-- #post-<?php the_ID(); ?> .inspiration.col-sm-4 -->
 
-	<?php
-	if (  $inspirations->max_num_pages > 1 ) :
-		wp_inspire_numeric_posts_nav();
-	endif;
-	?>
-	</section><!-- .inspirations-block.row -->
+				<?php endwhile; ?>
 
-<?php
-endif;
-wp_reset_postdata();
-?>
+			<?php
+			if (  $inspirations->max_num_pages > 1 ) :
+				wp_inspire_numeric_posts_nav();
+			endif;
+			?>
+			</section><!-- .inspirations-block.row -->
 
-</div><!-- .container -->
+		<?php
+		endif;
+		wp_reset_postdata();
+		?>
+
+	</div><!-- .container -->
+
+</div><!-- .inspirations-bg -->

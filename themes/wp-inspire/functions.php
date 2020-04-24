@@ -44,7 +44,8 @@ if ( ! function_exists( 'wp_inspire_setup' ) ) :
 
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
-			'main-menu' => esc_html__( 'Primary', 'wp_inspire' ),
+			'main-menu'   => esc_html__( 'Primary', 'wp_inspire' ),
+			'footer-menu' => esc_html__( 'Secondary', 'wp_inspire' ),
 		) );
 
 		/*

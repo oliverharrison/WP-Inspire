@@ -18,8 +18,14 @@ get_header();
 			<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
 		</header>
 
-		<!-- TODO insert site description -->
+		<div class="container">
+			<?php
+				$post_object = get_post( get_option('page_on_front') );
+				echo wp_kses_post( '<div class="fp-content">' . $post_object->post_content . '</div>' );
+			?>
+		</div>
 
+		<!-- TODO insert site description -->
 		<?php get_template_part( 'template-parts/content', 'inspirations' ); ?>
 
 		</main><!-- #main -->

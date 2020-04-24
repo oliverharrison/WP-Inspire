@@ -75,7 +75,7 @@
 		}
 	}
 
-	a:not(.tax-link),
+	a:not(.taxonomy-link),
 	.inspiration-title {
 		color: $c-white;
 	}
@@ -90,7 +90,25 @@
 		}
 
 		.card-shadow {
-			box-shadow: 0 rem(12) rem(32) rgba($c-niagara, 0.5);
+			box-shadow: 0 rem(4) rem(6) rem(3) rgba($c-niagara, 0.3),
+			0 rem(16) rem(32) rgba($c-niagara, 0.6);
+		}
+	}
+
+	.list-colors {
+		display: inline-flex;
+
+		.taxonomy-item,
+		.taxonomy-link {
+			border-radius: $bdr-medium;
+			height: rem(40);
+			margin-right: rem(12);
+			width: rem(40);
+		}
+
+		.taxonomy-link {
+			display: block;
+			font-size: rem(6);
 		}
 	}
 }
