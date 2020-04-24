@@ -27,6 +27,15 @@
 				</a>
 				<?php endif; ?>
 			</div><!-- .site-branding -->
+			<nav class="footer-navigation">
+				<?php
+				wp_nav_menu( array(
+					'theme_location' => 'footer-menu',
+					'menu_id'        => 'secondary-menu',
+					'container'      => '',
+				) );
+				?>
+			</nav><!-- #site-navigation -->
 		</div><!-- .container -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->
