@@ -56,37 +56,63 @@ if ( ! function_exists( 'wp_inspire_entry_body' ) ) :
 	 * Prints HTML with meta information for the inspiration
 	 */
 	function wp_inspire_entry_body() {
+		$inspiration_link = get_field( 'link' );
 		?>
 		<div class="card-content">
-
-
-
-		<?php
-		$tags       = get_the_terms( $post_id, 'post_tag' );
-		$industries = get_the_terms( $post_id, 'industry' );
-		$styles     = get_the_terms( $post_id, 'style' );
-		$colors     = get_the_terms( $post_id, 'color' );
-		$taxonomies = [ 'Colors' => $colors, 'Styles' => $styles, 'Tags' => $tags, 'Industries' => $industries ];
-		?>
-
-		<?php foreach ( $taxonomies as $name => $taxonomy ) : ?>
-			<?php if ( $taxonomy ) : ?>
-			<div class="taxonomy-<?php echo esc_attr( strtolower($name) ); ?>">
-				<!-- <h3 class="taxonomy-title"><?php echo $name; ?></h3> -->
-				<?php  ?>
-				<?php $list_class = ' list-' . strtolower( $name ); ?>
-				<ul class="taxonomy-list<?php echo esc_attr( $list_class ); ?>">
-					<?php foreach ( $taxonomy as $taxonomy_item ) : ?>
-						<?php
-							$color_bg   = 'Colors' === $name ? ' bg-tax-' . $taxonomy_item->slug : '';
-							$color_text	= 'Colors' === $name ? ' color-tax-' . $taxonomy_item->slug : '';
-						?>
-						<li class="taxonomy-item<?php echo esc_attr( $color_bg ); ?>"><a class="taxonomy-link<?php echo esc_attr( $color_text ); ?>" href="<?php echo get_term_link( $taxonomy_item ); ?>"><?php echo $taxonomy_item->name; ?></a></li>
-					<?php endforeach; ?>
-				</ul>
+			<div class="card-meta">
+				<div class="card-links">
+					<div class="internal-link">
+						<a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
+							<img class="icon icon-info" src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/info.svg' ); ?>" alt="Info icon" />
+							<?php esc_html_e( 'More Info', 'wp_inspire' ); ?>
+						</a>
+					</div>
+					<div class="external-link">
+						<a href="<?php echo esc_url( $inspiration_link['url'] ); ?>" class="link-out" target="_blank">
+							<img class="icon icon-link" src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/link.svg' ); ?>" alt="Link out icon" />
+							<?php echo esc_html( $inspiration_link['title'] ); ?>
+						</a>
+					</div>
+				</div>
+				<div class="card-heart">
+					<a href="#" class="like-this">
+						<img class="icon icon-heart" src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/heart.svg' ); ?>" alt="Heart icon" />
+						<span class="inspiration-likes">122</span>
+					</a>
+				</div>
 			</div>
-			<?php endif; ?>
-		<?php endforeach; ?>
+
+			<?php
+			$tags       = get_the_terms( $post_id, 'post_tag' );
+			$industries = get_the_terms( $post_id, 'industry' );
+			$styles     = get_the_terms( $post_id, 'style' );
+			$colors     = get_the_terms( $post_id, 'color' );
+			$taxonomies = [ 'Colors' => $colors, 'Styles' => $styles, 'Industries' => $industries, 'Tags' => $tags ];
+			?>
+
+			<div class="taxonomies-wrap">
+
+				<?php foreach ( $taxonomies as $name => $taxonomy ) : ?>
+					<?php if ( $taxonomy ) : ?>
+					<div class="taxonomy-<?php echo esc_attr( strtolower($name) ); ?>">
+						<!-- <h3 class="taxonomy-title"><?php echo $name; ?></h3> -->
+						<?php  ?>
+						<?php $list_class = ' list-' . strtolower( $name ); ?>
+						<ul class="taxonomy-list<?php echo esc_attr( $list_class ); ?>">
+							<?php foreach ( $taxonomy as $taxonomy_item ) : ?>
+								<?php
+									$color_bg   = 'Colors' === $name ? ' bg-tax-' . $taxonomy_item->slug : '';
+									$color_text	= 'Colors' === $name ? ' color-tax-' . $taxonomy_item->slug : '';
+								?>
+								<li class="taxonomy-item<?php echo esc_attr( $color_bg ); ?>"><a class="taxonomy-link<?php echo esc_attr( $color_text ); ?>" href="<?php echo get_term_link( $taxonomy_item ); ?>"><?php echo $taxonomy_item->name; ?></a></li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+					<?php endif; ?>
+				<?php endforeach; ?>
+
+			</div><!-- .taxonomies-wrap -->
+
 		</div><!-- .card-content -->
 		<?php
 	}
