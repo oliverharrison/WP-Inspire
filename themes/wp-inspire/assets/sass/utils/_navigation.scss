@@ -1,14 +1,32 @@
-.main-navigation {
+.main-navigation,
+.footer-navigation {
 	display: inline-flex;
 	justify-content: flex-end;
 	width: 100%;
 
-	.menu {
-		justify-self: flex-end;
-		margin: 0;
-	}
-
 	.menu-item {
 		margin: 0 0 0 $w-gutter;
+	}
+}
+
+.menu {
+	align-items: center;
+	display: inline-flex;
+	justify-self: flex-end;
+	margin: 0;
+}
+
+.footer-navigation {
+	a,
+	a:visited {
+		color: $c-white;
+		padding: $p-medium;
+		transition: 0.3s opacity ease;
+	}
+
+	a:hover,
+	a:active {
+		color: $c-white;
+		opacity: 0.7;
 	}
 }
