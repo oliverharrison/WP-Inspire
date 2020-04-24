@@ -7,6 +7,7 @@ $enable-reset-defaults: true !default; // reset default browser values
 $c-international-orange: #fd5200;
 $c-atoll: #0b6469;
 $c-niagara: #069fa6;
+$c-selective-yellow: #ffb400;
 $c-jagged-ice: #bee4e6;
 $c-white-smoke: #e9f6f6;
 $gr-pale: linear-gradient(180deg, #fff 0%, #a8dbdd 480px);
@@ -18,14 +19,15 @@ $c-success: #4caf50 !default;
 $c-info: #5bc0de !default;
 $c-warning: #f0ad4e !default;
 $c-error: #e74c3c !default;
-$c-gray: #969da6 !default;
+$c-gray: #aaa !default;
 $c-gray-light: #eceff1 !default;
 
 $c-primary: $c-niagara !default;
 $c-primary-dark: $c-atoll !default;
 $c-primary-light: $c-jagged-ice !default;
 $c-primary-lighter: $c-white-smoke !default;
-$c-secondary: #fd5200 !default;
+$c-secondary: $c-international-orange !default;
+$c-tertiary: $c-selective-yellow !default;
 $c-dark: #18232f !default;
 $c-light: $c-gray-light !default;
 
@@ -61,6 +63,7 @@ $c-map: (
 	'primary': $c-primary,
 	'dark': $c-dark,
 	'secondary': $c-secondary,
+	'tertiary': $c-tertiary,
 	'white': $c-white,
 	'success': $c-success,
 	'info': $c-info,
@@ -149,6 +152,7 @@ $m-huge: 48px !default;
 $p-small: 4px !default;
 $p-medium: 8px !default;
 $p-big: 16px !default;
+$p-xbig: 24px !default;
 $p-huge: 32px !default;
 
 // Layout
