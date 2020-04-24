@@ -24,7 +24,7 @@ $inspirations = new WP_Query(
 			<section class="inspirations-block row">
 				<?php while ( $inspirations->have_posts() ) : $inspirations->the_post(); ?>
 
-					<?php $insp_link = get_field( 'link' ); ?>
+					<?php $inspiration_link = get_field( 'link' ); ?>
 					<article id="post-<?php the_ID(); ?>" <?php post_class( 'inspiration col-md-6 col-lg-4' ); ?>><!--  -->
 
 						<div class="card">
@@ -38,10 +38,9 @@ $inspirations = new WP_Query(
 
 							<footer class="post-footer">
 								<?php the_title( '<h2 class="inspiration-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); ?>
-								<?php if ( $insp_link ) : ?>
-									<a href="<?php echo esc_url( $insp_link['url'] ); ?>" class="link-out" target="_blank"><span class="icon icon-link"><?php echo esc_html( preg_replace( '#^https?://#', '', rtrim( $insp_link['url'], '/' ) ) ); ?></span></a>
+								<?php if ( $inspiration_link ) : ?>
+									<a href="<?php echo esc_url( $inspiration_link['url'] ); ?>" class="link-out" target="_blank"><span class="icon icon-link"><?php echo esc_html( $inspiration_link['title'] ); ?></span></a>
 								<?php endif; ?>
-
 							</footer><!-- .entry-footer -->
 
 						</div><!-- .card -->

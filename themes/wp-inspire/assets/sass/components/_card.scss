@@ -15,7 +15,7 @@
 
 	.card-shadow {
 		border-radius: $bdr-rounded-corners;
-		box-shadow: 0 rem(4) rem(12) rgba($c-niagara, 0.3);
+		box-shadow: 0 rem(4) rem(12) rgba($c-primary, 0.3);
 		height: calc(100% + #{$m-medium});
 		position: absolute;
 		transition: 0.6s box-shadow ease-out;
@@ -51,27 +51,124 @@
 	}
 
 	.post-footer {
+		align-items: center;
 		background-color: $c-international-orange;
 		border-radius: 0 0 $bdr-rounded-corners $bdr-rounded-corners;
 		bottom: rem(-16);
+		display: inline-flex;
 		min-height: rem(100);
-		padding: $p-big;
+		padding: $p-xbig;
 		position: absolute;
+		transition: 0.6s background-color ease-out;
 		width: 100%;
 		z-index: 200;
+
+		.inspiration-title {
+			font-size: rem(28);
+			text-shadow: 0 rem(1) rem(4) rgba($c-black, 0.18);
+			width: 100%;
+		}
+
+		.icon {
+			display: block;
+			height: rem(36);
+			justify-self: flex-end;
+			margin-left: $p-medium;
+			text-indent: rem(-9999);
+			width: rem(36);
+
+			&-link {
+				background: url( '../img/link-white.svg' ) center no-repeat;
+			}
+		}
 	}
 
 	.card-content {
 		border-radius: $bdr-rounded-corners;
 		display: flex;
 		flex-flow: column;
-		padding: rem(32);
+		padding: rem(88) rem(32) rem(32);
 		top: 100%;
 		transition: top 0.2s ease-in;
 		z-index: 99;
 
-		a {
-			font-size: rem(16);
+		.card-meta {
+			align-items: center;
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.card-heart {
+			.like-this {
+				align-items: center;
+				color: $c-international-orange;
+				display: flex;
+				flex-direction: column;
+				font-size: rem(22);
+				height: 100%;
+				margin-left: rem(12);
+			}
+
+			.icon-heart {
+				margin: 0 0 rem(12);
+				width: rem(51);
+			}
+		}
+
+		.card-links {
+			.icon {
+				height: rem(36);
+				margin-right: $p-big;
+				width: rem(36);
+			}
+
+			& > div:not(:last-child) {
+				margin-bottom: rem(12);
+			}
+
+			a {
+				align-items: center;
+				color: $c-primary;
+				display: flex;
+				font-size: rem(16);
+				word-break: break-word;
+			}
+		}
+
+		.taxonomy-list {
+			.taxonomy-link {
+				color: $c-gray;
+				font-size: rem(16);
+				transition: 0.4s color ease;
+
+				&:hover {
+					color: $c-secondary;
+				}
+			}
+		}
+
+		.list-colors {
+			display: inline-flex;
+
+			.taxonomy-item,
+			.taxonomy-link {
+				border-radius: $bdr-medium;
+				height: rem(40);
+				margin-bottom: 0;
+				margin-right: rem(12);
+				width: rem(40);
+			}
+
+			.taxonomy-link {
+				display: block;
+				font-size: rem(6);
+			}
+		}
+
+		.taxonomies-wrap {
+			border-top: rem(2) solid $c-primary-light;
+			margin: $p-xbig 0 0 rem(52);
+			padding-top: $p-xbig;
 		}
 	}
 
@@ -84,31 +181,17 @@
 		margin-bottom: $m-huge;
 		margin-top: $m-large;
 
+		.post-footer {
+			background-color: $c-tertiary;
+		}
 
 		.card-content {
 			top: rem(-1);
 		}
 
 		.card-shadow {
-			box-shadow: 0 rem(4) rem(6) rem(3) rgba($c-niagara, 0.3),
-			0 rem(16) rem(32) rgba($c-niagara, 0.6);
+			box-shadow: 0 rem(4) rem(6) rem(3) rgba($c-primary, 0.3),
+			0 rem(16) rem(32) rgba($c-primary, 0.6);
 		}
-	}
-
-	.list-colors {
-		display: inline-flex;
-
-		.taxonomy-item,
-		.taxonomy-link {
-			border-radius: $bdr-medium;
-			height: rem(40);
-			margin-right: rem(12);
-			width: rem(40);
-		}
-
-		.taxonomy-link {
-			display: block;
-			font-size: rem(6);
-		}
-	}
+	} // .card:hover
 }
