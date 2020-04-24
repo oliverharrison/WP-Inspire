@@ -1394,7 +1394,7 @@ button {
   width: 100%;
 }
 .card .card-content .taxonomy-list .taxonomy-item {
-  margin: 0 4px;
+  margin: 0 8px 0 0;
 }
 .card .card-content .taxonomy-list .taxonomy-link {
   color: #aaa;
@@ -1413,8 +1413,7 @@ button {
 .card .card-content .list-colors .taxonomy-link {
   border-radius: 8px;
   height: 2.5rem;
-  margin-bottom: 0;
-  margin-right: 0.75rem;
+  margin: 0 0.75rem 0 0;
   width: 2.5rem;
 }
 .card .card-content .list-colors .taxonomy-link {
@@ -2311,8 +2310,9 @@ input:-webkit-autofill {
 
 .inspirations-bg {
   background: linear-gradient(180deg, #fff 0%, #a8dbdd 480px);
+  margin-top: 48px;
   min-height: calc(100vh - 12.5rem);
-  padding-bottom: 32px;
+  padding: 32px 0;
   width: 100%;
 }
 

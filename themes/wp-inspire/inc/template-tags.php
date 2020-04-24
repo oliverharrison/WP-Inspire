@@ -76,7 +76,7 @@ if ( ! function_exists( 'wp_inspire_entry_body' ) ) :
 				</div>
 				<div class="card-heart">
 					<a href="#" class="like-this">
-						<img class="icon icon-heart" src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/heart.svg' ); ?>" alt="Heart icon" />
+						<img class="icon icon-heart" src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/heart-outline.svg' ); ?>" alt="Heart icon" />
 						<span class="inspiration-likes">122</span>
 					</a>
 				</div>
@@ -97,8 +97,7 @@ if ( ! function_exists( 'wp_inspire_entry_body' ) ) :
 
 						<?php if ( $taxonomy ) : ?>
 
-						<div class="taxonomy-<?php echo esc_attr( strtolower($name) ); ?>">
-
+						<div class="taxonomy-wrap taxonomy-<?php echo esc_attr( strtolower($name) ); ?>">
 							<ul class="taxonomy-list list-<?php echo esc_attr( strtolower( $name ) ); ?>">
 								<?php foreach ( $taxonomy as $taxonomy_item ) : ?>
 									<?php
