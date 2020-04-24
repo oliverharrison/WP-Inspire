@@ -30,7 +30,15 @@ class adminNoticesController extends ShortPixelController
 
     public function __construct()
     {
-        add_action('admin_notices', array($this, 'check_admin_notices'), 5); // run before the plugin admin notices
+      add_action('admin_notices', array($this, 'displayNotices'), 50); // notices occured before page load
+      add_action('admin_footer', array($this, 'displayNotices'));  // called in views.
+
+      // no persistent notifications with this flag set.
+      if (defined('SHORTPIXEL_SILENT_MODE') && SHORTPIXEL_SILENT_MODE === true)
+        return;
+
+      add_action('admin_notices', array($this, 'check_admin_notices'), 5); // run before the plugin admin notices
+
     }
 
     public static function getInstance()
@@ -76,22 +84,68 @@ class adminNoticesController extends ShortPixelController
       $noticeControl->update();
     }
 
+    public function displayNotices()
+    {
+      if (! \wpSPIO()->env()->is_screen_to_use)
+        return; // suppress all when not our screen.
+
+      $noticeControl = Notices::getInstance();
+      $noticeControl->loadIcons(array(
+          'normal' => '<img class="short-pixel-notice-icon" src="' . plugins_url('res/img/slider.png', SHORTPIXEL_PLUGIN_FILE) . '">',
+          'success' => '<img class="short-pixel-notice-icon" src="' . plugins_url('res/img/robo-cool.png', SHORTPIXEL_PLUGIN_FILE) . '">',
+          'warning' => '<img class="short-pixel-notice-icon" src="' . plugins_url('res/img/robo-scared.png', SHORTPIXEL_PLUGIN_FILE) . '">',
+          'error' => '<img class="short-pixel-notice-icon" src="' . plugins_url('res/img/robo-scared.png', SHORTPIXEL_PLUGIN_FILE) . '">',
+      ));
+
+      if ($noticeControl->countNotices() > 0)
+      {
+        $notices = $noticeControl->getNoticesForDisplay();
+
+        if (count($notices) > 0)
+        {
+          wp_enqueue_style('shortpixel-notices');
+
+          foreach($notices as $notice)
+          {
+            echo $notice->getForDisplay();
+
+            if ($notice->getID() == adminNoticesController::MSG_QUOTA_REACHED || $notice->getID() == adminNoticesController::MSG_UPGRADE_MONTH
+            || $notice->getID() == adminNoticesController::MSG_UPGRADE_BULK)
+            {
+              wp_enqueue_script('jquery.knob.min.js');
+              wp_enqueue_script('jquery.tooltip.min.js');
+              wp_enqueue_script('shortpixel');
+              \wpSPIO()->load_style('shortpixel-modal');
+            }
+          }
+        }
+      }
+      $noticeControl->update(); // puts views, and updates
+    }
+
     /* General function to check on Hook for admin notices if there is something to show globally */
     public function check_admin_notices()
     {
+      if (! \wpSPIO()->env()->is_screen_to_use)
+        return; // suppress all when not our screen.
+
        $this->doFilePermNotice();
        $this->doAPINotices();
        $this->doCompatNotices();
        $this->doUnlistedNotices();
        $this->doQuotaNotices();
 
-       //$this->doIntegrationNotices();
+       $this->doIntegrationNotices();
     }
 
 
     protected function doIntegrationNotices()
     {
         $settings= \wpSPIO()->settings();
+        if (! \wpSPIO()->settings()->verifiedKey)
+        {
+          return; // no key, no integrations.
+        }
 
         if (\wpSPIO()->env()->has_nextgen && ! $settings->includeNextGen  )
         {
@@ -229,6 +283,7 @@ class adminNoticesController extends ShortPixelController
           $shortpixel->getQuotaInformation();
       }
 
+
       /**  Comment for historical reasons, this seems strange in the original, excluding.
       * isset($this->_settings->currentStats['optimizePdfs'])
       * && $this->_settings->currentStats['optimizePdfs'] == $this->_settings->optimizePdfs )
@@ -252,7 +307,7 @@ class adminNoticesController extends ShortPixelController
               $message = $this->getBulkUpgradeMessage(array('filesTodo' => $stats['totalFiles'] - $stats['totalProcessedFiles'],
                                                       'quotaAvailable' => max(0, $quotaData['APICallsQuotaNumeric'] + $quotaData['APICallsQuotaOneTimeNumeric'] - $quotaData['APICallsMadeNumeric'] - $quotaData['APICallsMadeOneTimeNumeric'])));
               $notice = Notices::addNormal($message);
-              Notices::makePersistent($notice, self::MSG_UPGRADE_BULK, YEAR_IN_SECONDS);
+              Notices::makePersistent($notice, self::MSG_UPGRADE_BULK, YEAR_IN_SECONDS, array($this, 'upgradeBulkCallback'));
               //ShortPixelView::displayActivationNotice('upgbulk', );
           }
           //consider the monthly plus 1/6 of the available one-time credits.
@@ -264,16 +319,27 @@ class adminNoticesController extends ShortPixelController
               Notices::makePersistent($notice, self::MSG_UPGRADE_MONTH, YEAR_IN_SECONDS);
           }
       }
-      elseif ($settings->quotaExceeded && \wpSPIO()->env()->is_screen_to_use)
+      elseif ($settings->quotaExceeded)
       {
          $stats = $shortpixel->countAllIfNeeded($settings->currentStats, 86400);
          $quotaData = $stats;
 
          $message = $this->getQuotaExceededMessage($quotaData);
+         Log::addtemp('Quota Exceeded message',  $message);
          $notice = Notices::addError($message);
          Notices::makePersistent($notice, self::MSG_QUOTA_REACHED, WEEK_IN_SECONDS);
+
+         Notices::removeNoticeByID(self::MSG_UPGRADE_MONTH); // get rid of doubles. reset
+         Notices::removeNoticeByID(self::MSG_UPGRADE_BULK);
       }
 
+    }
+
+    // Callback to check if we are on the correct page.
+    public function upgradeBulkCallback($notice)
+    {
+      if (! \wpSPIO()->env()->is_bulk_page)
+        return false;
     }
 
     protected function getActivationNotice()
@@ -342,7 +408,6 @@ class adminNoticesController extends ShortPixelController
     protected function getQuotaExceededMessage($quotaData)
     {
       $averageCompression = \wpSPIO()->getShortPixel()->getAverageCompression();
-      $recheck = isset($_GET['checkquota']) ? true : false;
       \wpSPIO()->loadModel('apikey');
 
       $keyModel = new apiKeyModel();
@@ -380,6 +445,8 @@ class adminNoticesController extends ShortPixelController
                class='short-pixel-notice-icon'> */
 
         $message .= '<h3>' . __('Quota Exceeded','shortpixel-image-optimiser') . '</h3>';
+
+        $recheck = isset($_GET['checkquota']) ? true : false;
 
         if($recheck) {
              $message .= '<p style="color: red">' . __('You have no available image credits. If you just bought a package, please note that sometimes it takes a few minutes for the payment confirmation to be sent to us by the payment processor.','shortpixel-image-optimiser') . '</p>';
