@@ -130,9 +130,6 @@ li {
   margin-bottom: 0.5em;
 }
 
-/**
- *  BACKGROUND
- */
 .bg-primary {
   background-color: #069fa6;
 }
@@ -307,9 +304,6 @@ li {
   background-color: #ffdd29;
 }
 
-/**
- *  COLOR
- */
 .color-primary {
   color: #069fa6;
 }
@@ -344,140 +338,140 @@ li {
   color: #eceff1;
 }
 .color-tax-beige {
-  color: beige;
+  color: beige !important;
   transition: 0.3s background-color ease;
 }
 .color-tax-beige:hover {
   color: #fefefc;
 }
 .color-tax-black {
-  color: black;
+  color: black !important;
   transition: 0.3s background-color ease;
 }
 .color-tax-black:hover {
   color: #141414;
 }
 .color-tax-blue {
-  color: dodgerblue;
+  color: dodgerblue !important;
   transition: 0.3s background-color ease;
 }
 .color-tax-blue:hover {
   color: #47a4ff;
 }
 .color-tax-brown {
-  color: saddlebrown;
+  color: saddlebrown !important;
   transition: 0.3s background-color ease;
 }
 .color-tax-brown:hover {
   color: #af5718;
 }
 .color-tax-burgundy {
-  color: firebrick;
+  color: firebrick !important;
   transition: 0.3s background-color ease;
 }
 .color-tax-burgundy:hover {
   color: #d42929;
 }
 .color-tax-darkblue {
-  color: navy;
+  color: navy !important;
   transition: 0.3s background-color ease;
 }
 .color-tax-darkblue:hover {
   color: #0000a9;
 }
 .color-tax-green {
-  color: green;
+  color: green !important;
   transition: 0.3s background-color ease;
 }
 .color-tax-green:hover {
   color: #00a900;
 }
 .color-tax-grey {
-  color: grey;
+  color: grey !important;
   transition: 0.3s background-color ease;
 }
 .color-tax-grey:hover {
   color: #949494;
 }
 .color-tax-khaki {
-  color: khaki;
+  color: khaki !important;
   transition: 0.3s background-color ease;
 }
 .color-tax-khaki:hover {
   color: #f5eeb0;
 }
 .color-tax-lime {
-  color: limegreen;
+  color: limegreen !important;
   transition: 0.3s background-color ease;
 }
 .color-tax-lime:hover {
   color: #53d553;
 }
 .color-tax-maroon {
-  color: maroon;
+  color: maroon !important;
   transition: 0.3s background-color ease;
 }
 .color-tax-maroon:hover {
   color: #a90000;
 }
 .color-tax-mediumblue {
-  color: mediumblue;
+  color: mediumblue !important;
   transition: 0.3s background-color ease;
 }
 .color-tax-mediumblue:hover {
   color: #0000f6;
 }
 .color-tax-orange {
-  color: darkorange;
+  color: darkorange !important;
   transition: 0.3s background-color ease;
 }
 .color-tax-orange:hover {
   color: #ff9e29;
 }
 .color-tax-pink {
-  color: hotpink;
+  color: hotpink !important;
   transition: 0.3s background-color ease;
 }
 .color-tax-pink:hover {
   color: #ff92c8;
 }
 .color-tax-purple {
-  color: purple;
+  color: purple !important;
   transition: 0.3s background-color ease;
 }
 .color-tax-purple:hover {
   color: #a900a9;
 }
 .color-tax-red {
-  color: red;
+  color: red !important;
   transition: 0.3s background-color ease;
 }
 .color-tax-red:hover {
   color: #ff2929;
 }
 .color-tax-teal {
-  color: teal;
+  color: teal !important;
   transition: 0.3s background-color ease;
 }
 .color-tax-teal:hover {
   color: #00a9a9;
 }
 .color-tax-turquoise {
-  color: turquoise;
+  color: turquoise !important;
   transition: 0.3s background-color ease;
 }
 .color-tax-turquoise:hover {
   color: #63e6d9;
 }
 .color-tax-white {
-  color: white;
+  color: white !important;
   transition: 0.3s background-color ease;
 }
 .color-tax-white:hover {
   color: white;
 }
 .color-tax-yellow {
-  color: gold;
+  color: gold !important;
   transition: 0.3s background-color ease;
 }
 .color-tax-yellow:hover {
@@ -1450,6 +1444,7 @@ button {
   width: 2.5rem;
 }
 .card .card-content .list-colors .taxonomy-link {
+  color: inherit;
   display: block;
   font-size: 0.375rem;
 }
@@ -2312,6 +2307,11 @@ input:-webkit-autofill {
   max-width: 13rem;
 }
 
+.site-main {
+  min-height: calc(100vh - 15rem);
+  position: relative;
+}
+
 .site-footer {
   background-color: #069fa6;
   padding: 3.75rem;
@@ -2331,8 +2331,13 @@ input:-webkit-autofill {
   margin: 48px 0;
 }
 
+.fp-content {
+  margin: 0 auto;
+  max-width: 47.5rem;
+}
+
 .inspirations-bg {
-  background: linear-gradient(180deg, #fff 0%, #e9f6f6 30rem);
+  background: linear-gradient(180deg, #fff 0%, #a8dbdd 480px);
   margin-top: 3rem;
   min-height: calc(100vh - 12.5rem);
   padding: 2rem 0;

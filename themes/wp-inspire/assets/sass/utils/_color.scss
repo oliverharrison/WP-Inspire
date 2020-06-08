@@ -1,6 +1,4 @@
-/**
- *  COLOR
- */
+// COLOR
 
 .color {
 	@each $type, $color in $c-map {
@@ -10,7 +8,7 @@
 	}
 	@each $type, $color in $c-tax-map {
 		&-#{$type} {
-			color: $color;
+			color: $color !important; // sass-lint:disable-line no-important
 			transition: 0.3s background-color ease;
 
 			&:hover {
