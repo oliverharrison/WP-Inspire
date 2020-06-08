@@ -89,3 +89,33 @@ function wp_inspire_numeric_posts_nav() {
     echo '</ul></div>' . "\n";
 
 }
+
+/**
+ * Update the likes for for a given inspiration.
+ *
+ * @author Scott Anderson <scott.anderson@webdevstudios.com>
+ * @since  NEXT
+ * @param array $data Options for the function.
+ * @return int New Likes Count
+ */
+function wp_inspire_like_inspiration( $data ) : int {
+	update_field( 'likes', abs( get_field( 'likes', $data['id'] ) ) + 1, $data['id'] );
+	return abs( get_field( 'likes', $data['id'] ) );
+}
+
+/**
+ * Register Inspiration Likes Endpoint
+ *
+ * @author Scott Anderson <scott.anderson@webdevstudios.com>
+ * @since  NEXT
+ */
+add_action( 'rest_api_init', function() {
+	register_rest_route(
+        'inspire/v1',
+        '/like/(?P<id>\d+)',
+        array(
+            'methods'  => 'POST',
+            'callback' => 'wp_inspire_like_inspiration',
+        )
+    );
+} );
