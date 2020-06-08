@@ -56,7 +56,8 @@ if ( ! function_exists( 'wp_inspire_entry_body' ) ) :
 	 * Prints HTML with meta information for the inspiration
 	 */
 	function wp_inspire_entry_body() {
-		$inspiration_link = get_field( 'link' );
+		$inspiration_link  = get_field( 'link' );
+		$inspiration_likes = get_field( 'likes' );
 		?>
 		<div class="card-content">
 			<div class="card-meta">
@@ -75,10 +76,16 @@ if ( ! function_exists( 'wp_inspire_entry_body' ) ) :
 					</div>
 				</div>
 				<div class="card-heart">
-					<a href="#" class="like-this">
-						<img class="icon icon-heart" src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/heart-outline.svg' ); ?>" alt="Heart icon" />
-						<span class="inspiration-likes">122</span>
-					</a>
+					<button class="like-this" data-id="<?php echo esc_attr( get_the_ID() ); ?>">
+						<?php
+							wp_inspire_display_svg(
+								array(
+									'icon' => 'heart-outline',
+								)
+							);
+						?>
+						<span class="inspiration-likes"><?php echo $inspiration_likes; ?></span>
+					</button>
 				</div>
 			</div>
 
@@ -162,6 +169,33 @@ if ( ! function_exists( 'wp_inspire_post_thumbnail' ) ) :
 	}
 endif;
 
+
+/**
+ * Display SVG markup.
+ *
+ * @param array $args The parameters needed to display the SVG.
+ * @author WDS
+ * @return string
+ */
+function wp_inspire_display_svg( $args = array() ) {
+
+	if ( ! $args ) {
+		return;
+	}
+
+	$defaults = array(
+		'icon' => '',
+	);
+
+	$args = wp_parse_args( $args, $defaults );
+	?>
+	<span class="icon">
+		<?php
+		echo file_get_contents( get_theme_file_uri( '/assets/img/' . esc_html( $args['icon'] ) . '.svg' ) );
+		?>
+	</span>
+	<?php
+}
 
 
 /**
