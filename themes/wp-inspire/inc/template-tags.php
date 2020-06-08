@@ -80,6 +80,7 @@ if ( ! function_exists( 'wp_inspire_entry_body' ) ) :
 						<?php
 							wp_inspire_display_heart(
 								array(
+									'icon' => 'heart-outline',
 									'fill' => ($inspiration_likes / 255) * 100,
 								)
 							);
