@@ -1,0 +1,21 @@
+/**
+ *  COLOR
+ */
+
+.color {
+	@each $type, $color in $c-map {
+		&-#{$type} {
+			color: $color;
+		}
+	}
+	@each $type, $color in $c-tax-map {
+		&-#{$type} {
+			color: $color;
+			transition: 0.3s background-color ease;
+
+			&:hover {
+				color: lighten($color, 8%);
+			}
+		}
+	}
+}

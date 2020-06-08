@@ -5,6 +5,8 @@ uploads/
 !mu-plugins/
 !plugins/
 !themes/
+!themes/*
+!themes/**/*
 
 # ignore these plugins
 plugins/hello.php
