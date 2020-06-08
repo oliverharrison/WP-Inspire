@@ -1949,6 +1949,9 @@ FormCraftApp.controller('FormController', function($scope, $locale, $http, $time
 		jQuery('.fields-list-sortable > button').on('dragstart', function(e) {
 			e.originalEvent.dataTransfer.setData('field', jQuery(e.target).attr('ng-click').replace('addFormElement("', '').replace('")', ''))
 		})
+		setTimeout(() => {
+			jQuery('.wp-color-picker').trigger('change')
+		}, 500)
 		jQuery('.fc-form').on('drop', function(e) {
 			e.preventDefault()
 			let data = e.originalEvent.dataTransfer.getData('field')

@@ -16,6 +16,9 @@ registerBlockType('formcraft/embed-form', {
 		auto: {
 			type: 'string'
 		},
+		align: {
+			type: 'string'
+		},
 		type: {
 			type: 'string'
 		},
@@ -157,6 +160,7 @@ registerBlockType('formcraft/embed-form', {
 
 		props.attributes.align = props.attributes.align || 'left'
 		props.attributes.text = props.attributes.text || 'Text'
+
 
 		return <div>[fc align='{props.attributes.align}' id='{props.attributes.id}' type='{props.attributes.type}' bind='{props.attributes.bind}' class='{props.attributes.class}' font_color='{props.attributes.font_color}' button_color='{props.attributes.button_color}' auto='{props.attributes.auto}' placement='{props.attributes.placement}']{props.attributes.text}[/fc]</div>
 	}

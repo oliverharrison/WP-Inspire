@@ -72,6 +72,9 @@
 			auto: {
 				type: 'string'
 			},
+			align: {
+				type: 'string'
+			},
 			type: {
 				type: 'string'
 			},
