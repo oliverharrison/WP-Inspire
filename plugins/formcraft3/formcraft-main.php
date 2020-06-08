@@ -6,8 +6,8 @@
   Description: Premium WordPress form and survey builder. Make amazing forms, incredibly fast.
   Author: nCrafts
   Author URI: http://ncrafts.net
-  Version: 3.8.8
-  Domain Path: /languages  
+  Version: 3.8.12
+  Domain Path: /languages
   Text Domain: formcraft
   */
 
@@ -16,7 +16,7 @@
   $fc_templates = array();
   $fc_triggers = array();
   $fc_templates['General'] = plugin_dir_path( __FILE__ ).'templates/';
-  $fc_meta['version'] = '3.8.8';
+  $fc_meta['version'] = '3.8.12';
   $fc_meta['f3_multi_site_addon'] = is_multisite() ? false : true;
   $fc_meta['user_can'] = strpos(get_site_url(), 'formcraft-wp.com/demo') > -1 || strpos(get_site_url(), 'formcraft-wp.com/plugin-demo') > -1 ? 'read' : 'activate_plugins';
   $fc_meta['preview_mode'] = strpos(get_site_url(), 'formcraft-wp.com/demo') > -1 || strpos(get_site_url(), 'formcraft-wp.com/plugin-demo') > -1 ? true : false;
@@ -346,7 +346,7 @@
       echo json_encode(array('failed'=>esc_html__('Email cannot be empty', 'formcraft')));
       die();
     }
-    if ( filter_var( $licenseEmail, FILTER_VALIDATE_EMAIL ) === false ) {
+    if ( is_email($licenseEmail) === false ) {
       echo json_encode(array('failed'=>esc_html__('Invalid email', 'formcraft')));
       die();
     }
@@ -467,7 +467,8 @@
     public function setTransitent( $transient ) {
 
       $this->initPluginData();
-      $this->getRepoReleaseInfo();
+      $this->getRepoReleaseInfo();  
+
       if ( get_site_option( 'f3_expires' )==NULL ) {
         return $transient;
       }
@@ -555,12 +556,11 @@
     public function postInstall( $true, $hook_extra, $result ) {
       $this->initPluginData();
       global $wp_filesystem;
-      if ( isset($_GET['plugin']) && $_GET['plugin']!=$this->slug )
-      {
-        return $true;
+
+      if ( isset($_GET['plugin']) && $_GET['plugin']!=$this->slug ) {
+      	return $true;
       }
-      if ( isset($_GET['plugin']) )
-      {
+      if ( isset($_GET['plugin']) ) {
         $pluginFolder = WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . dirname( $this->slug );
         $result['destination'] = substr($result['destination'], 0, -1);
         $wp_filesystem->move( $pluginFolder, $pluginFolder.'-temp', true );
@@ -857,7 +857,7 @@
         wp_enqueue_style('formcraft-form-page', plugins_url( 'dist/form-page.css', __FILE__ ),array(), $fc_meta['version']);
         add_action('wp_head','formcraft3_wp_head');
         echo '<!DOCTYPE html>
-        <html xmlns="http://www.w3.org/1999/xhtml" '; ?><?php language_attributes(); ?><?php echo '>
+        <html '; ?><?php language_attributes(); ?><?php echo '>
         <head>';
           ?>
           <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
@@ -1083,11 +1083,13 @@
     /* Register a Form Submission */
     function formcraft3_new_submission($form_id, $payment) {
       global $fc_meta, $fc_forms_table, $fc_views_table, $wpdb;
+      if ( !strpos($_SERVER["REQUEST_URI"], '?preview=true') && ctype_digit($form_id)) {
+        setcookie("fc_sb_".$form_id, true, time() + (10 * 365 * 24 * 60 * 60), '/');
+      }      
       if (get_site_option('f3_disable_analytics')) {
         return false;
       }      
       if ( !strpos($_SERVER["REQUEST_URI"], '?preview=true') && ctype_digit($form_id)) {
-        setcookie("fc_sb_".$form_id, true, time() + (10 * 365 * 24 * 60 * 60), '/');
         $time = date('Y-m-d 00:00:00', time() + formcraft3_offset());
         $query = $wpdb->prepare("SELECT counter FROM $fc_forms_table WHERE id = %d", $form_id);
         $existing = $wpdb->get_var($query);
@@ -2199,11 +2201,11 @@
     $failed = 0;
     $from_name = isset($config['general_sender_name']) ? $config['general_sender_name'] : 'FormCraft';
     $from_email = isset($config['general_sender_email']) ? $config['general_sender_email'] : get_bloginfo('admin_email');
-    $from_email = filter_var( $from_email, FILTER_VALIDATE_EMAIL ) == false ? get_bloginfo('admin_email') : $from_email;
+    $from_email = is_email($from_email) == false ? get_bloginfo('admin_email') : $from_email;
 
     require_once(ABSPATH . 'wp-includes/class-phpmailer.php');
     foreach ($emails as $key => $email) {
-      if ( filter_var( $email, FILTER_VALIDATE_EMAIL ) == false ) {
+      if ( is_email($email) == false ) {
         echo json_encode(array('failed' => esc_html__('Invalid e-mail', 'formcraft')));
         die();
       }
@@ -2354,7 +2356,7 @@
         /* Field Type Validation */
         switch ($field['type']) {
           case 'email':
-          if (trim($value)!='' && filter_var( $value, FILTER_VALIDATE_EMAIL ) == false) {
+          if (trim($value)!='' && is_email($value) == false) {
             $fc_final_response['errors'][$field['identifier']] = $messages['allow_email'];
           }
           break;
@@ -2562,6 +2564,10 @@
     $form_name = $wpdb->get_var( $wpdb->prepare("SELECT name FROM $fc_forms_table WHERE id = %d", $id) );
     $template = array();
     $template['Form ID'] = $id;
+    if ( !empty($meta['config']['collect_ip']) ) {
+        $visitor['IP'] = $template['IP'] = $_SERVER['REMOTE_ADDR'];
+    }
+    $template['Form ID'] = $id;
     $template['Form Name'] = $form_name;
     $template['URL'] = $visitor['URL'] = isset($_POST['location']) ? $_POST['location'] : esc_html__('Unknown','formcraft');
     $template['Date'] = current_time(get_option('date_format'));
@@ -2570,10 +2576,16 @@
     $temp2 = array();
     $thisWidth = 0;
     $signatureImages = array();
+
     foreach ($content as $key => $value) {
-      if ( $value['value']=='' ) {
-        continue;
-      }
+
+	    if (empty($meta['config']['dont_hide_empty']) && $value['value']=='') {
+	      continue;
+	    } else if ($value['value']=='') {
+	    	$content[$key]['value'] = '-';
+	    	$value['value'] = '-';
+	    }
+
       if ($value['type']=='fileupload') {
         foreach ($value['value'] as $key2 => $file) {
           $temp[] = "<a href='".$value['url'][$key2]."'>".$value['value'][$key2]."</a>";
@@ -2611,8 +2623,10 @@
       }
       if ( $value['value'] == '' && isset($template[$value['label'].'.value']) ) {
         $template[$value['label']] = $template[$value['label'].'.value'];
+        $template[$value['identifier']] = $template[$value['label'].'.value'];
       } else {
         $template[$value['label']] = $value['value'];
+        $template[$value['identifier']] = $value['value'];
       }
 
 
@@ -2802,7 +2816,7 @@
       $from_email = formcraft3_template($template, $from_email);
       $from_email = formcraft3_template_content($content, $from_email);
 
-      if ( !filter_var($from_email,FILTER_VALIDATE_EMAIL) ){
+      if ( !is_email($from_email) ){
         $from_email = get_bloginfo('admin_email');
       }
 
@@ -2814,7 +2828,7 @@
       }
 
       foreach ($autoresponder_email as $email) {
-        if (!filter_var($email,FILTER_VALIDATE_EMAIL)){
+        if (!is_email($email)){
           continue;
         }
 
@@ -2939,7 +2953,7 @@
           $from_email = formcraft3_template($template, $from_email);
           $from_email = formcraft3_template_content($content, $from_email);
 
-          if ( !filter_var($from_email,FILTER_VALIDATE_EMAIL) ){
+          if ( !is_email($from_email) ){
             $from_email = get_bloginfo('admin_email');
           }
 
@@ -3053,13 +3067,18 @@
 
 
     // Send Data to Custom URL
-
     if (isset($meta['config']['Post_data']) && $meta['config']['Post_data']==true && isset($meta['config']['webhook'])) {
       $post_data = array();
       $post_data['Entry ID'] = $template['Entry ID'];
       foreach ($content as $key => $value) {
         if ($value['type']=='fileupload') {
         $value['value'] = is_array($value['url']) ? implode(', ', $value['url']) : $value['url'];
+        } if ($value['type']=='matrix') {
+        	$newValue = array();
+        	foreach ($value['value'] as $key1 => $value1) {
+        		$newValue[] = $value1['question'].': '.$value1['value'];
+        	}
+        	$value['value'] = implode(', ', $newValue);
         } else {
         $value['value'] = is_array($value['value']) ? implode(', ', $value['value']) : $value['value'];
         }
@@ -3070,7 +3089,7 @@
       if (isset($meta['config']['webhook_method']) && $meta['config']['webhook_method']=='POST') {
         wp_remote_post($meta['config']['webhook'], array('body'=>$post_data));
       } else if ( isset($meta['config']['webhook_method']) && $meta['config']['webhook_method']=='POSTJSON' ) {
-        $headers = array('Content-Type' => 'application/json; charset=utf-8');
+        $headers = array('Content-Type' => 'application/json; charset=utf-8');      
         wp_remote_post($meta['config']['webhook'], array('body'=>json_encode($post_data), 'headers'=>$headers));
       } else {
         $url = strpos($meta['config']['webhook'], '?') === FALSE ? $meta['config']['webhook'].'?'.http_build_query($post_data) : $meta['config']['webhook'].'&'.http_build_query($post_data);
@@ -3879,7 +3898,7 @@
     $content = str_ireplace('<p><br>', '<p>', $content);
     return '
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    <html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
+    <html>
     <head>
       <meta name="viewport" content="width=device-width" />
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />

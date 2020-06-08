@@ -511,17 +511,25 @@ let EntryView = createReactClass({
 					{
 						entryData.content ?
 							<div className='tr thead'>
-								<span style={{ width: '15%' }}>
+								<span style={{ width: '10%' }}>
 									#{entryData.id}
 								</span>
-								<span style={{ width: '25%' }}>
+								<span style={{ width: '20%' }}>
 									{entryData.created_date}
 									&nbsp;at&nbsp;
 									{entryData.created_time}
 								</span>
-								<span title={entryData.visitor.URL} style={{ width: '60%' }}>
+								<span title={entryData.visitor.URL} style={{ width: '50%' }}>
 									{translate['Referer']}: <a href={entryData.visitor.URL} target='_blank'>{entryData.visitor.URL}</a>
 								</span>
+								{
+									entryData.visitor.IP ?
+									<span style={{ width: '20%' }}>
+										IP: {entryData.visitor.IP}
+									</span>
+									:
+									''
+								}
 							</div>
 							:
 							<div className='tr thead'>

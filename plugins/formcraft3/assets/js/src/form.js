@@ -151,7 +151,7 @@ class FormCraft {
 			let data = {}
 			self.form.parents('.form-live').find('.pre-populate-data').each(function() {
 				let dataTemp = jQuery(this).text().replace(/“/g, '"').replace(/”/g, '"').replace(/″/g, '"')
-				if (dataTemp == '') return true
+				if (dataTemp === '') return true
 				dataTemp = jQuery.parseJSON(dataTemp)
 				for (let field in dataTemp) {
 					if (dataTemp[field] === '' || (typeof dataTemp[field] === 'object' && dataTemp[field][0] === '')) {
@@ -161,6 +161,10 @@ class FormCraft {
 				data = Object.assign(data, dataTemp)
 			})
 			self.setFormValues(data)
+			setTimeout(function() {
+				jQuery('.oneLineText-cover input[type="text"],.datepicker-cover input[type="text"], .email-cover input[type="text"], .email-cover input[type="email"], .textarea-cover textarea').trigger('input')
+				jQuery('.customText-cover input[type="hidden"],.timepicker-cover input[type="hidden"],.slider-cover input[type="hidden"],.fileupload-cover input[type="hidden"],.star-cover input[type="radio"],.thumb-cover input[type="radio"],.dropdown-cover select').trigger('change')
+			}, 0)
 		}, 0)
 
 		form.keypress(function(event) {
@@ -1240,6 +1244,8 @@ window.FormCraftSubmitForm = function(element, type, callback) {
 				}
 			}
 		} else if (typeof response.success !== 'undefined') {
+			form.find('.submit-button').attr('disabled', true)
+			jQuery(document).trigger('formcraft_submit_result', [form, response])
 			let delay = parseInt(form.attr('data-delay'), 10)
 			delay = isNaN(delay) ? 0 : delay
 			delay = Math.max(0, delay)
@@ -1265,7 +1271,6 @@ window.FormCraftSubmitForm = function(element, type, callback) {
 					}
 				}
 			}
-			jQuery(document).trigger('formcraft_submit_result', [form, response])
 			if (response.redirect) {
 				setTimeout(function() {
 					window.location.assign(response.redirect)

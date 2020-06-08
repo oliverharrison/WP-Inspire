@@ -180,6 +180,7 @@ let InsightsConfig = createReactClass({
 						{translate['Select Form']}
 						</div>
 						<select className='td' style={{ width: '38%' }} onChange={this.updateConfig.bind(null, 'form')} value={this.state.config.form}>
+						<option value='0'>Select a Form</option>
 							{this.props.forms.map((form) => {
 								return <option value={form.id} key={form.id}>{form.name}</option>
 							})}

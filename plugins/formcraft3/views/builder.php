@@ -131,7 +131,7 @@ $backgrounds[] = array('Jeans','url('.$base.'jeans.png)','url('.$base.'jeans.png
 										<option value='equal_to'><?php esc_html_e('is equal to','formcraft'); ?></option>
 										<option value='not_equal_to'><?php esc_html_e('is not equal to','formcraft'); ?></option>
 										<option value='contains'><?php esc_html_e('contains','formcraft'); ?></option>
-										<option value='contains_not'><?php esc_html_e('doest not contain','formcraft'); ?></option>
+										<option value='contains_not'><?php esc_html_e('does not contain','formcraft'); ?></option>
 										<option value='greater_than'><?php esc_html_e('is greater than','formcraft'); ?></option>
 										<option value='less_than'><?php esc_html_e('is less than','formcraft'); ?></option>
 									</select>
@@ -589,10 +589,18 @@ $backgrounds[] = array('Jeans','url('.$base.'jeans.png)','url('.$base.'jeans.png
 					<label class='single-option has-checkbox'>
 						<input update-label type='checkbox' value='true' ng-model='Builder.Config.dont_submit_hidden'>
 						<h3><?php esc_html_e('Don\'t submit values for hidden fields','formcraft'); ?></h3>
-					</label>					
+					</label>
+					<label class='single-option has-checkbox'>
+						<input update-label type='checkbox' value='true' ng-model='Builder.Config.dont_hide_empty'>
+						<h3><?php esc_html_e('Don\'t hide empty fields in emails','formcraft'); ?></h3>
+					</label>
 					<label class='single-option has-checkbox'>
 						<input update-label type='checkbox' value='true' ng-model='Builder.Config.disable_enter'>
 						<h3><?php esc_html_e('Disable form submit on Enter','formcraft'); ?></h3>
+					</label>
+					<label class='single-option has-checkbox'>
+						<input update-label type='checkbox' value='true' ng-model='Builder.Config.collect_ip'>
+						<h3><?php esc_html_e('Collect User IP','formcraft'); ?></h3>
 					</label>
 					<label class='single-option has-checkbox'>
 						<input update-label type='checkbox' value='true' ng-model='Builder.Config.disable_store'>
@@ -1101,8 +1109,16 @@ $backgrounds[] = array('Jeans','url('.$base.'jeans.png)','url('.$base.'jeans.png
 				</div>
 			</form>
 			<div class='prev-next prev-next-{{Builder.FormElements.length}}' style='width: {{Builder.form_width}}; color: {{Builder.Config.font_color}}; font-size: {{Builder.font_size}}%; background: {{Builder.form_background}}'>
-				<div><label><input type='text' ng-model='Builder.prevText'/></label><span class='inactive page-prev'><i class='formcraft-icon'>keyboard_arrow_left</i>{{Builder.prevText}}</span></div>
-				<div><label><input type='text' ng-model='Builder.nextText'/></label><span class='page-next'>{{Builder.nextText}}<i class='formcraft-icon'>keyboard_arrow_right</i></span></div>
+				<div>
+					<!--RFH-->
+					<label><input type='text' ng-model='Builder.prevText'/></label>
+					<!--RTH-->
+					<span class='inactive page-prev'><i class='formcraft-icon'>keyboard_arrow_left</i>{{Builder.prevText}}</span></div>
+				<div>
+					<!--RFH-->
+					<label><input type='text' ng-model='Builder.nextText'/></label>
+					<!--RTH-->
+					<span class='page-next'>{{Builder.nextText}}<i class='formcraft-icon'>keyboard_arrow_right</i></span></div>
 			</div>
 		</div>
 	</div>
