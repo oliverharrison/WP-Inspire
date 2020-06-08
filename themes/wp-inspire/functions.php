@@ -139,6 +139,12 @@ function wp_inspire_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'wp_inspire_scripts' );
 
+
+/**
+ * Include custom Hooks.
+ */
+require get_template_directory() . '/inc/hooks.php';
+
 /**
  * Implement the Custom Header feature.
  */
