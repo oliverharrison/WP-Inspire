@@ -20,7 +20,7 @@ window.inspirationLike = {};
 		app.$c = {
 			window: $( window ),
 			html: $( 'html' ),
-			likeButton: $( '.like-this' ),
+			likeButton: $( '.like-this' )
 		};
 	};
 
@@ -31,16 +31,16 @@ window.inspirationLike = {};
 
 	// Update the likes
 	app.updateLikes = function( e ) {
+
 		// Hit the endpoint
 		$.ajax({
-			url: '/wp-json/inspire/v1/like/' + e.data['id'],
+			type: 'POST',
+			url: '/wp-json/inspire/v1/like/' + $( this ).data( 'id' ),
 		}).done(function( data ) {
-			console.log( data );
-
+			// Get the new value and update the frontend
+			$( e.currentTarget ).find( '.inspiration-likes' ).text( data );
+			$( e.currentTarget ).find( '.icon-fill' ).css( 'opacity', (data/255).toFixed(2) );
 		});
-
-		// Get the new value and update the frontend
-
 	};
 
 	// Do we meet the requirements?
