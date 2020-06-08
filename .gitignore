@@ -7,6 +7,7 @@ uploads/
 !themes/
 !themes/*
 !themes/**/*
+!themes/wp-inspire/*
 
 # ignore these plugins
 plugins/hello.php
