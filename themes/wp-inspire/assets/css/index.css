@@ -1396,6 +1396,20 @@ button {
   height: 100%;
   margin-left: 0.75rem;
 }
+.card .card-content .card-heart .like-this .icon {
+  height: 3.125rem;
+  position: relative;
+  width: 3.4375rem;
+}
+.card .card-content .card-heart .like-this svg {
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: transform 0.2s ease;
+}
+.card .card-content .card-heart .like-this:hover svg {
+  transform: scale(1.05);
+}
 .card .card-content .card-heart .icon-heart {
   margin: 0 0 0.75rem;
   width: 3.1875rem;
