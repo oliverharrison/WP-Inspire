@@ -101,12 +101,32 @@
 		.card-heart {
 			.like-this {
 				align-items: center;
+				border: 0;
 				color: $c-international-orange;
 				display: flex;
 				flex-direction: column;
 				font-size: rem(22);
 				height: 100%;
 				margin-left: rem(12);
+
+				.icon {
+					height: rem(50);
+					position: relative;
+					width: rem(55);
+				}
+
+				svg {
+					left: 0;
+					position: absolute;
+					top: 0;
+					transition: transform 0.2s ease;
+				}
+
+				&:hover {
+					svg {
+						transform: scale(1.05);
+					}
+				}
 			}
 
 			.icon-heart {
@@ -170,6 +190,7 @@
 			}
 
 			.taxonomy-link {
+				color: inherit;
 				display: block;
 				font-size: rem(6);
 			}

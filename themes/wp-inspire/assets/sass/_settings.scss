@@ -1,18 +1,10 @@
 //  SETTINGS
 
+//  sass-lint:disable no-color-keywords
 $enable-grid-classes: true !default; // generate grid classes
 $enable-reset-defaults: true !default; // reset default browser values
 
-// Brand colors
-$c-international-orange: #fd5200;
-$c-atoll: #0b6469;
-$c-niagara: #069fa6;
-$c-selective-yellow: #ffb400;
-$c-jagged-ice: #bee4e6;
-$c-white-smoke: #e9f6f6;
-$gr-pale: linear-gradient(180deg, #fff 0%, #a8dbdd 480px);
-
-// colors
+// Basic colors
 $c-white: #fff !default;
 $c-black: #000 !default;
 $c-success: #4caf50 !default;
@@ -21,6 +13,16 @@ $c-warning: #f0ad4e !default;
 $c-error: #e74c3c !default;
 $c-gray: #aaa !default;
 $c-gray-light: #eceff1 !default;
+
+// Brand colors
+$c-international-orange: #fd5200;
+$c-atoll: #0b6469;
+$c-niagara: #069fa6;
+$c-selective-yellow: #ffb400;
+$c-jagged-ice: #bee4e6;
+$c-white-smoke: #e9f6f6;
+$c-aqua-island: #a8dbdd;
+$gr-pale: linear-gradient(180deg, $c-white 0%, $c-aqua-island 480px);
 
 $c-primary: $c-niagara !default;
 $c-primary-dark: $c-atoll !default;
