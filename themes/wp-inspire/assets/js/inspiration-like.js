@@ -40,6 +40,10 @@ window.inspirationLike = {};
 			// Get the new value and update the frontend
 			$( e.currentTarget ).find( '.inspiration-likes' ).text( data );
 			$( e.currentTarget ).find( '.icon-fill' ).css( 'opacity', (data/255).toFixed(2) );
+			$( e.currentTarget ).find( '.icon' ).addClass( 'heartbeat' );
+			setTimeout( function() {
+				$( e.currentTarget ).find( '.icon' ).removeClass( 'heartbeat' );
+			}, 400 );
 		});
 	};
 
