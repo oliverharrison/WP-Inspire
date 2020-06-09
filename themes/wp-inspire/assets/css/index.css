@@ -1123,6 +1123,43 @@ object {
   display: block;
 }
 
+.heartbeat {
+  animation: heartbeat 1.5s ease-in-out both;
+}
+@keyframes heartbeat {
+  from {
+    -webkit-animation-timing-function: ease-out;
+    -webkit-transform: scale(1);
+    -webkit-transform-origin: center center;
+    animation-timing-function: ease-out;
+    transform: scale(1);
+    transform-origin: center center;
+  }
+  10% {
+    -webkit-animation-timing-function: ease-in;
+    -webkit-transform: scale(0.91);
+    animation-timing-function: ease-in;
+    transform: scale(0.91);
+  }
+  17% {
+    -webkit-animation-timing-function: ease-out;
+    -webkit-transform: scale(0.98);
+    animation-timing-function: ease-out;
+    transform: scale(0.98);
+  }
+  33% {
+    -webkit-animation-timing-function: ease-in;
+    -webkit-transform: scale(0.87);
+    animation-timing-function: ease-in;
+    transform: scale(0.87);
+  }
+  45% {
+    -webkit-animation-timing-function: ease-out;
+    -webkit-transform: scale(1);
+    animation-timing-function: ease-out;
+    transform: scale(1);
+  }
+}
 /**
  *  BADGE
  *
