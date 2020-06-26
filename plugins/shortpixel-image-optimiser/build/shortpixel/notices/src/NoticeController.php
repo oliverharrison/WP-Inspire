@@ -19,7 +19,6 @@ class NoticeController //extends ShortPixelController
   /** For backward compat. Never call constructor directly. */
   public function __construct()
   {
-  //    $this->loadModel('notice');
       $ns = __NAMESPACE__;
       $ns = substr($ns, 0, strpos($ns, '\\')); // try to get first part of namespace
       $this->notice_option = $ns . '-notices';
@@ -183,7 +182,7 @@ class NoticeController //extends ShortPixelController
     for($i = 0; $i < count(self::$notices); $i++)
     {
       $item = self::$notices[$i];
-      if ($item->getID() == $id)
+      if (is_object($item) && $item->getID() == $id)
       {
         Log::addDebug('Removing notice with ID ' . $id);
         unset(self::$notices[$i]);

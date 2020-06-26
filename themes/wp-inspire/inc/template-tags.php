@@ -106,6 +106,7 @@ if ( ! function_exists( 'wp_inspire_entry_body' ) ) :
 						<?php if ( $taxonomy ) : ?>
 
 						<div class="taxonomy-wrap taxonomy-<?php echo esc_attr( strtolower($name) ); ?>">
+							<span class="taxonomy-title"><?php echo esc_attr( $name ); ?></span>
 							<ul class="taxonomy-list list-<?php echo esc_attr( strtolower( $name ) ); ?>">
 								<?php foreach ( $taxonomy as $taxonomy_item ) : ?>
 									<?php
