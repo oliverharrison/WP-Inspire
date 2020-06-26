@@ -70,9 +70,6 @@ window.inspirationsFilters = {};
 		let regex = /page\/[0-9]*\//;
 		cleanURL = window.location.pathname.indexOf( '/page/' ) ? window.location.href.replace( regex, '' ) : window.location.href;
 
-		console.log(cleanURL);
-		console.log(paramString);
-
 		// Reload the page (reload) with new values.
 		$( location ).attr( 'href', cleanURL.split( '?' )[0] + paramString );
 	};

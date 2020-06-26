@@ -91,10 +91,10 @@ if ( ! function_exists( 'wp_inspire_entry_body' ) ) :
 			</div>
 
 			<?php
-			get_the_terms( $post_id, 'color' ) ? $taxonomies['Colors'] = get_the_terms( $post_id, 'color' ) : null;
-			get_the_terms( $post_id, 'style' ) ? $taxonomies['Styles'] = get_the_terms( $post_id, 'style' ) : null;
-			get_the_terms( $post_id, 'industry' ) ? $taxonomies['Industries'] = get_the_terms( $post_id, 'industry' ) : null;
-			get_the_terms( $post_id, 'post_tag' ) ? $taxonomies['Tags'] = get_the_terms( $post_id, 'post_tag' ) : null;
+			get_the_terms( get_the_ID(), 'color' ) ? $taxonomies['Colors'] = get_the_terms( get_the_ID(), 'color' ) : null;
+			get_the_terms( get_the_ID(), 'style' ) ? $taxonomies['Styles'] = get_the_terms( get_the_ID(), 'style' ) : null;
+			get_the_terms( get_the_ID(), 'industry' ) ? $taxonomies['Industries'] = get_the_terms( get_the_ID(), 'industry' ) : null;
+			get_the_terms( get_the_ID(), 'post_tag' ) ? $taxonomies['Tags'] = get_the_terms( get_the_ID(), 'post_tag' ) : null;
 			?>
 
 			<?php if ( $taxonomies ) : ?>
@@ -236,24 +236,6 @@ function wp_inspire_customize_logos( $wp_customize ) {
 }
 add_action( 'customize_register', 'wp_inspire_customize_logos' );
 
-
-/**
- * Custom Query Vars for the Inspiration filters.
- *
- * @param array $query_vars WP Public Query vars.
- * @author Oliver Harrison oliver@positivebias.com
- * @return array $query_vars Updated WP Public Query vars.
- * @since 2020-06-26
- */
-function wp_inspire_updated_query_vars( $query_vars ) {
-	$query_vars[] = 'filter_industry';
-	$query_vars[] = 'filter_style';
-	$query_vars[] = 'filter_color';
-	return $query_vars;
-}
-add_filter( 'query_vars', 'wp_inspire_updated_query_vars' );
-
-
 /**
  * Function to build the taxonomy filters for an inspirations wp_query.
  *
@@ -263,19 +245,23 @@ add_filter( 'query_vars', 'wp_inspire_updated_query_vars' );
  * @package WP Inspire
  */
 function wp_inspire_inspiration_tax_query() {
-	if ( ! get_query_var( 'industry' ) && ! get_query_var( 'style' ) && ! get_query_var( 'color' ) ) {
+	/**
+	 * You MUST use $_GET and NOT register public query_vars for the following.
+	 * More info here: https://core.trac.wordpress.org/ticket/25143
+	 */
+	if ( ! $_GET['filter_industry'] && ! $_GET['filter_style'] && ! $_GET['filter_color'] ) {
 		return;
 	}
 
 	$tax_query = array( 'relation' => 'AND' );
 
-	$query_vars = array(
-		'industry' => esc_html( get_query_var( 'filter_industry' ) ),
-		'style'    => esc_html( get_query_var( 'filter_style' ) ),
-		'color'    => esc_html( get_query_var( 'filter_color' ) ),
+	$custom_query_vars = array(
+		'industry' => filter_input ( INPUT_GET, 'filter_industry', FILTER_SANITIZE_STRING ),
+		'style'    => filter_input ( INPUT_GET, 'filter_style', FILTER_SANITIZE_STRING ),
+		'color'    => filter_input ( INPUT_GET, 'filter_color', FILTER_SANITIZE_STRING ),
 	);
 
-	foreach ( $query_vars as $tax_key => $query_var ) {
+	foreach ( $custom_query_vars as $tax_key => $query_var ) {
 		if ( empty( $query_var ) ) {
 			continue;
 		}
@@ -289,3 +275,14 @@ function wp_inspire_inspiration_tax_query() {
 
 	return $tax_query;
 }
+
+/**
+ * Redirect Inspirations to front-page.php
+ */
+function wp_inspire_inspiration_redirect( $template ) {
+    if ( get_query_var( 'filter_industry' ) || get_query_var( 'filter_style' ) || get_query_var( 'filter_color' ) ) {
+        // return locate_template( 'front-page.php' );
+    }
+    return $template;
+}
+add_filter( 'template_include', 'wp_inspire_inspiration_redirect' );

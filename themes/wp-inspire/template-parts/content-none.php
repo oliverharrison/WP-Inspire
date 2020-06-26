@@ -11,25 +11,19 @@
 
 <section class="no-results not-found">
 	<header class="page-header">
-		<h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'wp_inspire' ); ?></h1>
+		<h2 class="page-title"><?php esc_html_e( 'Nothing Found', 'wp_inspire' ); ?></h2>
 	</header><!-- .page-header -->
 
 	<div class="page-content">
 		<?php
-		if ( is_home() && current_user_can( 'publish_posts' ) ) :
+		if ( is_home() ) :
+			?>
 
-			printf(
-				'<p>' . wp_kses(
-					/* translators: 1: link to WP admin new post page. */
-					__( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'wp_inspire' ),
-					array(
-						'a' => array(
-							'href' => array(),
-						),
-					)
-				) . '</p>',
-				esc_url( admin_url( 'post-new.php' ) )
-			);
+			<p><?php esc_html_e( 'Sorry, but no inspirations matched the filters. Please clear the filters or search the site.', 'wp_inspire' ); ?></p>
+
+			<a href="<?php echo home_url(); ?>" class="button"><?php esc_html_e( 'Clear the filters', 'wp_inspire' ); ?></a>
+			<?php
+			get_search_form();
 
 		elseif ( is_search() ) :
 			?>
