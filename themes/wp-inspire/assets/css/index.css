@@ -2411,6 +2411,10 @@ input:-webkit-autofill {
   margin-right: 8px;
 }
 
+.no-results {
+  margin-top: 48px;
+}
+
 .container {
   margin-left: auto;
   margin-right: auto;

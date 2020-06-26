@@ -25,6 +25,14 @@
 			<?php
 			get_search_form();
 
+		elseif ( is_front_page() ) :
+			?>
+
+			<p><?php esc_html_e( 'Sorry, but no inspirations matched your filters. Please clear your filters or try a search below.', 'wp_inspire' ); ?></p>
+			<?php
+			get_search_form();
+
+
 		elseif ( is_search() ) :
 			?>
 
