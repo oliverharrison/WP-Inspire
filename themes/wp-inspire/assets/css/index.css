@@ -766,12 +766,13 @@ a {
 a:hover {
   color: #ff9664;
 }
-a:focus {
-  color: #069fa6;
-  outline: thin dotted;
-}
 a:hover, a:active {
   outline: 0;
+}
+a:focus {
+  color: #069fa6;
+  outline-style: dotted;
+  outline-width: thin;
 }
 
 h1,
@@ -1570,14 +1571,14 @@ label {
 }
 
 input:-webkit-autofill {
-  box-shadow: 0 0 0 1000px #eceff1 inset;
+  box-shadow: 0 0 0 1000px #fff inset;
 }
 
 .textarea,
 .input,
 .select {
   border: 1px solid #d5d9db;
-  border-radius: 8px;
+  border-radius: 24px;
   box-shadow: none;
   display: inline-block;
   font-weight: normal;
@@ -1592,15 +1593,17 @@ input:-webkit-autofill {
 .textarea.has-error,
 .input.has-error,
 .select.has-error {
-  background: #eceff1;
+  background: #fff;
   border: 1px solid #e74c3c;
   margin-bottom: 0;
 }
 
 .select {
-  background-color: #eceff1;
+  background-color: #fff;
+  border-radius: 24px;
   display: inline-block;
-  margin-right: 16px;
+  margin: 0 16px 0 0;
+  padding: 4px 16px;
   position: relative;
 }
 .select:last-child {
@@ -1618,19 +1621,18 @@ input:-webkit-autofill {
           appearance: none;
   background-color: transparent;
   border: 0;
-  border-radius: 0;
   color: #444;
   display: block;
-  font-size: 18px;
+  font-size: 12px;
   line-height: 1.5em;
-  margin: 0;
-  padding: 8px 16px;
-  padding-right: 30px;
+  margin-right: 16px;
+  padding: 0;
+  padding-right: 16px;
   transition: background-color 0.2s ease-in-out;
   width: 100%;
 }
 .select select:active, .select select:focus {
-  background-color: #fbfbfc;
+  background-color: white;
   border: 0;
   outline: none;
 }
@@ -1644,10 +1646,10 @@ input:-webkit-autofill {
   height: 2px;
   margin-top: 2px;
   position: absolute;
-  right: 5px;
+  right: 1rem;
   top: 50%;
   transform-origin: 1px;
-  width: 10px;
+  width: 0.5rem;
 }
 .select::after {
   transform: rotate(-135deg);
@@ -1657,7 +1659,7 @@ input:-webkit-autofill {
 }
 
 .textarea {
-  background-color: #eceff1;
+  background-color: #fff;
   padding: 0;
 }
 .textarea-fullWidth {
@@ -1676,7 +1678,7 @@ input:-webkit-autofill {
   line-height: 1.5em;
   margin: 0;
   min-height: 120px;
-  padding: 8px 16px;
+  padding: 4px 16px;
   transition: background-color 0.2s ease-in-out;
   width: 100%;
 }
@@ -1684,7 +1686,7 @@ input:-webkit-autofill {
   color: #aaa;
 }
 .textarea textarea:focus, .textarea textarea:active {
-  background-color: #fbfbfc;
+  background-color: white;
   border: 0;
   outline: none;
 }
@@ -1709,7 +1711,7 @@ input:-webkit-autofill {
   white-space: nowrap;
 }
 .checkbox input[type=checkbox] + label::before {
-  background-color: #eceff1;
+  background-color: #fff;
   border: 1px solid #d5d9db;
   border-radius: 8px;
   content: "";
@@ -1755,7 +1757,7 @@ input:-webkit-autofill {
   white-space: nowrap;
 }
 .radio input[type=radio] + label::before {
-  background-color: #eceff1;
+  background-color: #fff;
   border: 1px solid #d5d9db;
   border-radius: 20px;
   content: "";
@@ -1793,15 +1795,15 @@ input:-webkit-autofill {
   }
 }
 .input {
-  background-color: #eceff1;
+  background-color: #fff;
   margin-right: 10px;
   padding: 0;
   position: relative;
 }
 .input :focus,
 .input :active {
-  background-color: #fbfbfc;
-  border-radius: 8px;
+  background-color: white;
+  border-radius: 24px;
 }
 .input input {
   background: transparent;
@@ -1812,7 +1814,7 @@ input:-webkit-autofill {
   line-height: 1.5em;
   margin: 0;
   outline: none;
-  padding: 8px 16px;
+  padding: 4px 16px;
   width: 100%;
 }
 .input input::placeholder {
@@ -1866,12 +1868,12 @@ input:-webkit-autofill {
   margin: 0 !important;
 }
 .formCollapsed-item:first-child {
-  border-bottom-left-radius: 8px !important;
-  border-top-left-radius: 8px !important;
+  border-bottom-left-radius: 24px !important;
+  border-top-left-radius: 24px !important;
 }
 .formCollapsed-item:last-child {
-  border-bottom-right-radius: 8px !important;
-  border-top-right-radius: 8px !important;
+  border-bottom-right-radius: 24px !important;
+  border-top-right-radius: 24px !important;
 }
 .formCollapsed-item:not(:last-child) {
   border-right: 0;
@@ -2398,8 +2400,15 @@ input:-webkit-autofill {
 }
 
 .inspirations-filters {
+  align-items: center;
   display: flex;
   justify-content: center;
+}
+
+.inspirations-filters-title {
+  color: #aaa;
+  font-size: 0.875rem;
+  margin-right: 8px;
 }
 
 .container {

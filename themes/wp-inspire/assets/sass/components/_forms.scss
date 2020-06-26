@@ -70,8 +70,10 @@ input:-webkit-autofill {
 
 .select {
 	background-color: $bgc-form;
+	border-radius: $bdr-form;
 	display: inline-block;
-	margin-right: $m-medium;
+	margin: 0 $m-medium 0 0;
+	padding: $p-form;
 	position: relative;
 
 	&:last-child {
@@ -89,14 +91,13 @@ input:-webkit-autofill {
 		appearance: none;
 		background-color: transparent;
 		border: 0;
-		border-radius: 0;
 		color: $c-form;
 		display: block;
-		font-size: $fz-form;
+		font-size: $fz-small;
 		line-height: $lh-medium;
-		margin: 0;
-		padding: $p-form;
-		padding-right: 30px;
+		margin-right: $m-medium;
+		padding: 0;
+		padding-right: $p-big;
 		transition: $trs-form;
 		width: 100%;
 
@@ -120,10 +121,10 @@ input:-webkit-autofill {
 		height: 2px;
 		margin-top: 2px;
 		position: absolute;
-		right: 5px;
+		right: rem(16);
 		top: 50%;
 		transform-origin: 1px;
-		width: 10px;
+		width: rem(8);
 	}
 
 	&::after {

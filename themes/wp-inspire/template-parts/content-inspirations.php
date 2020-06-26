@@ -49,39 +49,45 @@ $query_vars = array(
 		<?php if ( $inspirations->have_posts() ) : ?>
 
 			<section class="inspirations-filters">
-
-				<select class="inspiration-industy-filters">
-					<option class="inspiration-industry" value=""><?php esc_html_e( 'Industries', 'wp_inspire' ); ?></option>
-					<?php
-					foreach ( $inspiration_industries as $key => $inspiration_industry ) :
-						?>
-						<option class="listings-region" value="<?php echo esc_attr( $inspiration_industry->slug ); ?>"<?php echo $inspiration_industry->slug === $query_vars['industry'] ? esc_attr( ' selected' ) : ''; ?>><?php echo esc_html( $inspiration_industry->name ); ?></option>
+				<h3 class="inspirations-filters-title">Filter the inspirations: </h3>
+				<span class="select">
+					<select class="inspiration-industy-filters">
+						<option class="inspiration-industry" value=""><?php esc_html_e( 'Industries', 'wp_inspire' ); ?></option>
 						<?php
-					endforeach;
-					?>
-				</select>
-
-				<select class="inspiration-style-filters">
-					<option class="inspiration-style" value=""><?php esc_html_e( 'Styles', 'wp_inspire' ); ?></option>
-					<?php
-					foreach ( $inspiration_styles as $key => $inspiration_style ) :
+						foreach ( $inspiration_industries as $key => $inspiration_industry ) :
+							?>
+							<option class="listings-region" value="<?php echo esc_attr( $inspiration_industry->slug ); ?>"<?php echo $inspiration_industry->slug === $query_vars['industry'] ? esc_attr( ' selected' ) : ''; ?>><?php echo esc_html( $inspiration_industry->name ); ?></option>
+							<?php
+						endforeach;
 						?>
-						<option class="inspiration-style" value="<?php echo esc_attr( $inspiration_style->slug ); ?>"<?php echo $inspiration_style->slug === $query_vars['style'] ? esc_attr( ' selected' ) : ''; ?>><?php echo esc_html( $inspiration_style->name ); ?></option>
-						<?php
-					endforeach;
-					?>
-				</select>
+					</select>
+				</span>
 
-				<select class="inspiration-color-filters">
-					<option class="inspiration-color" value=""><?php esc_html_e( 'Colors', 'wp_inspire' ); ?></option>
-					<?php
-					foreach ( $inspiration_colors as $key => $inspiration_color ) :
-						?>
-						<option class="listings-region" value="<?php echo esc_attr( $inspiration_color->slug ); ?>"<?php echo $inspiration_color->slug === $query_vars['color'] ? esc_attr( ' selected' ) : ''; ?>><?php echo esc_html( $inspiration_color->name ); ?></option>
+				<span class="select">
+					<select class="inspiration-style-filters">
+						<option class="inspiration-style" value=""><?php esc_html_e( 'Styles', 'wp_inspire' ); ?></option>
 						<?php
-					endforeach;
-					?>
-				</select>
+						foreach ( $inspiration_styles as $key => $inspiration_style ) :
+							?>
+							<option class="inspiration-style" value="<?php echo esc_attr( $inspiration_style->slug ); ?>"<?php echo $inspiration_style->slug === $query_vars['style'] ? esc_attr( ' selected' ) : ''; ?>><?php echo esc_html( $inspiration_style->name ); ?></option>
+							<?php
+						endforeach;
+						?>
+					</select>
+				</span>
+
+				<span class="select">
+					<select class="inspiration-color-filters">
+						<option class="inspiration-color" value=""><?php esc_html_e( 'Colors', 'wp_inspire' ); ?></option>
+						<?php
+						foreach ( $inspiration_colors as $key => $inspiration_color ) :
+							?>
+							<option class="listings-region" value="<?php echo esc_attr( $inspiration_color->slug ); ?>"<?php echo $inspiration_color->slug === $query_vars['color'] ? esc_attr( ' selected' ) : ''; ?>><?php echo esc_html( $inspiration_color->name ); ?></option>
+							<?php
+						endforeach;
+						?>
+					</select>
+				</span>
 
 			</section><!-- .inspiration-filters -->
 

@@ -16,14 +16,15 @@ a {
 		color: $c-link-hover;
 	}
 
-	&:focus {
-		color: $c-primary;
-		outline: thin dotted;
-	}
-
 	&:hover,
 	&:active {
 		outline: 0;
+	}
+
+	&:focus {
+		color: $c-primary;
+		outline-style: dotted;
+		outline-width: thin;
 	}
 }
 

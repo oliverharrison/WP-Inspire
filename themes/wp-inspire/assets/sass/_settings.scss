@@ -136,6 +136,7 @@ $bd-medium: 1px solid $bdc-base !default;
 $bdr-base: 4px !default;
 $bdr-medium: 8px !default;
 $bdr-rounded-corners: 16px !default;
+$bdr-big: 24px !default;
 
 // Defaults (HTML elements)
 $fw-strong: $fw-bold !default;
@@ -228,16 +229,16 @@ $fz-button-small: $fz-small !default;
 $p-button-small: $p-small $p-big !default;
 
 // Forms
-$bgc-form: $c-light !default;
+$bgc-form: $c-white !default;
 $c-form: $c-text !default;
-$bdr-form: $bdr-medium !default;
+$bdr-form: $bdr-big !default;
 $bd-form: $bd-medium !default;
 $fz-form: $fz-body !default;
 $bgc-form-focus: lighten($bgc-form, 5%) !default;
 $trs-form: background-color 0.2s ease-in-out !default;
 $c-form-placeholder: $c-gray !default;
 $mih-form-textarea: 120px !default;
-$p-form: $p-medium $p-big !default;
+$p-form: $p-small $p-big !default;
 $size-form-input-icon: 16px !default;
 $c-form-input-icon: $c-gray !default;
 $bd-form-error: 1px solid $c-error !default;
