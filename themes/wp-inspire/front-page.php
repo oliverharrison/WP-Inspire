@@ -12,6 +12,7 @@ get_header();
 ?>
 
 	<div id="primary" class="content-area">
+
 		<main id="main" class="site-main">
 
 			<div class="container">
@@ -19,12 +20,12 @@ get_header();
 					$post_object = get_post( get_option('page_on_front') );
 					echo wp_kses_post( '<div class="fp-content">' . $post_object->post_content . '</div>' );
 				?>
-			</div>
+			</div><!-- .container -->
 
-			<!-- TODO insert site description -->
 			<?php get_template_part( 'template-parts/content', 'inspirations' ); ?>
 
 		</main><!-- #main -->
+
 	</div><!-- #primary -->
 
 <?php
