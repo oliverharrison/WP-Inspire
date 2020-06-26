@@ -42,7 +42,7 @@ label {
 
 // Disable webkit background color
 input:-webkit-autofill {
-	box-shadow: 0 0 0 1000px $bgc-form inset;
+	box-shadow: 0 0 0 rem(1000) $bgc-form inset;
 }
 
 // Common styles
@@ -70,8 +70,10 @@ input:-webkit-autofill {
 
 .select {
 	background-color: $bgc-form;
+	border-radius: $bdr-form;
 	display: inline-block;
-	margin-right: $m-medium;
+	margin: 0 $m-medium 0 0;
+	padding: $p-form;
 	position: relative;
 
 	&:last-child {
@@ -89,14 +91,13 @@ input:-webkit-autofill {
 		appearance: none;
 		background-color: transparent;
 		border: 0;
-		border-radius: 0;
 		color: $c-form;
 		display: block;
-		font-size: $fz-form;
+		font-size: $fz-small;
 		line-height: $lh-medium;
-		margin: 0;
-		padding: $p-form;
-		padding-right: 30px;
+		margin-right: $m-medium;
+		padding: 0;
+		padding-right: $p-big;
 		transition: $trs-form;
 		width: 100%;
 
@@ -117,13 +118,13 @@ input:-webkit-autofill {
 		background: $c-primary;
 		content: '';
 		display: block;
-		height: 2px;
+		height: rem(2);
 		margin-top: 2px;
 		position: absolute;
-		right: 5px;
+		right: rem(16);
 		top: 50%;
 		transform-origin: 1px;
-		width: 10px;
+		width: rem(8);
 	}
 
 	&::after {
@@ -200,25 +201,25 @@ input:-webkit-autofill {
 				border-radius: $bdr-medium;
 				content: '';
 				display: inline-block;
-				height: 20px;
+				height: rem(20);
 				left: 0;
 				margin-top: -10px;
 				position: absolute;
 				top: 50%;
-				width: 20px;
+				width: rem(20);
 			}
 
 			&::after {
 				border-bottom: 3px solid $c-primary;
 				border-right: 3px solid $c-primary;
 				display: block;
-				height: 12px;
+				height: rem(12);
 				left: 11px;
 				margin-left: -4px;
 				margin-top: -7px;
 				position: absolute;
 				top: 50%;
-				width: 7px;
+				width: rem(7);
 				z-index: 1;
 			}
 		}
@@ -251,25 +252,25 @@ input:-webkit-autofill {
 				border-radius: 20px;
 				content: '';
 				display: inline-block;
-				height: 20px;
+				height: rem(20);
 				left: 0;
 				margin-top: -10px;
 				position: absolute;
 				top: 50%;
-				width: 20px;
+				width: rem(20);
 			}
 
 			&::after {
 				background-color: $c-primary;
 				border-radius: 20px;
 				display: block;
-				height: 10px;
+				height: rem(10);
 				left: 11px;
 				margin-left: -6px;
 				margin-top: -6px;
 				position: absolute;
 				top: 13px;
-				width: 10px;
+				width: rem(10);
 				z-index: 1;
 			}
 		}

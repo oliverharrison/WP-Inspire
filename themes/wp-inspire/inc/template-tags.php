@@ -91,10 +91,10 @@ if ( ! function_exists( 'wp_inspire_entry_body' ) ) :
 			</div>
 
 			<?php
-			get_the_terms( $post_id, 'color' ) ? $taxonomies['Colors'] = get_the_terms( $post_id, 'color' ) : null;
-			get_the_terms( $post_id, 'style' ) ? $taxonomies['Styles'] = get_the_terms( $post_id, 'style' ) : null;
-			get_the_terms( $post_id, 'industry' ) ? $taxonomies['Industries'] = get_the_terms( $post_id, 'industry' ) : null;
-			get_the_terms( $post_id, 'post_tag' ) ? $taxonomies['Tags'] = get_the_terms( $post_id, 'post_tag' ) : null;
+			get_the_terms( get_the_ID(), 'color' ) ? $taxonomies['Colors'] = get_the_terms( get_the_ID(), 'color' ) : null;
+			get_the_terms( get_the_ID(), 'style' ) ? $taxonomies['Styles'] = get_the_terms( get_the_ID(), 'style' ) : null;
+			get_the_terms( get_the_ID(), 'industry' ) ? $taxonomies['Industries'] = get_the_terms( get_the_ID(), 'industry' ) : null;
+			get_the_terms( get_the_ID(), 'post_tag' ) ? $taxonomies['Tags'] = get_the_terms( get_the_ID(), 'post_tag' ) : null;
 			?>
 
 			<?php if ( $taxonomies ) : ?>
@@ -176,7 +176,7 @@ endif;
  * Display heart SVG markup.
  *
  * @param array $args The parameters needed to display the SVG.
- * @author WDS
+ * @author Oliver Harrison oliver@positivebias.com
  * @return string
  */
 function wp_inspire_display_heart( $args = array() ) {
@@ -207,7 +207,7 @@ function wp_inspire_display_heart( $args = array() ) {
 /**
  * Create Alternate Logo Setting and Upload Control; add description for Primary Logo.
  *
- * @author Oliver Harrison
+ * @author Oliver Harrison oliver@positivebias.com
  * @param object $wp_customize Instance of WP_Customize_Class.
  */
 function wp_inspire_customize_logos( $wp_customize ) {
@@ -226,8 +226,8 @@ function wp_inspire_customize_logos( $wp_customize ) {
 			$wp_customize,
 			'wp_inspire_alternate_logo',
 			array(
-				'description' => esc_html__( 'Upload an alternate logo which will display in the footer. The dimensions should be 418x106 pixels if using a PNG image or 209x53 pixels if using an SVG image.', 'dell-foundation' ),
-				'label'       => esc_html__( 'Alternate Logo', 'dell-foundation' ),
+				'description' => esc_html__( 'Upload an alternate logo which will display in the footer.', 'wp_inspire' ),
+				'label'       => esc_html__( 'Alternate Logo', 'wp_inspire' ),
 				'section'     => 'title_tagline',
 				'settings'    => 'wp_inspire_alternate_logo',
 			)
@@ -235,3 +235,54 @@ function wp_inspire_customize_logos( $wp_customize ) {
 	);
 }
 add_action( 'customize_register', 'wp_inspire_customize_logos' );
+
+/**
+ * Function to build the taxonomy filters for an inspirations wp_query.
+ *
+ * @return array $tax_query Array containing the taxonomy filters.
+ * @author Oliver Harrison oliver@positivebias.com
+ * @since 2020-06-26
+ * @package WP Inspire
+ */
+function wp_inspire_inspiration_tax_query() {
+	/**
+	 * You MUST use $_GET and NOT register public query_vars for the following.
+	 * More info here: https://core.trac.wordpress.org/ticket/25143
+	 */
+	if ( ! $_GET['filter_industry'] && ! $_GET['filter_style'] && ! $_GET['filter_color'] ) {
+		return;
+	}
+
+	$tax_query = array( 'relation' => 'AND' );
+
+	$custom_query_vars = array(
+		'industry' => filter_input ( INPUT_GET, 'filter_industry', FILTER_SANITIZE_STRING ),
+		'style'    => filter_input ( INPUT_GET, 'filter_style', FILTER_SANITIZE_STRING ),
+		'color'    => filter_input ( INPUT_GET, 'filter_color', FILTER_SANITIZE_STRING ),
+	);
+
+	foreach ( $custom_query_vars as $tax_key => $query_var ) {
+		if ( empty( $query_var ) ) {
+			continue;
+		}
+
+		$tax_query[] = array(
+			'taxonomy' => $tax_key,
+			'field'    => 'slug',
+			'terms'    => $query_var,
+		);
+	}
+
+	return $tax_query;
+}
+
+/**
+ * Redirect Inspirations to front-page.php
+ */
+function wp_inspire_inspiration_redirect( $template ) {
+    if ( get_query_var( 'filter_industry' ) || get_query_var( 'filter_style' ) || get_query_var( 'filter_color' ) ) {
+        // return locate_template( 'front-page.php' );
+    }
+    return $template;
+}
+add_filter( 'template_include', 'wp_inspire_inspiration_redirect' );

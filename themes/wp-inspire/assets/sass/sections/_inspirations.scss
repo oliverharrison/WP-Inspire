@@ -14,6 +14,35 @@
 }
 
 .inspirations-filters {
+	flex-direction: column;
+}
+
+.inspirations-filters,
+.filters-block,
+.filters-active {
+	align-items: center;
 	display: flex;
 	justify-content: center;
+}
+
+.inspirations-filters-title {
+	color: $c-gray;
+	font-size: rem(14);
+	margin-right: $m-small;
+}
+
+.filters-active {
+	border-top: rem(1) solid $c-gray-light;
+	margin: $m-medium 0 0;
+	padding: $p-medium 0 0;
+}
+
+.filter-delete,
+.filters-clear {
+	font-size: rem(14);
+}
+
+.filter-delete:not(:last-child),
+.filters-clear:not(:last-child) {
+	margin-right: $m-medium;
 }

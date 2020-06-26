@@ -16,14 +16,15 @@ a {
 		color: $c-link-hover;
 	}
 
-	&:focus {
-		color: $c-primary;
-		outline: thin dotted;
-	}
-
 	&:hover,
 	&:active {
 		outline: 0;
+	}
+
+	&:focus {
+		color: $c-primary;
+		outline-style: dotted;
+		outline-width: thin;
 	}
 }
 
@@ -86,6 +87,12 @@ h4,
 		font-size: $fz-body;
 		line-height: $lh-body;
 	}
+}
+
+sup,
+sub {
+	font-size: $fz-small;
+	line-height: $fz-small;
 }
 
 // Colors

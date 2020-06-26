@@ -30,8 +30,6 @@ q,
 samp,
 small,
 strong,
-sub,
-sup,
 var,
 b,
 i,
@@ -482,23 +480,23 @@ li {
  *  BORDER
  */
 .border {
-  border: 1px solid #d5d9db;
+  border: 1px solid #a8dbdd;
 }
 
 .border-bottom {
-  border-bottom: 1px solid #d5d9db;
+  border-bottom: 1px solid #a8dbdd;
 }
 
 .border-left {
-  border-left: 1px solid #d5d9db;
+  border-left: 1px solid #a8dbdd;
 }
 
 .border-right {
-  border-right: 1px solid #d5d9db;
+  border-right: 1px solid #a8dbdd;
 }
 
 .border-top {
-  border-top: 1px solid #d5d9db;
+  border-top: 1px solid #a8dbdd;
 }
 
 /**
@@ -766,12 +764,13 @@ a {
 a:hover {
   color: #ff9664;
 }
-a:focus {
-  color: #069fa6;
-  outline: thin dotted;
-}
 a:hover, a:active {
   outline: 0;
+}
+a:focus {
+  color: #069fa6;
+  outline-style: dotted;
+  outline-width: thin;
 }
 
 h1,
@@ -811,6 +810,12 @@ h4,
 .text-body {
   font-size: 18px;
   line-height: 1.5em;
+}
+
+sup,
+sub {
+  font-size: 12px;
+  line-height: 12px;
 }
 
 .text-primary {
@@ -1245,7 +1250,7 @@ button {
   padding: 8px 16px;
   text-align: center;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: none;
   transition: opacity 0.2s ease-in-out;
   white-space: nowrap;
 }
@@ -1325,7 +1330,7 @@ button {
 }
 .button--outlined {
   background-color: transparent;
-  border: 1px solid #d5d9db;
+  border: 1px solid #a8dbdd;
   color: #069fa6;
 }
 .button--outlined:active, .button--outlined:hover, .button--outlined:focus {
@@ -1570,14 +1575,14 @@ label {
 }
 
 input:-webkit-autofill {
-  box-shadow: 0 0 0 1000px #eceff1 inset;
+  box-shadow: 0 0 0 62.5rem #fff inset;
 }
 
 .textarea,
 .input,
 .select {
-  border: 1px solid #d5d9db;
-  border-radius: 8px;
+  border: 1px solid #a8dbdd;
+  border-radius: 24px;
   box-shadow: none;
   display: inline-block;
   font-weight: normal;
@@ -1592,15 +1597,17 @@ input:-webkit-autofill {
 .textarea.has-error,
 .input.has-error,
 .select.has-error {
-  background: #eceff1;
+  background: #fff;
   border: 1px solid #e74c3c;
   margin-bottom: 0;
 }
 
 .select {
-  background-color: #eceff1;
+  background-color: #fff;
+  border-radius: 24px;
   display: inline-block;
-  margin-right: 16px;
+  margin: 0 16px 0 0;
+  padding: 4px 16px;
   position: relative;
 }
 .select:last-child {
@@ -1618,19 +1625,18 @@ input:-webkit-autofill {
           appearance: none;
   background-color: transparent;
   border: 0;
-  border-radius: 0;
   color: #444;
   display: block;
-  font-size: 18px;
+  font-size: 12px;
   line-height: 1.5em;
-  margin: 0;
-  padding: 8px 16px;
-  padding-right: 30px;
+  margin-right: 16px;
+  padding: 0;
+  padding-right: 16px;
   transition: background-color 0.2s ease-in-out;
   width: 100%;
 }
 .select select:active, .select select:focus {
-  background-color: #fbfbfc;
+  background-color: white;
   border: 0;
   outline: none;
 }
@@ -1641,13 +1647,13 @@ input:-webkit-autofill {
   background: #069fa6;
   content: "";
   display: block;
-  height: 2px;
+  height: 0.125rem;
   margin-top: 2px;
   position: absolute;
-  right: 5px;
+  right: 1rem;
   top: 50%;
   transform-origin: 1px;
-  width: 10px;
+  width: 0.5rem;
 }
 .select::after {
   transform: rotate(-135deg);
@@ -1657,7 +1663,7 @@ input:-webkit-autofill {
 }
 
 .textarea {
-  background-color: #eceff1;
+  background-color: #fff;
   padding: 0;
 }
 .textarea-fullWidth {
@@ -1676,7 +1682,7 @@ input:-webkit-autofill {
   line-height: 1.5em;
   margin: 0;
   min-height: 120px;
-  padding: 8px 16px;
+  padding: 4px 16px;
   transition: background-color 0.2s ease-in-out;
   width: 100%;
 }
@@ -1684,7 +1690,7 @@ input:-webkit-autofill {
   color: #aaa;
 }
 .textarea textarea:focus, .textarea textarea:active {
-  background-color: #fbfbfc;
+  background-color: white;
   border: 0;
   outline: none;
 }
@@ -1709,29 +1715,29 @@ input:-webkit-autofill {
   white-space: nowrap;
 }
 .checkbox input[type=checkbox] + label::before {
-  background-color: #eceff1;
-  border: 1px solid #d5d9db;
+  background-color: #fff;
+  border: 1px solid #a8dbdd;
   border-radius: 8px;
   content: "";
   display: inline-block;
-  height: 20px;
+  height: 1.25rem;
   left: 0;
   margin-top: -10px;
   position: absolute;
   top: 50%;
-  width: 20px;
+  width: 1.25rem;
 }
 .checkbox input[type=checkbox] + label::after {
   border-bottom: 3px solid #069fa6;
   border-right: 3px solid #069fa6;
   display: block;
-  height: 12px;
+  height: 0.75rem;
   left: 11px;
   margin-left: -4px;
   margin-top: -7px;
   position: absolute;
   top: 50%;
-  width: 7px;
+  width: 0.4375rem;
   z-index: 1;
 }
 
@@ -1755,29 +1761,29 @@ input:-webkit-autofill {
   white-space: nowrap;
 }
 .radio input[type=radio] + label::before {
-  background-color: #eceff1;
-  border: 1px solid #d5d9db;
+  background-color: #fff;
+  border: 1px solid #a8dbdd;
   border-radius: 20px;
   content: "";
   display: inline-block;
-  height: 20px;
+  height: 1.25rem;
   left: 0;
   margin-top: -10px;
   position: absolute;
   top: 50%;
-  width: 20px;
+  width: 1.25rem;
 }
 .radio input[type=radio] + label::after {
   background-color: #069fa6;
   border-radius: 20px;
   display: block;
-  height: 10px;
+  height: 0.625rem;
   left: 11px;
   margin-left: -6px;
   margin-top: -6px;
   position: absolute;
   top: 13px;
-  width: 10px;
+  width: 0.625rem;
   z-index: 1;
 }
 
@@ -1793,15 +1799,15 @@ input:-webkit-autofill {
   }
 }
 .input {
-  background-color: #eceff1;
+  background-color: #fff;
   margin-right: 10px;
   padding: 0;
   position: relative;
 }
 .input :focus,
 .input :active {
-  background-color: #fbfbfc;
-  border-radius: 8px;
+  background-color: white;
+  border-radius: 24px;
 }
 .input input {
   background: transparent;
@@ -1812,7 +1818,7 @@ input:-webkit-autofill {
   line-height: 1.5em;
   margin: 0;
   outline: none;
-  padding: 8px 16px;
+  padding: 4px 16px;
   width: 100%;
 }
 .input input::placeholder {
@@ -1866,12 +1872,12 @@ input:-webkit-autofill {
   margin: 0 !important;
 }
 .formCollapsed-item:first-child {
-  border-bottom-left-radius: 8px !important;
-  border-top-left-radius: 8px !important;
+  border-bottom-left-radius: 24px !important;
+  border-top-left-radius: 24px !important;
 }
 .formCollapsed-item:last-child {
-  border-bottom-right-radius: 8px !important;
-  border-top-right-radius: 8px !important;
+  border-bottom-right-radius: 24px !important;
+  border-top-right-radius: 24px !important;
 }
 .formCollapsed-item:not(:last-child) {
   border-right: 0;
@@ -2165,7 +2171,7 @@ input:-webkit-autofill {
  */
 .table {
   background-color: #eceff1;
-  border: 1px solid #d5d9db;
+  border: 1px solid #a8dbdd;
   border-collapse: collapse;
   color: #444;
   max-width: 100%;
@@ -2173,12 +2179,12 @@ input:-webkit-autofill {
 }
 .table th,
 .table td {
-  border-bottom: 1px solid #d5d9db;
+  border-bottom: 1px solid #a8dbdd;
   padding: 8px;
   position: relative;
 }
 .table thead {
-  border-bottom: 1px solid #d5d9db;
+  border-bottom: 1px solid #a8dbdd;
 }
 .table th {
   background-color: #fff;
@@ -2247,7 +2253,7 @@ input:-webkit-autofill {
   }
 }
 .table--responsive td:first-child {
-  border-top: 1px solid #d5d9db;
+  border-top: 1px solid #a8dbdd;
 }
 .table--responsive th,
 .table--responsive td {
@@ -2256,7 +2262,7 @@ input:-webkit-autofill {
 @media (min-width: 90%) {
   .table--responsive th,
 .table--responsive td {
-    border-top: 1px solid #d5d9db;
+    border-top: 1px solid #a8dbdd;
     display: table-cell;
   }
 }
@@ -2274,7 +2280,7 @@ input:-webkit-autofill {
  *
  */
 .tabs {
-  border-bottom: 1px solid #d5d9db;
+  border-bottom: 1px solid #a8dbdd;
   text-align: center;
 }
 .tabs-item {
@@ -2398,8 +2404,41 @@ input:-webkit-autofill {
 }
 
 .inspirations-filters {
+  flex-direction: column;
+}
+
+.inspirations-filters,
+.filters-block,
+.filters-active {
+  align-items: center;
   display: flex;
   justify-content: center;
+}
+
+.inspirations-filters-title {
+  color: #aaa;
+  font-size: 0.875rem;
+  margin-right: 8px;
+}
+
+.filters-active {
+  border-top: 0.0625rem solid #eceff1;
+  margin: 16px 0 0;
+  padding: 8px 0 0;
+}
+
+.filter-delete,
+.filters-clear {
+  font-size: 0.875rem;
+}
+
+.filter-delete:not(:last-child),
+.filters-clear:not(:last-child) {
+  margin-right: 16px;
+}
+
+.no-results {
+  margin-top: 48px;
 }
 
 .container {
