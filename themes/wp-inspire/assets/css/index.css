@@ -1468,8 +1468,6 @@ button {
 }
 .card .card-content .taxonomy-list {
   display: inline-flex;
-  margin: 16px 0 0 0;
-  padding-top: 8px;
   width: 100%;
 }
 .card .card-content .taxonomy-list .taxonomy-item {
@@ -1504,6 +1502,15 @@ button {
   border-top: 0.125rem solid #bee4e6;
   margin: 24px 0 0 3.25rem;
   padding-top: 24px;
+}
+.card .card-content .taxonomy-wrap {
+  margin-bottom: 16px;
+}
+.card .card-content .taxonomy-title {
+  color: #cfcfcf;
+  font-size: 0.625rem;
+  line-height: 0.625rem;
+  text-transform: uppercase;
 }
 .card a:not(.taxonomy-link),
 .card .inspiration-title {
@@ -1673,9 +1680,6 @@ input:-webkit-autofill {
   transition: background-color 0.2s ease-in-out;
   width: 100%;
 }
-.textarea textarea::-ms-input-placeholder {
-  color: #aaa;
-}
 .textarea textarea::placeholder {
   color: #aaa;
 }
@@ -1810,9 +1814,6 @@ input:-webkit-autofill {
   outline: none;
   padding: 8px 16px;
   width: 100%;
-}
-.input input::-ms-input-placeholder {
-  color: #aaa;
 }
 .input input::placeholder {
   color: #aaa;
@@ -2394,6 +2395,11 @@ input:-webkit-autofill {
   min-height: calc(100vh - 12.5rem);
   padding: 2rem 0;
   width: 100%;
+}
+
+.inspirations-filters {
+  display: flex;
+  justify-content: center;
 }
 
 .container {
