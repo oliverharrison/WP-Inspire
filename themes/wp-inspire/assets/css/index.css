@@ -30,8 +30,6 @@ q,
 samp,
 small,
 strong,
-sub,
-sup,
 var,
 b,
 i,
@@ -814,6 +812,12 @@ h4,
   line-height: 1.5em;
 }
 
+sup,
+sub {
+  font-size: 12px;
+  line-height: 12px;
+}
+
 .text-primary {
   color: #069fa6;
 }
@@ -1246,7 +1250,7 @@ button {
   padding: 8px 16px;
   text-align: center;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: none;
   transition: opacity 0.2s ease-in-out;
   white-space: nowrap;
 }
@@ -2400,6 +2404,12 @@ input:-webkit-autofill {
 }
 
 .inspirations-filters {
+  flex-direction: column;
+}
+
+.inspirations-filters,
+.filters-block,
+.filters-active {
   align-items: center;
   display: flex;
   justify-content: center;
@@ -2409,6 +2419,22 @@ input:-webkit-autofill {
   color: #aaa;
   font-size: 0.875rem;
   margin-right: 8px;
+}
+
+.filters-active {
+  border-top: 0.0625rem solid #eceff1;
+  margin: 16px 0 0;
+  padding: 8px 0 0;
+}
+
+.filter-delete,
+.filters-clear {
+  font-size: 0.875rem;
+}
+
+.filter-delete:not(:last-child),
+.filters-clear:not(:last-child) {
+  margin-right: 16px;
 }
 
 .no-results {

@@ -89,6 +89,12 @@ h4,
 	}
 }
 
+sup,
+sub {
+	font-size: $fz-small;
+	line-height: $fz-small;
+}
+
 // Colors
 .text {
 	@each $type, $color in $c-map {
