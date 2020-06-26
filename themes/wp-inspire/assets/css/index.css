@@ -2418,6 +2418,7 @@ input:-webkit-autofill {
 .inspirations-filters-title {
   color: #aaa;
   font-size: 0.875rem;
+  line-height: 1.6875rem;
   margin-right: 8px;
 }
 
