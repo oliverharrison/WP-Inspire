@@ -7,6 +7,7 @@
  * @package WP_Inspire
  */
 
+// Inspirations custom Query.
 $inspirations = new WP_Query(
 	array(
 		'post_type' => 'inspiration',
@@ -14,20 +15,26 @@ $inspirations = new WP_Query(
 	)
 );
 
+// Add Type or Region Query Vars to the query.
+$tax_query = wp_inspire_inspiration_tax_query();
+
+if ( $tax_query ) {
+	$inspirations['tax_query'] = $tax_query;
+}
+
+// Get the terms for the filters.
 $inspiration_industries = get_terms(
 	array(
 		'taxonomy'   => 'industry',
 		'hide_empty' => true,
 	)
 );
-
 $inspiration_styles = get_terms(
 	array(
 		'taxonomy'   => 'style',
 		'hide_empty' => true,
 	)
 );
-
 $inspiration_colors = get_terms(
 	array(
 		'taxonomy'   => 'color',
@@ -36,9 +43,9 @@ $inspiration_colors = get_terms(
 );
 
 $query_vars = array(
-	'region' => esc_html( get_query_var( 'region' ) ),
-	'type'   => esc_html( get_query_var( 'type' ) ),
-	'search' => esc_html( get_query_var( 'search' ) ),
+	'industry' => esc_html( get_query_var( 'filter_industry' ) ),
+	'style'    => esc_html( get_query_var( 'filter_style' ) ),
+	'color'    => esc_html( get_query_var( 'filter_color' ) ),
 );
 ?>
 
@@ -51,12 +58,12 @@ $query_vars = array(
 			<section class="inspirations-filters">
 				<h3 class="inspirations-filters-title">Filter the inspirations: </h3>
 				<span class="select">
-					<select class="inspiration-industy-filters">
+					<select class="inspiration-industry-filters">
 						<option class="inspiration-industry" value=""><?php esc_html_e( 'Industries', 'wp_inspire' ); ?></option>
 						<?php
 						foreach ( $inspiration_industries as $key => $inspiration_industry ) :
 							?>
-							<option class="listings-region" value="<?php echo esc_attr( $inspiration_industry->slug ); ?>"<?php echo $inspiration_industry->slug === $query_vars['industry'] ? esc_attr( ' selected' ) : ''; ?>><?php echo esc_html( $inspiration_industry->name ); ?></option>
+							<option class="inspiration-industry" value="<?php echo esc_attr( $inspiration_industry->slug ); ?>"<?php echo $inspiration_industry->slug === $query_vars['industry'] ? esc_attr( ' selected' ) : ''; ?>><?php echo esc_html( $inspiration_industry->name ); ?></option>
 							<?php
 						endforeach;
 						?>
@@ -82,7 +89,7 @@ $query_vars = array(
 						<?php
 						foreach ( $inspiration_colors as $key => $inspiration_color ) :
 							?>
-							<option class="listings-region" value="<?php echo esc_attr( $inspiration_color->slug ); ?>"<?php echo $inspiration_color->slug === $query_vars['color'] ? esc_attr( ' selected' ) : ''; ?>><?php echo esc_html( $inspiration_color->name ); ?></option>
+							<option class="inspiration-color" value="<?php echo esc_attr( $inspiration_color->slug ); ?>"<?php echo $inspiration_color->slug === $query_vars['color'] ? esc_attr( ' selected' ) : ''; ?>><?php echo esc_html( $inspiration_color->name ); ?></option>
 							<?php
 						endforeach;
 						?>

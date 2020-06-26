@@ -176,7 +176,7 @@ endif;
  * Display heart SVG markup.
  *
  * @param array $args The parameters needed to display the SVG.
- * @author WDS
+ * @author Oliver Harrison oliver@positivebias.com
  * @return string
  */
 function wp_inspire_display_heart( $args = array() ) {
@@ -207,7 +207,7 @@ function wp_inspire_display_heart( $args = array() ) {
 /**
  * Create Alternate Logo Setting and Upload Control; add description for Primary Logo.
  *
- * @author Oliver Harrison
+ * @author Oliver Harrison oliver@positivebias.com
  * @param object $wp_customize Instance of WP_Customize_Class.
  */
 function wp_inspire_customize_logos( $wp_customize ) {
@@ -226,8 +226,8 @@ function wp_inspire_customize_logos( $wp_customize ) {
 			$wp_customize,
 			'wp_inspire_alternate_logo',
 			array(
-				'description' => esc_html__( 'Upload an alternate logo which will display in the footer. The dimensions should be 418x106 pixels if using a PNG image or 209x53 pixels if using an SVG image.', 'dell-foundation' ),
-				'label'       => esc_html__( 'Alternate Logo', 'dell-foundation' ),
+				'description' => esc_html__( 'Upload an alternate logo which will display in the footer.', 'wp_inspire' ),
+				'label'       => esc_html__( 'Alternate Logo', 'wp_inspire' ),
 				'section'     => 'title_tagline',
 				'settings'    => 'wp_inspire_alternate_logo',
 			)
@@ -235,3 +235,57 @@ function wp_inspire_customize_logos( $wp_customize ) {
 	);
 }
 add_action( 'customize_register', 'wp_inspire_customize_logos' );
+
+
+/**
+ * Custom Query Vars for the Inspiration filters.
+ *
+ * @param array $query_vars WP Public Query vars.
+ * @author Oliver Harrison oliver@positivebias.com
+ * @return array $query_vars Updated WP Public Query vars.
+ * @since 2020-06-26
+ */
+function wp_inspire_updated_query_vars( $query_vars ) {
+	$query_vars[] = 'filter_industry';
+	$query_vars[] = 'filter_style';
+	$query_vars[] = 'filter_color';
+	return $query_vars;
+}
+add_filter( 'query_vars', 'wp_inspire_updated_query_vars' );
+
+
+/**
+ * Function to build the taxonomy filters for an inspirations wp_query.
+ *
+ * @return array $tax_query Array containing the taxonomy filters.
+ * @author Oliver Harrison oliver@positivebias.com
+ * @since 2020-06-26
+ * @package WP Inspire
+ */
+function wp_inspire_inspiration_tax_query() {
+	if ( ! get_query_var( 'industry' ) && ! get_query_var( 'style' ) && ! get_query_var( 'color' ) ) {
+		return;
+	}
+
+	$tax_query = array( 'relation' => 'AND' );
+
+	$query_vars = array(
+		'industry' => esc_html( get_query_var( 'filter_industry' ) ),
+		'style'    => esc_html( get_query_var( 'filter_style' ) ),
+		'color'    => esc_html( get_query_var( 'filter_color' ) ),
+	);
+
+	foreach ( $query_vars as $tax_key => $query_var ) {
+		if ( empty( $query_var ) ) {
+			continue;
+		}
+
+		$tax_query[] = array(
+			'taxonomy' => $tax_key,
+			'field'    => 'slug',
+			'terms'    => $query_var,
+		);
+	}
+
+	return $tax_query;
+}

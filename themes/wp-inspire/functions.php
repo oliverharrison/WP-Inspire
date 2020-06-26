@@ -133,6 +133,8 @@ function wp_inspire_scripts() {
 
 	wp_enqueue_script( 'wp_inspire-likes', get_template_directory_uri() . '/assets/js/inspiration-like.min.js', array(), wp_get_theme()->get('Version'), true );
 
+	wp_enqueue_script( 'wp_inspire-filters', get_template_directory_uri() . '/assets/js/inspirations-filter.min.js', array(), wp_get_theme()->get('Version'), true );
+
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}

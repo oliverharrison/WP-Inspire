@@ -42,7 +42,7 @@ label {
 
 // Disable webkit background color
 input:-webkit-autofill {
-	box-shadow: 0 0 0 1000px $bgc-form inset;
+	box-shadow: 0 0 0 rem(1000) $bgc-form inset;
 }
 
 // Common styles
@@ -118,7 +118,7 @@ input:-webkit-autofill {
 		background: $c-primary;
 		content: '';
 		display: block;
-		height: 2px;
+		height: rem(2);
 		margin-top: 2px;
 		position: absolute;
 		right: rem(16);
@@ -201,25 +201,25 @@ input:-webkit-autofill {
 				border-radius: $bdr-medium;
 				content: '';
 				display: inline-block;
-				height: 20px;
+				height: rem(20);
 				left: 0;
 				margin-top: -10px;
 				position: absolute;
 				top: 50%;
-				width: 20px;
+				width: rem(20);
 			}
 
 			&::after {
 				border-bottom: 3px solid $c-primary;
 				border-right: 3px solid $c-primary;
 				display: block;
-				height: 12px;
+				height: rem(12);
 				left: 11px;
 				margin-left: -4px;
 				margin-top: -7px;
 				position: absolute;
 				top: 50%;
-				width: 7px;
+				width: rem(7);
 				z-index: 1;
 			}
 		}
@@ -252,25 +252,25 @@ input:-webkit-autofill {
 				border-radius: 20px;
 				content: '';
 				display: inline-block;
-				height: 20px;
+				height: rem(20);
 				left: 0;
 				margin-top: -10px;
 				position: absolute;
 				top: 50%;
-				width: 20px;
+				width: rem(20);
 			}
 
 			&::after {
 				background-color: $c-primary;
 				border-radius: 20px;
 				display: block;
-				height: 10px;
+				height: rem(10);
 				left: 11px;
 				margin-left: -6px;
 				margin-top: -6px;
 				position: absolute;
 				top: 13px;
-				width: 10px;
+				width: rem(10);
 				z-index: 1;
 			}
 		}
