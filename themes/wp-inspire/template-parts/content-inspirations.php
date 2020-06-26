@@ -13,6 +13,33 @@ $inspirations = new WP_Query(
 		'paged' => $paged
 	)
 );
+
+$inspiration_industries = get_terms(
+	array(
+		'taxonomy'   => 'industry',
+		'hide_empty' => true,
+	)
+);
+
+$inspiration_styles = get_terms(
+	array(
+		'taxonomy'   => 'style',
+		'hide_empty' => true,
+	)
+);
+
+$inspiration_colors = get_terms(
+	array(
+		'taxonomy'   => 'color',
+		'hide_empty' => true,
+	)
+);
+
+$query_vars = array(
+	'region' => esc_html( get_query_var( 'region' ) ),
+	'type'   => esc_html( get_query_var( 'type' ) ),
+	'search' => esc_html( get_query_var( 'search' ) ),
+);
 ?>
 
 <div class="inspirations-bg">
@@ -20,6 +47,43 @@ $inspirations = new WP_Query(
 	<div class="container">
 
 		<?php if ( $inspirations->have_posts() ) : ?>
+
+			<section class="inspirations-filters">
+
+				<select class="inspiration-industy-filters">
+					<option class="inspiration-industry" value=""><?php esc_html_e( 'Industries', 'wp_inspire' ); ?></option>
+					<?php
+					foreach ( $inspiration_industries as $key => $inspiration_industry ) :
+						?>
+						<option class="listings-region" value="<?php echo esc_attr( $inspiration_industry->slug ); ?>"<?php echo $inspiration_industry->slug === $query_vars['industry'] ? esc_attr( ' selected' ) : ''; ?>><?php echo esc_html( $inspiration_industry->name ); ?></option>
+						<?php
+					endforeach;
+					?>
+				</select>
+
+				<select class="inspiration-style-filters">
+					<option class="inspiration-style" value=""><?php esc_html_e( 'Styles', 'wp_inspire' ); ?></option>
+					<?php
+					foreach ( $inspiration_styles as $key => $inspiration_style ) :
+						?>
+						<option class="inspiration-style" value="<?php echo esc_attr( $inspiration_style->slug ); ?>"<?php echo $inspiration_style->slug === $query_vars['style'] ? esc_attr( ' selected' ) : ''; ?>><?php echo esc_html( $inspiration_style->name ); ?></option>
+						<?php
+					endforeach;
+					?>
+				</select>
+
+				<select class="inspiration-color-filters">
+					<option class="inspiration-color" value=""><?php esc_html_e( 'Colors', 'wp_inspire' ); ?></option>
+					<?php
+					foreach ( $inspiration_colors as $key => $inspiration_color ) :
+						?>
+						<option class="listings-region" value="<?php echo esc_attr( $inspiration_color->slug ); ?>"<?php echo $inspiration_color->slug === $query_vars['color'] ? esc_attr( ' selected' ) : ''; ?>><?php echo esc_html( $inspiration_color->name ); ?></option>
+						<?php
+					endforeach;
+					?>
+				</select>
+
+			</section><!-- .inspiration-filters -->
 
 			<section class="inspirations-block row">
 				<?php while ( $inspirations->have_posts() ) : $inspirations->the_post(); ?>
