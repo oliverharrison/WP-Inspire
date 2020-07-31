@@ -1517,7 +1517,6 @@ button {
   color: #069fa6;
   display: flex;
   font-size: 1rem;
-  word-break: break-word;
 }
 .card a:not(.taxonomy-link),
 .card .inspiration-title {
