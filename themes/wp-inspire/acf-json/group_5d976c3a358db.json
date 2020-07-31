@@ -11,7 +11,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "60",
+                "width": "40",
                 "class": "",
                 "id": ""
             },
@@ -42,6 +42,30 @@
             "mime_types": ""
         },
         {
+            "key": "field_5f24298fd02c0",
+            "label": "Single Main Image",
+            "name": "single_image",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "20",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
             "key": "field_5ede53933fa58",
             "label": "Likes",
             "name": "likes",
@@ -61,33 +85,6 @@
             "min": 0,
             "max": "",
             "step": 1
-        },
-        {
-            "key": "field_5ea2efe4aa5b1",
-            "label": "Gallery",
-            "name": "gallery",
-            "type": "gallery",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array",
-            "preview_size": "medium",
-            "insert": "append",
-            "library": "all",
-            "min": "",
-            "max": "",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": ""
         }
     ],
     "location": [
@@ -107,5 +104,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1591635219
+    "modified": 1596210455
 }
