@@ -59,3 +59,15 @@
 		margin-right: $m-medium;
 	}
 }
+
+.inspirations-block {
+	@include media-breakpoint-up(lg) {
+		margin-top: $m-huge;
+
+		.inspiration {
+			&:nth-child(3n + 2) {
+				margin-top: -$m-huge;
+			}
+		}
+	}
+}
