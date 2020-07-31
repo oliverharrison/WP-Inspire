@@ -6,7 +6,12 @@
 }
 
 .inspirations-bg {
-	background: $gr-pale;
+
+	@include media-breakpoint-up(lg) {
+		background: linear-gradient(180deg, $c-white rem(250), $c-aqua-island rem(250));
+	}
+
+	background: linear-gradient(180deg, $c-white rem(220), $c-aqua-island rem(220));
 	margin-top: rem(48);
 	min-height: calc(100vh - #{rem(200)});
 	padding: rem(32) 0;

@@ -2475,11 +2475,16 @@ textarea textarea:active {
 }
 
 .inspirations-bg {
-  background: linear-gradient(180deg, #fff 0%, #a8dbdd 480px);
+  background: linear-gradient(180deg, #fff 13.75rem, #a8dbdd 13.75rem);
   margin-top: 3rem;
   min-height: calc(100vh - 12.5rem);
   padding: 2rem 0;
   width: 100%;
+}
+@media (min-width: 1024px) {
+  .inspirations-bg {
+    background: linear-gradient(180deg, #fff 15.625rem, #a8dbdd 15.625rem);
+  }
 }
 
 .inspirations-filters,
