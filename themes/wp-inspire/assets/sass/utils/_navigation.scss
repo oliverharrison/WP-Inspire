@@ -1,6 +1,8 @@
 .main-navigation,
 .footer-navigation {
+	align-items: center;
 	display: inline-flex;
+	height: 100%;
 	justify-content: flex-end;
 	width: 100%;
 
@@ -10,6 +12,16 @@
 }
 
 .menu {
+	@include media-breakpoint-down(sm) {
+		justify-content: center;
+		margin-top: $m-large;
+		width: 100%;
+
+		.menu-item {
+			margin: 0 $m-medium 0 0;
+		}
+	}
+
 	align-items: center;
 	display: inline-flex;
 	justify-self: flex-end;

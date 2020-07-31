@@ -15,8 +15,8 @@
 
 	<footer id="colophon" class="site-footer">
 		<div class="container">
-			<div class="footer-wrap">
-				<div class="site-branding">
+			<div class="footer-wrap row">
+				<div class="site-branding col-md-3">
 					<?php
 						// Grab alternate logo from options.
 						$alternate_logo = get_theme_mod( 'wp_inspire_alternate_logo' );
@@ -28,15 +28,17 @@
 					</a>
 					<?php endif; ?>
 				</div><!-- .site-branding -->
-				<nav class="footer-navigation">
-					<?php
-					wp_nav_menu( array(
-						'theme_location' => 'footer-menu',
-						'menu_id'        => 'secondary-menu',
-						'container'      => '',
-					) );
-					?>
-				</nav><!-- #site-navigation -->
+				<div class="col-md-9">
+					<nav class="footer-navigation">
+						<?php
+						wp_nav_menu( array(
+							'theme_location' => 'footer-menu',
+							'menu_id'        => 'secondary-menu',
+							'container'      => '',
+						) );
+						?>
+					</nav><!-- #site-navigation -->
+				</div><!-- .col-md-9 -->
 			</div><!-- .footer-wrap -->
 		</div><!-- .container -->
 	</footer><!-- #colophon -->

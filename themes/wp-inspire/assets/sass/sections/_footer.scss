@@ -1,14 +1,17 @@
 .site-footer {
+	@include media-breakpoint-up(md) {
+		padding: rem(60);
+	}
+
 	background-color: $c-niagara;
 	margin-top: rem(60);
-	padding: rem(60);
+	padding: rem(60) 0;
+
+	.home & {
+		margin-top: 0;
+	}
 
 	.alternate-logo {
 		max-width: rem(144);
 	}
-}
-
-.footer-wrap {
-	display: inline-flex;
-	width: 100%;
 }

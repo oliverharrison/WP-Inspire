@@ -26,19 +26,22 @@
 
 	<header id="masthead" class="site-header">
 		<div class="container header-wrap">
-			<div class="site-branding">
-				<?php the_custom_logo(); ?>
-			</div><!-- .site-branding -->
-
-			<nav id="site-navigation" class="main-navigation">
-				<?php
-				wp_nav_menu( array(
-					'theme_location' => 'main-menu',
-					'menu_id'        => 'primary-menu',
-					'container'      => '',
-				) );
-				?>
-			</nav><!-- #site-navigation -->
+			<div class="row">
+				<div class="site-branding col-md-3">
+					<?php the_custom_logo(); ?>
+				</div><!-- .site-branding -->
+				<div class="col-md-9">
+					<nav id="site-navigation" class="main-navigation">
+						<?php
+						wp_nav_menu( array(
+							'theme_location' => 'main-menu',
+							'menu_id'        => 'primary-menu',
+							'container'      => '',
+						) );
+						?>
+					</nav><!-- #site-navigation -->
+				</div><!-- .col-md-9 -->
+			</div><!-- .row -->
 		</div><!-- .container -->
 	</header><!-- #masthead -->
 

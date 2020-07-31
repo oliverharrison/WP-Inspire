@@ -48,11 +48,15 @@ input:-webkit-autofill {
 // Common styles
 .textarea,
 .input,
-.select {
+.select,
+textarea,
+input {
 	border: $bd-form;
 	border-radius: $bdr-form;
 	box-shadow: none;
 	display: inline-block;
+	font-family: $ff-body;
+	font-size: $fz-body;
 	font-weight: normal;
 	margin-bottom: 20px;
 	overflow: hidden;
@@ -137,9 +141,11 @@ input:-webkit-autofill {
 }
 
 // textarea
-.textarea {
+.textarea,
+textarea {
 	background-color: $bgc-form;
-	padding: 0;
+	border-radius: $bdr-base;
+	padding: $p-medium;
 
 	&-fullWidth {
 		display: block;
