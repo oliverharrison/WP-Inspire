@@ -2524,6 +2524,15 @@ textarea textarea:active {
   margin-right: 16px;
 }
 
+@media (min-width: 1024px) {
+  .inspirations-block {
+    margin-top: 48px;
+  }
+  .inspirations-block .inspiration:nth-child(3n+2) {
+    margin-top: -48px;
+  }
+}
+
 .no-results {
   margin-top: 48px;
 }
