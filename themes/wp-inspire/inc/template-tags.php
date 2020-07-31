@@ -287,7 +287,7 @@ function wp_inspire_inspiration_tax_query() {
 	 * You MUST use $_GET and NOT register public query_vars for the following.
 	 * More info here: https://core.trac.wordpress.org/ticket/25143
 	 */
-	if ( ! $_GET['filter_industry'] && ! $_GET['filter_style'] && ! $_GET['filter_color'] ) {
+	if ( ! $_GET['filter_industry'] && ! $_GET['filter_style'] && ! $_GET['filter_color'] && ! $_GET['filter_plugins'] ) {
 		return;
 	}
 
@@ -297,6 +297,7 @@ function wp_inspire_inspiration_tax_query() {
 		'industry' => filter_input ( INPUT_GET, 'filter_industry', FILTER_SANITIZE_STRING ),
 		'style'    => filter_input ( INPUT_GET, 'filter_style', FILTER_SANITIZE_STRING ),
 		'color'    => filter_input ( INPUT_GET, 'filter_color', FILTER_SANITIZE_STRING ),
+		'plugins'  => filter_input ( INPUT_GET, 'filter_plugins', FILTER_SANITIZE_STRING ),
 	);
 
 	foreach ( $custom_query_vars as $tax_key => $query_var ) {

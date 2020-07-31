@@ -23,7 +23,8 @@ window.inspirationsFilters = {};
 			inspirationsFilter: $( '.inspirations-filters' ),
 			inspirationIndustryFilters: $( '.inspiration-industry-filters' ),
 			inspirationStyleFilters: $( '.inspiration-style-filters' ),
-			inspirationColorFilters: $( '.inspiration-color-filters' )
+			inspirationColorFilters: $( '.inspiration-color-filters' ),
+			inspirationPluginsFilters: $( '.inspiration-plugins-filters' )
 		};
 	};
 
@@ -32,6 +33,7 @@ window.inspirationsFilters = {};
 		app.$c.inspirationIndustryFilters.on( 'change', app.inspirationsFilter );
 		app.$c.inspirationStyleFilters.on( 'change', app.inspirationsFilter );
 		app.$c.inspirationColorFilters.on( 'change', app.inspirationsFilter );
+		app.$c.inspirationPluginsFilters.on( 'change', app.inspirationsFilter );
 	};
 
 	// Do we meet the requirements?
@@ -44,11 +46,12 @@ window.inspirationsFilters = {};
 		event.preventDefault();
 
 		const industryValue = app.$c.inspirationIndustryFilters.val();
-		const styleValue = app.$c.inspirationStyleFilters.val();
-		const colorValue = app.$c.inspirationColorFilters.val();
-		let cleanURL = '';
-		let paramString = '';
-		let params = new URLSearchParams();
+		const styleValue    = app.$c.inspirationStyleFilters.val();
+		const colorValue    = app.$c.inspirationColorFilters.val();
+		const pluginsValue  = app.$c.inspirationPluginsFilters.val();
+		let   cleanURL      = '';
+		let   paramString   = '';
+		let   params        = new URLSearchParams();
 
 		if ( industryValue ) {
 			params.append( 'filter_industry', industryValue );
@@ -60,6 +63,10 @@ window.inspirationsFilters = {};
 
 		if ( colorValue ) {
 			params.append( 'filter_color', colorValue );
+		}
+
+		if ( pluginsValue ) {
+			params.append( 'filter_plugins', pluginsValue );
 		}
 
 		if ( params.toString() ) {

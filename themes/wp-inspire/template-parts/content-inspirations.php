@@ -42,11 +42,18 @@ $inspiration_colors = get_terms(
 		'hide_empty' => false,
 	)
 );
+$inspiration_plugins = get_terms(
+	array(
+		'taxonomy'   => 'plugins',
+		'hide_empty' => false,
+	)
+);
 
 $custom_query_vars = array(
 	'industry' => filter_input ( INPUT_GET, 'filter_industry', FILTER_SANITIZE_STRING ),
 	'style'    => filter_input ( INPUT_GET, 'filter_style', FILTER_SANITIZE_STRING ),
 	'color'    => filter_input ( INPUT_GET, 'filter_color', FILTER_SANITIZE_STRING ),
+	'plugins'  => filter_input ( INPUT_GET, 'filter_plugins', FILTER_SANITIZE_STRING ),
 );
 ?>
 
@@ -96,9 +103,22 @@ $custom_query_vars = array(
 						?>
 					</select>
 				</span>
+
+				<span class="select">
+					<select class="inspiration-plugins-filters">
+						<option class="inspiration-plugins" value=""><?php esc_html_e( 'Plugins', 'wp_inspire' ); ?></option>
+						<?php
+						foreach ( $inspiration_plugins as $key => $inspiration_plugin ) :
+							?>
+							<option class="inspiration-plugin" value="<?php echo esc_attr( $inspiration_plugin->slug ); ?>"<?php echo $inspiration_plugin->slug === $custom_query_vars['plugins'] ? esc_attr( ' selected' ) : ''; ?>><?php echo esc_html( $inspiration_plugin->name ); ?></option>
+							<?php
+						endforeach;
+						?>
+					</select>
+				</span>
 			</div>
 			<?php
-			if ( $custom_query_vars['industry'] || $custom_query_vars['style'] || $custom_query_vars['color'] ) :
+			if ( $custom_query_vars['industry'] || $custom_query_vars['style'] || $custom_query_vars['color'] || $custom_query_vars['plugins'] ) :
 				?>
 				<div class="filters-active">
 					<h3 class="inspirations-filters-title">Active filters: </h3>
@@ -108,7 +128,8 @@ $custom_query_vars = array(
 							continue;
 						}
 
-						echo wp_kses_post( '<span class="filter-delete">' . ucwords( $key ) . ': <a href="' . esc_url( remove_query_arg( 'filter_' . $key ) ) . '">' . ucwords( $query_var ) . ' <sup>&times;</sup></a></span>' );
+						$name = get_term_by( 'slug', $query_var, $key )->name;
+						echo wp_kses_post( '<span class="filter-delete">' . ucwords( $key ) . ': <a href="' . esc_url( remove_query_arg( 'filter_' . $key ) ) . '">' . $name . ' <sup>&times;</sup></a></span>' );
 					}
 					?>
 					<span class="filters-clear"><a class="clear-filters" href="<?php echo get_home_url(); ?>"><?php esc_html_e( 'Clear filters', 'wp_inspire' ); ?></a></span>

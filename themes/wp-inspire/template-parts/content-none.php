@@ -23,14 +23,14 @@
 
 			<a href="<?php echo home_url(); ?>" class="button"><?php esc_html_e( 'Clear the filters', 'wp_inspire' ); ?></a>
 			<?php
-			get_search_form();
+			// get_search_form();
 
 		elseif ( is_front_page() ) :
 			?>
 
 			<p><?php esc_html_e( 'Sorry, but no inspirations matched your filters. Please clear your filters or try a search below.', 'wp_inspire' ); ?></p>
 			<?php
-			get_search_form();
+			// get_search_form();
 
 
 		elseif ( is_search() ) :
@@ -38,14 +38,14 @@
 
 			<p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'wp_inspire' ); ?></p>
 			<?php
-			get_search_form();
+			// get_search_form();
 
 		else :
 			?>
 
 			<p><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'wp_inspire' ); ?></p>
 			<?php
-			get_search_form();
+			// get_search_form();
 
 		endif;
 		?>
