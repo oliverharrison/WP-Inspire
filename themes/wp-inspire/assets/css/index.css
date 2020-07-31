@@ -2520,8 +2520,8 @@ textarea textarea:active {
   margin-top: 48px;
 }
 
-.single-inspiration .entry-header,
-.single-inspiration .row {
+.single-inspiration .site-main .entry-header,
+.single-inspiration .site-main .row {
   margin-bottom: 48px;
 }
 .single-inspiration .wp-block-pgcsimplygalleryblock-masonry {
