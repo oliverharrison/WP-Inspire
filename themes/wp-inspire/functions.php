@@ -71,7 +71,7 @@ if ( ! function_exists( 'wp_inspire_setup' ) ) :
 
 
 		// Custom image sizes
-		add_image_size( 'extra_large', 1600, 900 ); // 220 pixels wide by 180 pixels tall, soft proportional crop mode
+		add_image_size( 'extra_large', 1600, 1600 );
 
 		/**
 		 * Add support for core custom logo.
