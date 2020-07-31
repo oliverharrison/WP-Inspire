@@ -3,4 +3,8 @@
 .site-main {
 	min-height: calc(100vh - 15rem);
 	position: relative;
-  }
+}
+
+.entry-header {
+	margin-bottom: $m-huge;
+}
