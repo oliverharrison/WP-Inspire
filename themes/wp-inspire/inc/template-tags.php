@@ -90,45 +90,55 @@ if ( ! function_exists( 'wp_inspire_entry_body' ) ) :
 				</div>
 			</div>
 
-			<?php
-			get_the_terms( get_the_ID(), 'color' ) ? $taxonomies['Colors'] = get_the_terms( get_the_ID(), 'color' ) : null;
-			get_the_terms( get_the_ID(), 'style' ) ? $taxonomies['Styles'] = get_the_terms( get_the_ID(), 'style' ) : null;
-			get_the_terms( get_the_ID(), 'industry' ) ? $taxonomies['Industries'] = get_the_terms( get_the_ID(), 'industry' ) : null;
-			get_the_terms( get_the_ID(), 'post_tag' ) ? $taxonomies['Tags'] = get_the_terms( get_the_ID(), 'post_tag' ) : null;
-			?>
-
-			<?php if ( $taxonomies ) : ?>
-
-				<div class="taxonomies-wrap">
-
-					<?php foreach ( $taxonomies as $name => $taxonomy ) : ?>
-
-						<?php if ( $taxonomy ) : ?>
-
-						<div class="taxonomy-wrap taxonomy-<?php echo esc_attr( strtolower($name) ); ?>">
-							<span class="taxonomy-title"><?php echo esc_attr( $name ); ?></span>
-							<ul class="taxonomy-list list-<?php echo esc_attr( strtolower( $name ) ); ?>">
-								<?php foreach ( $taxonomy as $taxonomy_item ) : ?>
-									<?php
-										$color_bg   = 'Colors' === $name ? ' bg-tax-' . $taxonomy_item->slug : '';
-										$color_text	= 'Colors' === $name ? ' color-tax-' . $taxonomy_item->slug : '';
-									?>
-									<li class="taxonomy-item<?php echo esc_attr( $color_bg ); ?>"><a class="taxonomy-link<?php echo esc_attr( $color_text ); ?>" href="<?php echo get_term_link( $taxonomy_item ); ?>"><?php echo $taxonomy_item->name; ?></a></li>
-								<?php endforeach; ?>
-							</ul>
-
-						</div>
-
-						<?php endif; ?>
-
-					<?php endforeach; ?>
-
-				</div><!-- .taxonomies-wrap -->
-
-			<?php endif; ?>
+			<?php wp_inspire_display_taxonomies(); ?>
 
 		</div><!-- .card-content -->
 		<?php
+	}
+endif;
+
+if ( ! function_exists( 'wp_inspire_display_taxonomies' ) ) :
+	/**
+	 * Displays a list of an Inspiration's taxonomies.
+	 */
+	function wp_inspire_display_taxonomies() {
+
+		get_the_terms( get_the_ID(), 'color' ) ? $taxonomies['Colors'] = get_the_terms( get_the_ID(), 'color' ) : null;
+		get_the_terms( get_the_ID(), 'style' ) ? $taxonomies['Styles'] = get_the_terms( get_the_ID(), 'style' ) : null;
+		get_the_terms( get_the_ID(), 'industry' ) ? $taxonomies['Industries'] = get_the_terms( get_the_ID(), 'industry' ) : null;
+		get_the_terms( get_the_ID(), 'post_tag' ) ? $taxonomies['Tags'] = get_the_terms( get_the_ID(), 'post_tag' ) : null;
+
+		if ( $taxonomies ) :
+		?>
+
+			<div class="taxonomies-wrap">
+
+				<?php foreach ( $taxonomies as $name => $taxonomy ) : ?>
+
+					<?php if ( $taxonomy ) : ?>
+
+					<div class="taxonomy-wrap taxonomy-<?php echo esc_attr( strtolower($name) ); ?>">
+						<span class="taxonomy-title"><?php echo esc_attr( $name ); ?></span>
+						<ul class="taxonomy-list list-<?php echo esc_attr( strtolower( $name ) ); ?>">
+							<?php foreach ( $taxonomy as $taxonomy_item ) : ?>
+								<?php
+									$color_bg   = 'Colors' === $name ? ' bg-tax-' . $taxonomy_item->slug : '';
+									$color_text	= 'Colors' === $name ? ' color-tax-' . $taxonomy_item->slug : '';
+								?>
+								<li class="taxonomy-item<?php echo esc_attr( $color_bg ); ?>"><a class="taxonomy-link<?php echo esc_attr( $color_text ); ?>" href="<?php echo get_term_link( $taxonomy_item ); ?>"><?php echo $taxonomy_item->name; ?></a></li>
+							<?php endforeach; ?>
+						</ul>
+
+					</div>
+
+					<?php endif; ?>
+
+				<?php endforeach; ?>
+
+			</div><!-- .taxonomies-wrap -->
+
+		<?php
+		endif;
 	}
 endif;
 
@@ -150,7 +160,14 @@ if ( ! function_exists( 'wp_inspire_post_thumbnail' ) ) :
 			?>
 
 			<div class="post-thumbnail">
-				<?php the_post_thumbnail( 'medium_large', array( 'class' => $classname ) ); ?>
+				<?php
+					$single_thumbnail = get_field( 'single_image' );
+					if ( is_single() && $single_thumbnail ) :
+						echo wp_get_attachment_image( $single_thumbnail, 'extra_large' );
+					else :
+						the_post_thumbnail( 'extra_large', array( 'class' => $classname ) );
+					endif;
+				?>
 			</div><!-- .post-thumbnail -->
 
 		<?php else : ?>
