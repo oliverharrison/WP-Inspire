@@ -131,7 +131,10 @@
 			}
 
 			.icon-heart {
+				left: rem(2);
 				margin: 0 0 rem(12);
+				position: absolute;
+				top: 0;
 				width: rem(51);
 			}
 		}

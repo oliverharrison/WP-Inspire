@@ -80,7 +80,6 @@ if ( ! function_exists( 'wp_inspire_entry_body' ) ) :
 						<?php
 							wp_inspire_display_heart(
 								array(
-									'icon' => 'heart-outline',
 									'fill' => ($inspiration_likes / 255) * 100,
 								)
 							);
@@ -235,9 +234,9 @@ function wp_inspire_display_heart( $args = array() ) {
 	?>
 	<span class="icon">
 		<span class="icon-fill" style="<?php echo 'opacity:' . $args['fill'] . '%;' ?>">
-			<?php echo file_get_contents( get_theme_file_uri( '/assets/img/heart.svg' ) ); ?>
+			<img src="<?php echo get_theme_file_uri( '/assets/img/heart.svg' ); ?>" alt="" class="icon-heart" />
 		</span>
-		<?php echo file_get_contents( get_theme_file_uri( '/assets/img/' . esc_html( $args['icon'] ) . '.svg' ) ); ?>
+		<img src="<?php echo get_theme_file_uri( '/assets/img/heart-outline.svg' ); ?>" alt="" class="icon-heart" />
 	</span>
 	<?php
 }

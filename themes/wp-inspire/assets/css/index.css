@@ -1497,7 +1497,10 @@ button {
   transform: scale(1.05);
 }
 .card .card-content .card-heart .icon-heart {
+  left: 0.125rem;
   margin: 0 0 0.75rem;
+  position: absolute;
+  top: 0;
   width: 3.1875rem;
 }
 .card .card-content .card-links .icon {
