@@ -1236,7 +1236,8 @@ button {
   cursor: pointer;
 }
 
-.button {
+.button,
+.submit {
   background-color: #069fa6;
   border: 0;
   border-radius: 200px;
@@ -1251,89 +1252,119 @@ button {
   text-align: center;
   text-decoration: none;
   text-transform: none;
-  transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease, background-color 0.3s ease;
   white-space: nowrap;
 }
-.button:focus, .button:hover, .button:active {
+.button[type=submit],
+.submit[type=submit] {
+  background-color: #fd5200;
+}
+.button:focus, .button:hover, .button:active,
+.submit:focus,
+.submit:hover,
+.submit:active {
   color: #fff;
 }
-.button:hover {
+.button:hover,
+.submit:hover {
   background-color: rgba(6, 159, 166, 0.8);
   color: #fff;
   cursor: pointer;
   text-decoration: none;
 }
-.button:active {
+.button:active,
+.submit:active {
   opacity: 1;
 }
-.button:first-child {
+.button:first-child,
+.submit:first-child {
   margin-left: 0;
 }
-.button:last-child {
+.button:last-child,
+.submit:last-child {
   margin-right: 0;
 }
-.button--big {
+.button--big,
+.submit--big {
   font-size: 24px;
   padding: 16px 32px;
 }
-.button--small {
+.button--small,
+.submit--small {
   font-size: 12px;
   padding: 4px 16px;
 }
 @media (max-width: 1023px) {
-  .button--mobilefull {
+  .button--mobilefull,
+.submit--mobilefull {
     margin-left: 0;
     margin-right: 0;
     width: 100%;
   }
 }
-.button--secondary {
+.button--secondary,
+.submit--secondary {
   background-color: #fd5200;
   color: #fff;
 }
-.button--secondary:hover {
+.button--secondary:hover,
+.submit--secondary:hover {
   background-color: rgba(253, 82, 0, 0.8);
   color: #fff;
 }
-.button--white {
+.button--white,
+.submit--white {
   background-color: #fff;
   color: #069fa6;
 }
-.button--white:hover {
+.button--white:hover,
+.submit--white:hover {
   background-color: rgba(255, 255, 255, 0.8);
   color: rgba(6, 159, 166, 0.8);
 }
-.button--green {
+.button--green,
+.submit--green {
   background-color: #4caf50;
   color: #fff;
 }
-.button--green:hover {
+.button--green:hover,
+.submit--green:hover {
   background-color: rgba(76, 175, 80, 0.8);
   color: #fff;
 }
-.button--red {
+.button--red,
+.submit--red {
   background-color: #e74c3c;
   color: #fff;
 }
-.button--red:hover {
+.button--red:hover,
+.submit--red:hover {
   background-color: rgba(231, 76, 60, 0.8);
   color: #fff;
 }
-.button--transparent {
+.button--transparent,
+.submit--transparent {
   background-color: transparent;
   color: #069fa6;
 }
-.button--transparent:active, .button--transparent:hover, .button--transparent:focus {
+.button--transparent:active, .button--transparent:hover, .button--transparent:focus,
+.submit--transparent:active,
+.submit--transparent:hover,
+.submit--transparent:focus {
   background-color: transparent;
   color: rgba(6, 159, 166, 0.8);
   opacity: 0.8;
 }
-.button--outlined {
+.button--outlined,
+.submit--outlined {
   background-color: transparent;
   border: 1px solid #a8dbdd;
   color: #069fa6;
 }
-.button--outlined:active, .button--outlined:hover, .button--outlined:focus {
+.button--outlined:active, .button--outlined:hover, .button--outlined:focus,
+.submit--outlined:active,
+.submit--outlined:hover,
+.submit--outlined:focus {
   background-color: transparent;
   color: rgba(6, 159, 166, 0.8);
   opacity: 0.8;
@@ -2373,6 +2404,7 @@ input:-webkit-autofill {
 
 .site-footer {
   background-color: #069fa6;
+  margin-top: 3.75rem;
   padding: 3.75rem;
 }
 .site-footer .alternate-logo {

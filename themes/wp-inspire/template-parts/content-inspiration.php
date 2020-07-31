@@ -28,24 +28,14 @@
 					?>
 				</div><!-- .entry-meta -->
 			<?php endif; ?>
-		</header><!-- .entry-header -->
+        </header><!-- .entry-header -->
 
+        <?php wp_inspire_display_taxonomies(); ?>
 		<?php wp_inspire_post_thumbnail(); ?>
 
 		<div class="entry-content">
 			<?php
-			the_content( sprintf(
-				wp_kses(
-					/* translators: %s: Name of current post. Only visible to screen readers */
-					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'wp_inspire' ),
-					array(
-						'span' => array(
-							'class' => array(),
-						),
-					)
-				),
-				get_the_title()
-			) );
+			the_content();
 
 			wp_link_pages( array(
 				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'wp_inspire' ),

@@ -16,7 +16,8 @@ button {
 	cursor: pointer;
 }
 
-.button {
+.button,
+.submit {
 	background-color: $bg-button;
 	border: 0;
 	border-radius: $bdr-button;
@@ -31,8 +32,12 @@ button {
 	text-align: center;
 	text-decoration: none;
 	text-transform: $tt-button;
-	transition: opacity 0.2s ease-in-out;
+	transition: opacity 0.2s ease, background-color 0.3s ease;
 	white-space: nowrap;
+
+	&[type='submit'] {
+		background-color: $c-secondary;
+	}
 
 	&:focus,
 	&:hover,
