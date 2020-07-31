@@ -42,6 +42,7 @@
 	.post-thumbnail {
 		height: 100%;
 		line-height: 0;
+		padding: 0;
 	}
 
 	.inspire-thumb {
@@ -153,62 +154,6 @@
 				font-size: rem(16);
 				word-break: break-word;
 			}
-		}
-
-		.taxonomy-list {
-			display: inline-flex;
-			width: 100%;
-
-			.taxonomy-item {
-				margin: 0 $m-small 0 0;
-			}
-
-			.taxonomy-link {
-				color: $c-gray;
-				font-size: rem(16);
-				transition: 0.4s color ease;
-
-				&:hover {
-					color: $c-secondary;
-				}
-			}
-		}
-
-		.list-colors {
-			display: inline-flex;
-			margin: 0;
-			padding: 0;
-
-			.taxonomy-item,
-			.taxonomy-link {
-				border-radius: $bdr-medium;
-				height: rem(40);
-				margin: 0 rem(12) 0 0;
-				width: rem(40);
-			}
-
-			.taxonomy-link {
-				color: inherit;
-				display: block;
-				font-size: rem(6);
-			}
-		}
-
-		.taxonomies-wrap {
-			border-top: rem(2) solid $c-primary-light;
-			margin: $p-xbig 0 0 rem(52);
-			padding-top: $p-xbig;
-		}
-
-		.taxonomy-wrap {
-			margin-bottom: $m-medium;
-		}
-
-		.taxonomy-title {
-			color: $c-gray-medium;
-			font-size: rem(10);
-			line-height: rem(10);
-			text-transform: uppercase;
 		}
 	}
 

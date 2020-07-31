@@ -30,20 +30,27 @@
 			<?php endif; ?>
         </header><!-- .entry-header -->
 
-        <?php wp_inspire_display_taxonomies(); ?>
-		<?php wp_inspire_post_thumbnail(); ?>
+        <div class="row">
+            <?php wp_inspire_display_inspiration_logo(); ?>
+            <?php wp_inspire_display_taxonomies(); ?>
+        </div>
 
-		<div class="entry-content">
-			<?php
-			the_content();
+        <div class="row">
+		    <?php wp_inspire_post_thumbnail(); ?>
+        </div>
 
-			wp_link_pages( array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'wp_inspire' ),
-				'after'  => '</div>',
-			) );
-			?>
-		</div><!-- .entry-content -->
+        <div class="row">
+            <div class="entry-content col">
+                <?php
+                the_content();
 
+                wp_link_pages( array(
+                    'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'wp_inspire' ),
+                    'after'  => '</div>',
+                ) );
+                ?>
+            </div><!-- .entry-content -->
+        </div>
 	</article><!-- #post-<?php the_ID(); ?> -->
 
 </div><!-- .container -->

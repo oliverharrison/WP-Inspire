@@ -1,9 +1,14 @@
 // BRANDING
 
 .site-branding {
+	@include media-breakpoint-down(md) {
+		justify-content: center;
+	}
+
 	display: inline-flex;
 
 	.custom-logo {
 		max-width: rem(208);
+		width: auto;
 	}
 }

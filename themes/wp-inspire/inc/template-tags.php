@@ -111,6 +111,10 @@ if ( ! function_exists( 'wp_inspire_display_taxonomies' ) ) :
 		if ( $taxonomies ) :
 		?>
 
+			<?php if ( is_single() ) : ?>
+				<div class="col-md-8">
+			<?php endif; ?>
+
 			<div class="taxonomies-wrap">
 
 				<?php foreach ( $taxonomies as $name => $taxonomy ) : ?>
@@ -137,17 +141,35 @@ if ( ! function_exists( 'wp_inspire_display_taxonomies' ) ) :
 
 			</div><!-- .taxonomies-wrap -->
 
+			<?php if ( is_single() ) : ?>
+				</div>
+			<?php endif; ?>
+
 		<?php
+		endif;
+	}
+endif;
+
+if ( ! function_exists( 'wp_inspire_display_inspiration_logo' ) ) :
+	/**
+	 * Displays an Inspiration's logo.
+	 */
+	function wp_inspire_display_inspiration_logo() {
+		$inspiration_logo = get_field( 'logo' );
+
+		if ( $inspiration_logo ) :
+			?>
+			<div class="col-md-4">
+				<?php echo wp_get_attachment_image( $inspiration_logo, 'medium' ); ?>
+			</div>
+			<?php
 		endif;
 	}
 endif;
 
 if ( ! function_exists( 'wp_inspire_post_thumbnail' ) ) :
 	/**
-	 * Displays an optional post thumbnail.
-	 *
-	 * Wraps the post thumbnail in an anchor element on index views, or a div
-	 * element when on single views.
+	 * Displays an inspiration's thumbnail.
 	 */
 	function wp_inspire_post_thumbnail( $class = null ) {
 		$classname = 'inspire-thumb' ? 'inspire-thumb ' . $class : 'inspire-thumb';
@@ -159,7 +181,7 @@ if ( ! function_exists( 'wp_inspire_post_thumbnail' ) ) :
 		if ( is_singular() ) :
 			?>
 
-			<div class="post-thumbnail">
+			<div class="post-thumbnail col">
 				<?php
 					$single_thumbnail = get_field( 'single_image' );
 					if ( is_single() && $single_thumbnail ) :

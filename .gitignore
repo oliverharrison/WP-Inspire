@@ -4,6 +4,7 @@
 uploads/
 !mu-plugins/
 !plugins/
+!plugins/**/*
 !themes/
 !themes/*
 !themes/**/*
