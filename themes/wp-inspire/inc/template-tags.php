@@ -166,49 +166,55 @@ if ( ! function_exists( 'wp_inspire_display_inspiration_logo' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'wp_inspire_post_thumbnail' ) ) :
-	/**
-	 * Displays an inspiration's thumbnail.
-	 */
-	function wp_inspire_post_thumbnail( $class = null ) {
-		$classname = 'inspire-thumb' ? 'inspire-thumb ' . $class : 'inspire-thumb';
+/**
+ * Displays an inspiration's thumbnail.
+ */
+function wp_inspire_post_thumbnail( $class = null ) {
+	$classname = 'inspire-thumb' ? 'inspire-thumb ' . $class : 'inspire-thumb';
 
-		if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
-			return;
-		}
-
-		if ( is_singular() ) :
-			?>
-
-			<div class="post-thumbnail col">
-				<?php
-					$single_thumbnail = get_field( 'single_image' );
-					if ( is_single() && $single_thumbnail ) :
-						echo wp_get_attachment_image( $single_thumbnail, 'extra_large' );
-					else :
-						the_post_thumbnail( 'extra_large', array( 'class' => $classname ) );
-					endif;
-				?>
-			</div><!-- .post-thumbnail -->
-
-		<?php else : ?>
-
-			<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
-				<?php
-				the_post_thumbnail( 'extra_large', array(
-					'alt' => the_title_attribute( array(
-						'echo' => false,
-					) ),
-					'class' => $classname
-				) );
-				?>
-			</a>
-
-		<?php
-		endif; // End is_singular().
+	if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
+		return;
 	}
-endif;
 
+	if ( is_singular() ) :
+		?>
+
+		<div class="post-thumbnail col">
+			<?php
+				$single_thumbnail = get_field( 'single_image' );
+				if ( is_single() && $single_thumbnail ) :
+					echo wp_get_attachment_image( $single_thumbnail, 'extra_large' );
+				else :
+					the_post_thumbnail( 'extra_large', array( 'class' => $classname ) );
+				endif;
+			?>
+		</div><!-- .post-thumbnail -->
+
+	<?php elseif ( is_search() ) : ?>
+
+		<div class="post-thumbnail col col-lg-3 col-md-4">
+			<?php
+				$single_thumbnail = get_field( 'single_image', get_the_ID() ) ?: ( get_field( 'logo', get_the_ID() ) ?: get_post_thumbnail_id() );
+				echo wp_get_attachment_image( $single_thumbnail, 'extra_large' );
+				?>
+		</div><!-- .post-thumbnail -->
+
+	<?php else : ?>
+
+		<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+			<?php
+			the_post_thumbnail( 'extra_large', array(
+				'alt' => the_title_attribute( array(
+					'echo' => false,
+				) ),
+				'class' => $classname
+			) );
+			?>
+		</a>
+
+	<?php
+	endif; // End is_singular().
+}
 
 /**
  * Display heart SVG markup.

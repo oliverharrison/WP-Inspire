@@ -1,3 +1,9 @@
 .header-wrap {
 	margin: $m-huge 0;
-}
+} // .header-wrap
+
+.nav-wrap {
+	align-items: center;
+	display: flex;
+	justify-content: flex-end
+} // .nav-wrap

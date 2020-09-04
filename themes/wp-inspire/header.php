@@ -31,6 +31,7 @@
 					<?php the_custom_logo(); ?>
 				</div><!-- .site-branding -->
 				<div class="col-md-9">
+
 					<nav id="site-navigation" class="main-navigation">
 						<?php
 						wp_nav_menu( array(
@@ -40,6 +41,7 @@
 						) );
 						?>
 					</nav><!-- #site-navigation -->
+
 				</div><!-- .col-md-9 -->
 			</div><!-- .row -->
 		</div><!-- .container -->

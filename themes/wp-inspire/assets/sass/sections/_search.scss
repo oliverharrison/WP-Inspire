@@ -1,0 +1,44 @@
+// SEARCH
+
+.search-results {
+	.page-header {
+		margin-bottom: $m-big;
+	} // .page-header
+
+	article {
+
+		background-color: $c-white;
+		border-radius: $bdr-rounded-corners;
+		box-shadow: 0 rem(4) rem(6) rem(3) rgba($c-primary, 0.3),
+		0 rem(16) rem(32) rgba($c-primary, 0.6);
+		margin-bottom: $m-big;
+		padding: rem(24) rem(32);
+
+		.entry-header {
+			margin-bottom: rem(24);
+		} // .entry-header
+
+		.entry-summary,
+		p {
+			margin: 0;
+		}
+	} // article
+} // .search-results
+
+.search-form {
+
+	display: flex;
+	height: rem(42);
+	max-width: rem(340);
+
+	.input {
+		display: flex;
+		float: left;
+		height: rem(42);
+		width: rem(240);
+	} // .input
+
+	.button-search {
+		margin: 0;
+	} // .button-search
+} // .search-form

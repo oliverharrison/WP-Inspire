@@ -16,29 +16,22 @@
 
 	<div class="page-content">
 		<?php
-		if ( is_home() ) :
-			?>
-
-			<p><?php esc_html_e( 'Sorry, but no inspirations matched the filters. Please clear the filters or search the site.', 'wp_inspire' ); ?></p>
-
-			<a href="<?php echo home_url(); ?>" class="button"><?php esc_html_e( 'Clear the filters', 'wp_inspire' ); ?></a>
-			<?php
-			// get_search_form();
-
-		elseif ( is_front_page() ) :
+		if ( is_front_page() ) :
 			?>
 
 			<p><?php esc_html_e( 'Sorry, but no inspirations matched your filters. Please clear your filters or try a search below.', 'wp_inspire' ); ?></p>
-			<?php
-			// get_search_form();
 
+			<a href="<?php echo home_url(); ?>" class="button clear-filters"><?php esc_html_e( 'Clear the filters', 'wp_inspire' ); ?></a>
+
+			<?php
+			get_search_form();
 
 		elseif ( is_search() ) :
 			?>
 
 			<p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'wp_inspire' ); ?></p>
 			<?php
-			// get_search_form();
+			get_search_form();
 
 		else :
 			?>

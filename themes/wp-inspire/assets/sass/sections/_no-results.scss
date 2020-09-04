@@ -2,4 +2,16 @@
 
 .no-results {
 	margin-top: $m-huge;
-}
+
+	.page-content {
+		margin-top: rem(60);
+	} // .page-content
+
+	.clear-filters {
+		margin-left: 0;
+	} // .clear-filters
+
+	.search-form {
+		margin-top: $m-big;
+	} // .search-form
+} // .no-results
