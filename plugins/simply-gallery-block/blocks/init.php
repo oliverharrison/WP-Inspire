@@ -42,6 +42,16 @@ function pgc_sgb_block_assets()
 		$pgc_sgb_skins_list,
 		$pgc_sgb_skins_presets;
 
+	register_post_meta('attachment', 'pgc_sgb_link', array(
+		'show_in_rest' => true,
+		'type' => 'string',
+		'single' => true,
+		'sanitize_callback' => 'sanitize_text_field',
+		'auth_callback' => function () {
+			return current_user_can('edit_posts');
+		}
+	));
+
 	wp_register_style(
 		$pgc_sgb_slug . '-frontend',
 		plugins_url('blocks/blocks.uni.css', dirname(__FILE__)), // Block style CSS.
@@ -78,7 +88,7 @@ function pgc_sgb_block_assets()
 	wp_register_script(
 		$pgc_sgb_slug . '-js',
 		plugins_url('/dist/blocks.build.js', dirname(__FILE__)),
-		array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-data', 'media', 'media-grid', $pgc_sgb_slug . '-script',),
+		array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wplink', 'wp-data', 'media', 'media-grid', 'backbone', $pgc_sgb_slug . '-script',),
 		$pgc_sgb_version,
 		false
 	);

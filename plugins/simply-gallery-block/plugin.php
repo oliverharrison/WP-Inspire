@@ -6,7 +6,7 @@
  * Description: The highly customizable Lightbox for native WordPress Gallery/Image. And beautiful gallery blocks with advanced Lightbox for photographers, video creators, writers and content marketers. This blocks set will help you create responsive Images, Video, Audio gallery. Three desired layout in one plugin - Masonry, Justified and Grid.  
  * Author: GalleryCreator
  * Author URI: https://blockslib.com/
- * Version: 1.4.0
+ * Version: 1.5.1
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  *
@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {
 }
 
 
-$pgc_sgb_version = '1.4.0';
+$pgc_sgb_version = '1.5.1';
 $pgc_sgb_skins_list = array();
 $pgc_sgb_skins_presets = array();
 
@@ -43,24 +43,37 @@ function pgc_sgb_getGlobalPresets()
 }
 add_action('init', 'pgc_sgb_getGlobalPresets', 1);
 
-function pgc_sgb_update_def_settings()
+function pgc_sgb_action_wizard()
 {
 	check_ajax_referer('pgc-sgb-nonce', 'nonce');
-
 	$globaldata  =  stripslashes($_POST['props']);
 	$json = json_decode($globaldata);
 	$out = array();
 	$out['message'] = array();
-
-	foreach ($json as $key => $value) {
-		$out['message'][$key] = update_option($key, $value);
+	$data = array();
+	if ($json->type == 'update_post_meta') {
+		$out['message'][$json->key] = update_post_meta($json->postId, $json->key, $json->value);
+	} else if ($json->type == 'get_attachments_metadata') {
+		foreach ($json->iDs as $i => $value) {
+			$data[$json->iDs[$i]] = wp_get_attachment_metadata($json->iDs[$i]);
+		}
+	} else if ($json->type == 'get_posts_metadata') {
+		foreach ($json->iDs as $i => $value) {
+			$data[$json->iDs[$i]] = get_post_meta($json->iDs[$i], $json->key ? $json->key : '');
+		}
+	} else if ($json->type == 'update_option') {
+		foreach ($json->options as $key => $value) {
+			$out['message'][$key] = update_option($key, $value);
+		}
 	}
+	$out['message']['data'] = $data;
 	header('Content-Type: application/json; charset=' . get_option('blog_charset'), true);
 	echo json_encode($out);
 	wp_die();
 }
+
 if (wp_doing_ajax()) {
-	add_action('wp_ajax_pgc_sgb_update_def_settings', 'pgc_sgb_update_def_settings');
+	add_action('wp_ajax_pgc_sgb_action_wizard', 'pgc_sgb_action_wizard');
 }
 
 require_once plugin_dir_path(__FILE__) . 'blocks/init.php';

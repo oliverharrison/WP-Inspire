@@ -12,10 +12,14 @@
 	}
 
 	background: linear-gradient(180deg, $c-white rem(250), $c-aqua-island rem(250));
-	margin-top: rem(48);
 	min-height: calc(100vh - #{rem(200)});
-	padding: rem(32) 0;
+	padding: 0 0 rem(96) 0;
 	width: 100%;
+
+	.container + & {
+		margin-top: rem(48);
+		padding-top: rem(32);
+	}
 }
 
 .inspirations-filters,
