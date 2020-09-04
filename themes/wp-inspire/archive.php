@@ -10,47 +10,57 @@
 get_header();
 ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main">
+<div id="primary" class="content-area">
 
-		<?php if ( have_posts() ) : ?>
+	<main id="main" class="site-main">
+
+		<div class="inspirations-bg">
 
 			<div class="container">
 
-				<header class="page-header">
-					<?php
-					the_archive_title( '<h1 class="page-title">', '</h1>' );
-					the_archive_description( '<div class="archive-description">', '</div>' );
-					?>
-				</header><!-- .page-header -->
+				<?php if ( have_posts() ) : ?>
 
-			</div>
+					<header class="page-header">
+						<?php
+						the_archive_title( '<h1 class="page-title">', '</h1>' );
+						the_archive_description( '<div class="archive-description">', '</div>' );
+						?>
+					</header><!-- .page-header -->
 
-			<?php
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
 
-				/*
-				 * Include the Post-Type-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', 'inspirations' );
+					<section class="inspirations-block row">
+						<?php
+						/* Start the Loop */
+						while ( have_posts() ) :
+							the_post();
 
-			endwhile;
+							/*
+							* Include the Post-Type-specific template for the content.
+							* If you want to override this in a child theme, then include a file
+							* called content-___.php (where ___ is the Post Type name) and that will be used instead.
+							*/
+							get_template_part( 'template-parts/content', 'inspirations' );
 
-			the_posts_navigation();
+						endwhile;
+						?>
 
-		else :
+					</section><!-- .inspirations-block.row -->
 
-			get_template_part( 'template-parts/content', 'none' );
+				<?php
+				else :
 
-		endif;
-		?>
+					get_template_part( 'template-parts/content', 'none' );
 
-		</main><!-- #main -->
-	</div><!-- #primary -->
+				endif;
+				?>
+
+			</div><!-- .container -->
+
+		</div><!-- .inspirations-bg -->
+
+	</main><!-- #main -->
+
+</div><!-- #primary -->
 
 <?php
 get_footer();
