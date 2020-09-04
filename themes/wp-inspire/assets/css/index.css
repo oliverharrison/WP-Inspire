@@ -2450,7 +2450,6 @@ textarea textarea:active {
 
 .site-footer {
   background-color: #069fa6;
-  margin-top: 3.75rem;
   padding: 3.75rem 0;
 }
 @media (min-width: 768px) {
@@ -2473,15 +2472,18 @@ textarea textarea:active {
 
 .inspirations-bg {
   background: linear-gradient(180deg, #fff 15.625rem, #a8dbdd 15.625rem);
-  margin-top: 3rem;
   min-height: calc(100vh - 12.5rem);
-  padding: 2rem 0;
+  padding: 0 0 6rem 0;
   width: 100%;
 }
 @media (min-width: 1024px) {
   .inspirations-bg {
     background: linear-gradient(180deg, #fff 13.75rem, #a8dbdd 13.75rem);
   }
+}
+.container + .inspirations-bg {
+  margin-top: 3rem;
+  padding-top: 2rem;
 }
 
 .inspirations-filters,
