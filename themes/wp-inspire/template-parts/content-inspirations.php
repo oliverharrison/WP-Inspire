@@ -170,11 +170,6 @@ $custom_query_vars = array(
 
 				<?php endwhile; ?>
 
-			<?php
-			if (  $inspirations->max_num_pages > 1 ) :
-				wp_inspire_numeric_posts_nav();
-			endif;
-			?>
 			</section><!-- .inspirations-block.row -->
 
 		<?php

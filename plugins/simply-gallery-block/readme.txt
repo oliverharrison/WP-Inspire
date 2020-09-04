@@ -1,68 +1,71 @@
-=== Gallery Blocks with Lightbox. Image Gallery, Video Gallery MP4 and Audio Gallery MP3  ===
+=== Gallery Blocks with Lightbox. Image Gallery, Video Gallery and Lightbox for native gallery ===
 Author URI: https://blockslib.com/galleryblock/
 Plugin URI: https://blockslib.com/galleryblock/
 Contributors: gallerycreator
 Tags: block, image gallery, video gallery, lightbox, gallery, wordpress gallery plugin
-Requires at least: 5.0
-Tested up to: 5.4
+Requires at least: 5.3
+Tested up to: 5.5
 Requires PHP: 5.2.4
 Stable tag: trunk
 License: GPL-2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
+Two in One. Gutenberg gallery blocks and highly customizable lightbox.
+
 == Description ==
 
-[SimpLy Lightbox](https://blockslib.com/galleryblock/simply-lightbox/) easily displays all linked images from a post or page in highly customizable lightbox. Compatible with native WordPress gallery (Block or  Classic Editor) and independent images from Media Library.
+SimpLy Gallery Blocks is a friendly, easy-to-use gallery plugin with a list of advanced options for creating responsive Image, Video, Audio galleries.
 
->Now each Post or Page can have a unique lightbox setting 🚀
-> * Blocks Editor / Gutenberg
+SimpLy Lightbox Plugin easily displays all linked images from a post or page in highly customizable lightbox. Compatible with native WordPress gallery (Block or Classic Editor). Each Post or Page can have a unique lightbox setting.
 
-[SimpLy Gallery Blocks](https://blockslib.com/galleryblock/) is a suite of beautiful gallery Gutenberg blocks for photographers, video creators , writers and content marketers. SimpLy Gallery Blocks is a friendly, easy-to-use gallery plugin with a list of advanced options for creating responsive Image, Video, Audio galleries with a beautiful lightbox.
+### Links ###
 
- > * Supports Photo, Video *MP4 and Audio *MP3 [DEMO](https://blockslib.com/galleryblock/media-gallery-without-lightbox/) 🚀
+* [Masonry, Justified, Grid Gallery Blocks - Live DEMO](https://blockslib.com/galleryblock/#gallery-blocks)
+* [Photo, Video, Audio Gallery without lightbox - DEMO](https://blockslib.com/galleryblock/media-gallery-without-lightbox)
+* [SimpLy Lightbox and WordPress Native Gallery - DEMO](https://blockslib.com/galleryblock/simply-lightbox/)
 
-####Main Features:
+## Features ##
 
-> * Multitype gallery (Video, Audio and Image) without Lightbox (lightbox disabled) - [DEMO](https://blockslib.com/galleryblock/media-gallery-without-lightbox/). Lightbox is enabled by default
-> * HTML5 Browser History support - [Deep linking](https://blockslib.com/galleryblock/2020/01/browser-history-deep-linking/#9ab60dfa_1578433440761-784) Disabled by default
-> * Lightbox - [Mouse wheel navigation and Fading Transition](https://blockslib.com/galleryblock/2020/04/lightbox-mouse-wheel-navigation-and-fading-transition/)
-> * Automatic SlideShow support (with CountDown timer)
-> * Multi-touch gestures support
-> * Thumbnails support
-> * Fully Responsive
-> * Mobile Friendly
-> * Unlimited colors
-> * SVG icon
-> * Physics Based Animations
-> * FullScreen support
-> * Browser features control (scrollbar, mousewheel, right click prevention)
-> * Inactive State detection
-> * Smart Resizing
-> * HTML Caption (Attachment Caption or Alternative Text)
-> * Keyboard and mouse wheel support (navigate and zoom)
-> * Social Sharing (Facebook, Twitter, Pinterest)
-> * Smart Loading
+* Supports [Photo, Video *MP4 and Audio *MP3](https://blockslib.com/galleryblock/media-gallery-without-lightbox/) Lightbox is enabled by default
+* HTML5 Browser History support - [Deep linking](https://blockslib.com/galleryblock/2020/01/browser-history-deep-linking/#9ab60dfa_1578433440761-784) Disabled by default
+* Lightbox - [Mouse wheel navigation and Fading Transition](https://blockslib.com/galleryblock/2020/04/lightbox-mouse-wheel-navigation-and-fading-transition/)
+* Automatic SlideShow support (with CountDown timer)
+* Multi-touch gestures support
+* Thumbnails support
+* Fully Responsive
+* Mobile Friendly
+* Unlimited colors
+* SVG icon
+* Physics Based Animations
+* FullScreen support
+* Browser features control (scrollbar, mousewheel, right click prevention)
+* Inactive State detection
+* Smart Resizing
+* HTML Caption (Attachment Caption or Alternative Text)
+* Keyboard and mouse wheel support (navigate and zoom)
+* Social Sharing (Facebook, Twitter, Pinterest)
+* Smart Loading
 
-## Unrivaled, in every way
-The first of its kind, [SimpLy Gallery Blocks](https://blockslib.com/galleryblock/) offers an unrivaled drag and drop gallery building experience in Gutenberg. Drop your images in your choice of photo gallery block, customize display settings, hit publish.
+## Unrivaled, in every way ##
+The first of its kind, [SimpLy Gallery Blocks](https://blockslib.com/galleryblock/) offers an unrivaled drag and drop gallery building experience in Gutenberg. Add your images, video or audio files in your choice of photo gallery block, customize display settings, hit publish.
 
-## Unparalleled capabilities
-An innovative transform system lets you instantly change your photos galleries into another form. Go from a fullscreen Masonry gallery to universal Grid or stylish Justified gallery, with just a single click. You won't find another Gutenberg gallery plugin with this kind of capability. Guaranteed.
+## Unparalleled capabilities ##
+An innovative transform system lets you instantly change your galleries into another form. Go from a fullscreen Masonry gallery to universal Grid or stylish Justified gallery, with just a single click. You won't find another Gutenberg gallery plugin with this kind of capability. Guaranteed.
 
-## Highly responsive
+## Highly responsive ##
 Our Gutenberg gallery blocks are second-to-none, featuring fullscale responsive support. And with fine controls for mobile and desktop styles, you can set custom styling for each gallery.
 
-## Next gen Lightbox
+## Next gen Lightbox ##
 Built on top of the latest technologies, SimpLy Lightbox is multi-gestures compatible, smooth and performant! Easily navigate with one or several fingers on your smartphone. Swipe, drag and pinch content naturally like with a native mobile swipeable view. It also supports navigation with keyboard or mouse wheel to slide or zoom.
 
 Our lightbox mimics the most populars UIs like IOS, Android, Google Drive, etc… With a well known UI, users will instantly understand how to use the lightbox, and will easily navigate through your galleries.
 
 SimpLy Lightbox is the only one lightbox to gather all these possibilities and You can use it absolutely for free without buying any addons or premium versions of the plugin.
 
-## A Super-fast experience
+## A Super-fast experience ##
 We've built a highly interactive and intuitive experience with a focus on speed and ease of use. Drag. Drop. Transform. Style.
 
-## A short demo of SimpLy Gallery Blocks
+## A short demo of SimpLy Gallery Blocks ##
 In this video you will see how easily you can create photo gallery using SGB Gutenberg photo gallery block.
 [youtube https://youtu.be/YEFVCGdTwtM]
 Please note that you easily convert block gallery from Masonry to Justified or to Grid or to WordPress image gallery and vice versa.
@@ -95,6 +98,17 @@ Please note that you easily convert block gallery from Masonry to Justified or t
 Yes! SimpLy Gallery Blocks's core features are absolutely free.
 
 == Changelog ==
+= 1.5.1 =
+* Optimization: performance improvement - Go to Block Sidebar -> Items Manager -> Reload Gallery and Update Post/Page
+* Added: Now you can attach an additional link to an element
+* Added: Ability to disable lazy loading mode
+* Added: Gallery without background mode (Block without padding)
+* Fixed: Minor bug fixes
+
+= 1.4.1 =
+* Fixed: HTML Tags in the caption
+* minor fix
+
 = 1.4.0 =
 * Big changes - Major Udate!
 * Added: Supports Video MP4 and Audio MP3
