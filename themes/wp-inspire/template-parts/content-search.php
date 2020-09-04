@@ -23,10 +23,12 @@
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 
-	<?php wp_inspire_post_thumbnail(); ?>
+	<div class="row">
+		<?php wp_inspire_post_thumbnail(); ?>
 
-	<div class="entry-summary">
-		<?php the_excerpt(); ?>
-	</div><!-- .entry-summary -->
+		<div class="entry-summary col">
+			<?php the_excerpt(); ?>
+		</div><!-- .entry-summary -->
+	</div>
 
 </article><!-- #post-<?php the_ID(); ?> -->
